@@ -1,5 +1,23 @@
 ---
-title: GOV.UK Documentation Example
+title: BAT tech team guide
 ---
 
-<%= partial 'documentation/index' %>
+# BAT tech team guide
+
+Welcome to the tech guide for Become a teacher.
+
+## Service documentation
+
+This is documentation pulled directly from the various repositories.
+
+<% service_docs.each do |service_doc| %>
+
+### <%= service_doc[:title] %>
+
+<ul class='govuk-list'>
+<% service_doc[:pages].each do |page| %>
+  <li><%= link_to page[:title], page[:path] %></li>
+<% end %>
+</ul>
+
+<% end %>
