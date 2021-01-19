@@ -26,6 +26,10 @@ bundle exec middleman build`
 
 Every time you run this command, the `build` folder gets generated from scratch. This means any changes to the `build` folder that are not part of the build command will get overwritten.
 
+## Deployment
+
+The site is deployed automatically to the GOV.UK PaaS whenever `main` branch is updated. 
+
 ## Troubleshooting
 
 Run `bundle update` to make sure you're using the most recent Ruby gem versions.
