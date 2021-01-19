@@ -1,6 +1,8 @@
-# BAT Tech
+# BAT tech guide
 
-## Preview your changes locally
+This is the repo for the [Become a Teacher tech team guide](https://bat-tech-guide.london.cloudapps.digital).
+
+## Developing on this project
 
 To preview your new website locally, navigate to your project folder and run:
 
