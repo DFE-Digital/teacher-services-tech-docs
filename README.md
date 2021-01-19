@@ -1,6 +1,8 @@
-# BAT Tech
+# BAT tech guide
 
-## Preview your changes locally
+This is the repo for the [Become a Teacher tech team guide](https://bat-tech-guide.london.cloudapps.digital).
+
+## Developing on this project
 
 To preview your new website locally, navigate to your project folder and run:
 
@@ -23,6 +25,10 @@ bundle exec middleman build`
 ```
 
 Every time you run this command, the `build` folder gets generated from scratch. This means any changes to the `build` folder that are not part of the build command will get overwritten.
+
+## Deployment
+
+The site is deployed automatically to the GOV.UK PaaS whenever `main` branch is updated. 
 
 ## Troubleshooting
 

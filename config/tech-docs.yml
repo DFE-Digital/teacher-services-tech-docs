@@ -1,5 +1,5 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: bat-tech-guide.cloudapps.digital
+host: bat-tech-guide.london.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: false
