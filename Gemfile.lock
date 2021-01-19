@@ -179,6 +179,7 @@ GEM
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rainbow (3.0.0)
+    rake (13.0.3)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -264,6 +265,7 @@ DEPENDENCIES
   govuk_tech_docs
   html-pipeline
   octokit
+  rake
   rspec
   rubocop-govuk
   tzinfo-data
