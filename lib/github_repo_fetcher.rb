@@ -11,7 +11,7 @@ class GitHubRepoFetcher
     markdown_files = directory_contents.select { |doc| doc.name.end_with?(".md") }
 
     pages = markdown_files.map do |file|
-      contents = HTTP.get(file.download_url)
+      contents = HTTP.get_cached(file.download_url)
       filename = file.name.match(/(.+)\..+$/)[1]
       title = ExternalDoc.title(contents) || filename
 
