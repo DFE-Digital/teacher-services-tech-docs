@@ -26,6 +26,8 @@ class GitHubRepoFetcher
           },
           data: {
             # Title in search results
+            category: service_name,
+            original_title: title,
             title: "#{service_name} - #{title}",
             source_url: file.html_url,
           },
