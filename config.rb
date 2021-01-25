@@ -12,6 +12,7 @@ SERVICE_DOCS = [
       repo_name: "DFE-Digital/teacher-training-api",
       path_in_repo: "docs",
       path_prefix: "services/teacher-training-api",
+      ignore_files: %w[api.md],
     ),
   },
   {
@@ -48,6 +49,10 @@ ignore "templates/*"
 helpers do
   def service_docs
     SERVICE_DOCS
+  end
+
+  def pages_by_category
+    PagesByCategory.new(sitemap)
   end
 end
 

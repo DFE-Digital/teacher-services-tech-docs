@@ -6,17 +6,15 @@ title: BAT tech team guide
 
 Welcome to the guide for Become a Teacher tech team. This site is used internally in the Department for Education by the Candidate, ProVendor, and Publish & Register team.
 
-## Service specific documentation
+## Table of contents
 
-This is documentation pulled directly from the various repositories.
+<% pages_by_category.pages.each do |category, pages| %>
 
-<% service_docs.each do |service_doc| %>
-
-### <%= service_doc[:title] %>
+### <%= category %>
 
 <ul class='govuk-list'>
-<% service_doc[:pages].each do |page| %>
-  <li><%= link_to page[:title], page[:path] %></li>
+<% pages.each do |page| %>
+  <li><%= link_to page.data.original_title || page.data.title, page.path %></li>
 <% end %>
 </ul>
 

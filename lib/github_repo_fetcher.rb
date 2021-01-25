@@ -6,9 +6,9 @@ require "faraday_middleware"
 class GitHubRepoFetcher
   include Singleton
 
-  def docs(repo_name:, path_in_repo:, path_prefix:, service_name:)
+  def docs(repo_name:, path_in_repo:, path_prefix:, service_name:, ignore_files: [])
     directory_contents = client.contents(repo_name, path: path_in_repo)
-    markdown_files = directory_contents.select { |doc| doc.name.end_with?(".md") }
+    markdown_files = directory_contents.select { |doc| doc.name.end_with?(".md") && !doc.name.in?(ignore_files) }
 
     pages = markdown_files.map do |file|
       contents = HTTP.get(file.download_url)
@@ -26,6 +26,8 @@ class GitHubRepoFetcher
           },
           data: {
             # Title in search results
+            category: service_name,
+            original_title: title,
             title: "#{service_name} - #{title}",
             source_url: file.html_url,
           },
