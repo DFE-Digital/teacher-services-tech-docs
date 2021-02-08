@@ -37,9 +37,9 @@ class GitHubRepoFetcher
     pages.sort_by do |page|
       title = page.fetch(:title)
       # Because of lexicographical ordering, by default the ADRs would be ordered
-      # like 1, 10, 11, 12, 2, etc. To correcly order we need to translate the
-      # titles into integers. This will crash if some pages in the repo have
-      # leading numbers, and others have not.
+      # like 1, 10, 11, 12, 2, etc. To correctly order we need to translate the
+      # titles into integers. This will crash if some pages in the source directory
+      # have leading numbers, and others have not.
       first_integer = title.scan(/\d+/).first
       first_integer ? first_integer.to_i : title
     end
