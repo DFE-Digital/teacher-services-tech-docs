@@ -11,7 +11,7 @@ class GitHubRepoFetcher
     markdown_files = directory_contents.select { |doc| doc.name.end_with?(".md") && !doc.name.in?(ignore_files) }
 
     pages = markdown_files.map do |file|
-      contents = HTTP.get(file.download_url)
+      contents = HTTP.get_cached(file.download_url)
       filename = file.name.match(/(.+)\..+$/)[1]
       title = ExternalDoc.title(contents) || filename
 
@@ -35,7 +35,16 @@ class GitHubRepoFetcher
       }
     end
 
-    pages.sort_by { |page| page.fetch(:title) }
+    # Sort the pages by title.
+    pages.sort_by do |page|
+      title = page.fetch(:title)
+      # Because of lexicographical ordering, by default the ADRs would be ordered
+      # like 1, 10, 11, 12, 2, etc. To correctly order we need to translate the
+      # titles into integers. This will crash if some pages in the source directory
+      # have leading numbers, and others have not.
+      first_integer = title.scan(/\d+/).first
+      first_integer ? first_integer.to_i : title
+    end
   end
 
 private

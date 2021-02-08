@@ -6,13 +6,23 @@ GovukTechDocs.configure(self)
 
 SERVICE_DOCS = [
   {
-    title: "Teacher Training API",
+    title: "Teacher Training API documentation",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Teacher Training API",
       repo_name: "DFE-Digital/teacher-training-api",
       path_in_repo: "docs",
       path_prefix: "services/teacher-training-api",
       ignore_files: %w[api.md],
+    ),
+  },
+  {
+    title: "Teacher Training API decisions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Teacher Training API",
+      repo_name: "DFE-Digital/teacher-training-api",
+      path_in_repo: "docs/adr",
+      path_prefix: "services/teacher-training-api",
+      ignore_files: %w[index.md],
     ),
   },
   {
@@ -34,11 +44,30 @@ SERVICE_DOCS = [
     ),
   },
   {
-    title: "Apply for teacher training",
+    title: "Register trainee teachers decisions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Register trainee teachers",
+      repo_name: "DFE-Digital/register-trainee-teachers",
+      path_in_repo: "docs/adr",
+      path_prefix: "services/register-trainee-teachers",
+      ignore_files: %w[index.md],
+    ),
+  },
+  {
+    title: "Apply for teacher training documentation",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Apply for teacher training",
       repo_name: "DFE-Digital/apply-for-teacher-training",
       path_in_repo: "docs",
+      path_prefix: "services/apply-for-teacher-training",
+    ),
+  },
+  {
+    title: "Apply for teacher training decisions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Apply for teacher training",
+      repo_name: "DFE-Digital/apply-for-teacher-training",
+      path_in_repo: "adr",
       path_prefix: "services/apply-for-teacher-training",
     ),
   },
