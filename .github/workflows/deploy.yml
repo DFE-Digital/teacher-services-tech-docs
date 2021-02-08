@@ -18,7 +18,7 @@ jobs:
     - uses: citizen-of-planet-earth/cf-cli-action@master
       with:
         cf_api: https://api.london.cloud.service.gov.uk
-        cf_org: dfe-teacher-services
+        cf_org: dfe
         cf_space: bat-qa
         command: push bat-tech-guide
         cf_username: ${{ secrets.CF_USER }}

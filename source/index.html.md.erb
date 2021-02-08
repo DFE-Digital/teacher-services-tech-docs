@@ -4,7 +4,7 @@ title: BAT tech team guide
 
 # BAT tech team guide
 
-Welcome to the guide for Becoming a Teacher tech team. This site is used internally in the Department for Education by the Candidate, ProVendor, and Publish & Register team.
+Welcome to the guide for Become a Teacher tech team. This site is used internally in the Department for Education by the Candidate, ProVendor, and Publish & Register teams.
 
 ## Repositories we own
 
@@ -21,18 +21,30 @@ Welcome to the guide for Becoming a Teacher tech team. This site is used interna
 | Register trainee teachers | [DFE-Digital/register-trainee-teachers](https://github.com/DFE-Digital/register-trainee-teachers) | Publish & Register |
 | Teacher Training API | [DFE-Digital/teacher-training-api](https://github.com/DFE-Digital/teacher-training-api) | Publish & Register |
 
-## Service specific documentation
+## Table of contents
 
-This is documentation pulled directly from the various repositories.
+<% pages_by_category.pages.each do |category, pages| %>
 
-<% service_docs.each do |service_doc| %>
-
-### <%= service_doc[:title] %>
+### <%= category %>
 
 <ul class='govuk-list'>
-<% service_doc[:pages].each do |page| %>
-  <li><%= link_to page[:title], page[:path] %></li>
+<% pages.each do |page| %>
+  <li><%= link_to page.data.original_title || page.data.title, page.path %></li>
 <% end %>
 </ul>
 
 <% end %>
+
+## External contributions
+
+It's highly recommended and encouraged to contribute to open source projects that we use. Here's some of the things we've done:
+
+- Added [new tag styles to the Design System](https://github.com/alphagov/govuk-frontend/pull/1711)
+- Created [GOV.UK Design System community resources](https://github.com/tijmenb/design-system-community-resources) repo
+- Improved the [grammar in Design System documentation](https://github.com/alphagov/govuk-design-system/pull/1026)
+- Improved the [DfE form builder](https://github.com/DFE-Digital/govuk_design_system_formbuilder)
+- Improved the [GOV.UK Notify ruby client](https://github.com/alphagov/notifications-ruby-client/pull/89)
+- Improved the [GOV.UK Notify Rails integration](https://github.com/dxw/mail-notify/pull/11)
+- Improved the [GOV.UK Rubocop configuration](https://github.com/alphagov/rubocop-govuk/pull/17)
+- Improved the [MoJ frontend toolkit](https://github.com/ministryofjustice/moj-frontend/pull/87)
+- Improved the [tech docs template docs](https://github.com/alphagov/tdt-documentation/pull/81)
