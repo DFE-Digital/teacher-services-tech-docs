@@ -4,10 +4,12 @@ on:
   push:
     branches:
     - main
+  schedule: # 06:00 UTC Mon-Fri
+    - cron: '0 6 * * 1-5'
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
