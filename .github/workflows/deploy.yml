@@ -14,12 +14,14 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
+
     - run: bundle exec middleman build
-    - uses: citizen-of-planet-earth/cf-cli-action@master
+
+    - uses: DFE-Digital/github-actions/setup-cf-cli@master
+      name: Install cf CLI
       with:
-        cf_api: https://api.london.cloud.service.gov.uk
-        cf_org: dfe
-        cf_space: bat-qa
-        command: push bat-tech-guide
-        cf_username: ${{ secrets.CF_USER }}
-        cf_password: ${{ secrets.CF_PASSWORD }}
+        CF_USERNAME: ${{ secrets.CF_USER }}
+        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+        CF_SPACE_NAME: bat-qa
+
+    - run: cf push bat-tech-guide
