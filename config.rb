@@ -50,7 +50,7 @@ SERVICE_DOCS = [
       repo_name: "DFE-Digital/register-trainee-teachers",
       path_in_repo: "docs/adr",
       path_prefix: "services/register-trainee-teachers",
-      ignore_files: %w[index.md],
+      ignore_files: %w[index.md template.md],
     ),
   },
   {
