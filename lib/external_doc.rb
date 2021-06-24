@@ -2,18 +2,18 @@ require "html/pipeline"
 require "uri"
 
 class ExternalDoc
-  def self.parse(markdown, repo_name: "", path: "")
+  def self.parse(markdown, repo_name: "", branch: "", path: "")
     context = {
       repository: repo_name,
       # Turn off hardbreaks as they behave different to github rendering
       gfm: false,
       base_url: URI.join(
         "https://github.com",
-        "#{repo_name}/blob/master/",
+        "#{repo_name}/blob/#{branch}/",
       ),
       image_base_url: URI.join(
         "https://raw.githubusercontent.com",
-        "#{repo_name}/master/",
+        "#{repo_name}/#{branch}/",
       ),
     }
 
