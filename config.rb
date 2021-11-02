@@ -72,6 +72,24 @@ SERVICE_DOCS = [
       path_prefix: "services/apply-for-teacher-training",
     ),
   },
+  {
+    title: "Teaching vacancies documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Teaching vacancies",
+      repo_name: "DFE-Digital/teaching-vacancies",
+      path_in_repo: "documentation",
+      path_prefix: "services/teaching-vacancies",
+    ),
+  },
+  {
+    title: "Teaching vacancies decisions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Teaching vacancies",
+      repo_name: "DFE-Digital/teaching-vacancies",
+      path_in_repo: "documentation/adr",
+      path_prefix: "services/teaching-vacancies",
+    ),
+  },
 ].freeze
 
 ignore "templates/*"
