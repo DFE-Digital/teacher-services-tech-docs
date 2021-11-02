@@ -27,4 +27,4 @@ jobs:
         CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
         CF_SPACE_NAME: bat-qa
 
-    - run: cf push bat-tech-guide
+    - run: cf push teacher-services-tech-docs

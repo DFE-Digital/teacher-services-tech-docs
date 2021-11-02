@@ -1,6 +1,6 @@
 # Teacher Services tech docs
 
-This is the repo for the [Teacher Services tech docs](https://bat-tech-guide.london.cloudapps.digital).
+This is the repo for the [Teacher Services tech docs](https://teacher-services-tech-docs.london.cloudapps.digital).
 
 ## Developing on this project
 
