@@ -3,7 +3,7 @@ host: bat-tech-guide.london.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: false
-service_name: BAT tech team guide
+service_name: Teacher Services tech docs
 service_link: /
 phase: Experimental
 

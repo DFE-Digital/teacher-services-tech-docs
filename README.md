@@ -1,6 +1,6 @@
-# BAT tech guide
+# Teacher Services tech docs
 
-This is the repo for the [Become a Teacher tech team guide](https://bat-tech-guide.london.cloudapps.digital).
+This is the repo for the [Teacher Services tech docs](https://bat-tech-guide.london.cloudapps.digital).
 
 ## Developing on this project
 
