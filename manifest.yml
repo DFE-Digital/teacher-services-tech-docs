@@ -1,6 +1,6 @@
 ---
 applications:
-- name: bat-tech-guide
+- name: teacher-services-tech-docs
   memory: 64M
   instances: 2
   path: ./build
