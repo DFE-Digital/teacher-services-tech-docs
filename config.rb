@@ -90,6 +90,78 @@ SERVICE_DOCS = [
       path_prefix: "services/teaching-vacancies",
     ),
   },
+  {
+    title: "Get Into Teaching application documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Get Into Teaching",
+      repo_name: "DFE-Digital/get-into-teaching-app",
+      path_in_repo: "doc",
+      path_prefix: "services/get-into-teaching",
+    ),
+  },
+  {
+    title: "Get Into Teaching API documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Get Into Teaching",
+      repo_name: "DFE-Digital/get-into-teaching-api",
+      path_in_repo: "docs",
+      path_prefix: "services/get-into-teaching",
+    ),
+  },
+  {
+    title: "Get Teacher Training Adviser documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Get Into Teaching",
+      repo_name: "DFE-Digital/get-teacher-training-adviser-service",
+      path_in_repo: "docs",
+      path_prefix: "services/get-into-teaching",
+    ),
+  },
+  {
+    title: "Get Into Teaching Asset Manager",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Get Into Teaching",
+      repo_name: "DFE-Digital/GITISContent",
+      path_in_repo: "docs",
+      path_prefix: "services/get-into-teaching",
+    ),
+  },
+  {
+    title: "Get School Experience documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Get School Experience",
+      repo_name: "DFE-Digital/schools-experience",
+      path_in_repo: "doc",
+      path_prefix: "services/school-experience",
+    ),
+  },
+  {
+    title: "Monitoring",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Infrastructure",
+      repo_name: "DFE-Digital/cf-monitoring",
+      path_in_repo: "",
+      path_prefix: "services/cf-monitoring",
+    ),
+  },
+  {
+    title: "Github Actions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Infrastructure",
+      repo_name: "DFE-Digital/github-actions",
+      path_in_repo: "",
+      path_prefix: "services/github-actions",
+    ),
+  },
+  {
+    title: "Infrastructure",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Infrastructure",
+      repo_name: "DFE-Digital/bat-infrastructure",
+      path_in_repo: "",
+      path_prefix: "services/bat-infrastructure",
+    ),
+  },
 ].freeze
 
 ignore "templates/*"
