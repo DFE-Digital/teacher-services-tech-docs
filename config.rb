@@ -135,6 +135,33 @@ SERVICE_DOCS = [
       path_prefix: "services/school-experience",
     ),
   },
+  {
+    title: "Monitoring",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Infrastructure",
+      repo_name: "DFE-Digital/cf-monitoring",
+      path_in_repo: "",
+      path_prefix: "services/cf-monitoring",
+    ),
+  },
+  {
+    title: "Github Actions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Infrastructure",
+      repo_name: "DFE-Digital/github-actions",
+      path_in_repo: "",
+      path_prefix: "services/github-actions",
+    ),
+  },
+  {
+    title: "Infrastructure",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Infrastructure",
+      repo_name: "DFE-Digital/bat-infrastructure",
+      path_in_repo: "",
+      path_prefix: "services/bat-infrastructure",
+    ),
+  },
 ].freeze
 
 ignore "templates/*"
