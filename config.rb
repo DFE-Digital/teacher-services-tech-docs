@@ -162,6 +162,15 @@ SERVICE_DOCS = [
       path_prefix: "services/bat-infrastructure",
     ),
   },
+  {
+    title: "Qualified Teachers API documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Qualified Teachers API",
+      repo_name: "DFE-Digital/qualified-teachers-api",
+      path_in_repo: "docs",
+      path_prefix: "services/qualified-teachers-api",
+    ),
+  },
 ].freeze
 
 ignore "templates/*"
