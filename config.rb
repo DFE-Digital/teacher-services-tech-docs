@@ -171,6 +171,15 @@ SERVICE_DOCS = [
       path_prefix: "services/qualified-teachers-api",
     ),
   },
+  {
+    title: "Teacher Regulation Agency documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Teacher Regulation Agency",
+      repo_name: "DFE-Digital/teacher-regulation-agency",
+      path_in_repo: "docs",
+      path_prefix: "services/teacher-regulation-agency",
+    ),
+  },
 ].freeze
 
 ignore "templates/*"
