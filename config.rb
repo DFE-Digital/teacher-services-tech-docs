@@ -172,12 +172,12 @@ SERVICE_DOCS = [
     ),
   },
   {
-    title: "Teacher Regulation Agency documentation",
+    title: "Database of Qualified Teachers documentation",
     pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Teacher Regulation Agency",
-      repo_name: "DFE-Digital/teacher-regulation-agency",
+      service_name: "Database of Qualified Teachers",
+      repo_name: "DFE-Digital/database-of-qualified-teachers",
       path_in_repo: "docs",
-      path_prefix: "services/teacher-regulation-agency",
+      path_prefix: "services/database-of-qualified-teachers",
     ),
   },
 ].freeze
