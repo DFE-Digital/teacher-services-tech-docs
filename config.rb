@@ -131,7 +131,7 @@ SERVICE_DOCS = [
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Get School Experience",
       repo_name: "DFE-Digital/schools-experience",
-      path_in_repo: "doc",
+      path_in_repo: "docs",
       path_prefix: "services/school-experience",
     ),
   },
