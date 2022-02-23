@@ -180,6 +180,15 @@ SERVICE_DOCS = [
       path_prefix: "services/database-of-qualified-teachers",
     ),
   },
+  {
+    title: "Teacher Misconduct System documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Teacher Misconduct System",
+      repo_name: "DFE-Digital/teacher-misconduct-system",
+      path_in_repo: "docs",
+      path_prefix: "services/teacher-misconduct-system",
+    ),
+  },
 ].freeze
 
 ignore "templates/*"
