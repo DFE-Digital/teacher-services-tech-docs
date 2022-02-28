@@ -80,7 +80,7 @@ Update stakeholders on the Slack incident channel every 60 minutes, until the in
 
 ## Incident review
 
-1. Run an incident review meeting and cover the WHAT?
+1. Hold an incident and lesson learned review following a [blameless post mortem culture](https://codeascraft.com/2012/05/22/blameless-postmortems/) so your service can improve.
   1. Write up an incident review with recommendations.
   2. The report introduction should be written in plain English, avoiding technical jargon whenever possible.
 2. Publish the incident review to the [incident reports folder in Google Drive](https://drive.google.com/drive/folders/12uWIF4beypUpEjejTRcKtV2PFadT5met).
