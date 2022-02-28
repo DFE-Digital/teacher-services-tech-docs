@@ -51,11 +51,9 @@ Contact your users if:
 
 Informing users about incidents is generally considered best practice, but should be decided on a case by case basis with the product and service managers.
 
-## While the incident is in progress
+## While the incident is in progress (all incident leads)
 
 Keep all conversations and status updates about the incident on the dedicated Slack incident channel.
-
-[A call for further information can be requested on the thread.] - what does this mean?
 
 Use these incident stages in your Slack updates:
 
@@ -63,6 +61,12 @@ Use these incident stages in your Slack updates:
 - Incident is being assessed
 - Incident is being fixed
 - Incident is resolved
+
+Use the Slack IncidentBot `/update` command to update:
+
+- Description
+- Priority
+- Leads
 
 ### Provide regular updates every 60 minutes (comms lead)
 
