@@ -74,6 +74,8 @@ Senior stakeholders:
 
 ## Priority 3 (P3) - Low (L)
 
+### Description
+
 Lowest level of incident where **two or more** of the following factors apply:
 
 * Less than 20% of users affected.
