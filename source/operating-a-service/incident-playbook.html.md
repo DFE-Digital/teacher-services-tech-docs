@@ -76,7 +76,7 @@ Update stakeholders on the Slack incident channel every 60 minutes, until the in
 
 1. Update the running incident report
 2. Close the incident on using `/closeincident` command in Slack
-3. Confirm that the incident has been automatically resolved on the service status dashboard (it may take 5 mins to update)
+3. Confirm that the incident has been automatically resolved on the [service status dashboard](https://teacher-services-status.education.gov.uk/) (it may take 5 mins to update)
 
 ## Incident review
 
