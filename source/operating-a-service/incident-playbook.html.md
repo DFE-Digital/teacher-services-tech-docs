@@ -20,7 +20,7 @@ The incident leads should [triage the incident](/operating-a-service/how-to-cate
 ### 3. Create an incident Slack channel and inform the stakeholders (comms lead)
 
 1. Initiate the Slack IncidentBot by typing `/incident` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
-2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated slack channel for the incident.
+2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
 3. Determine who needs to be contacted, based on the incident priority and affected services, using [the incident contact lists](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy).
 4.  Invite the appropriate people from the contact lists to the incident channel.
 
