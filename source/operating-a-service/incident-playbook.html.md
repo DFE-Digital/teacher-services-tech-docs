@@ -10,7 +10,7 @@ Self-organise to appoint:
     (responsible for communicating and alerts to users and stakeholders)
 2.  the **Incident tech lead**
     (responsible for technical direction and communicating to the comms lead)
-3. the **Incident support lead**, when the incident involves a public-facing service
+3. the **Incident support lead**
     (responsible for monitoring Zendesk and alerting the team to any changes in the queues and severity of experience of users).
 
 ### 2. Triage the incident (all incident leads)
