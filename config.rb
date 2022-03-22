@@ -181,6 +181,24 @@ SERVICE_DOCS = [
     ),
   },
   {
+    title: "Find a lost TRN documentation",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Find a lost TRN",
+      repo_name: "DFE-Digital/find-a-lost-trn",
+      path_in_repo: "docs",
+      path_prefix: "services/find-a-lost-trn",
+    ),
+  },
+  {
+    title: "Find a lost TRN decisions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Find a lost TRN",
+      repo_name: "DFE-Digital/find-a-lost-trn",
+      path_in_repo: "adr",
+      path_prefix: "services/find-a-lost-trn",
+    ),
+  },
+  {
     title: "Teacher Misconduct System documentation",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Teacher Misconduct System",
