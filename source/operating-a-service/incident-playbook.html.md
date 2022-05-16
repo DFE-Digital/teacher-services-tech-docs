@@ -19,7 +19,7 @@ The incident leads should [triage the incident](/operating-a-service/how-to-cate
 
 ### 3. Create an incident Slack channel and inform the stakeholders (comms lead)
 
-1. Initiate the Slack IncidentBot by typing `/incident` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
+1. Initiate the Slack IncidentBot by typing `/incident open` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
 2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
 3. Determine who needs to be contacted, based on the incident priority and affected services, using [the incident contact lists](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy).
 4.  Invite the appropriate people from the contact lists to the incident channel.
@@ -62,7 +62,7 @@ Use these incident stages in your Slack updates:
 - Incident is being fixed
 - Incident is resolved
 
-Use the Slack IncidentBot `/update` command to update:
+Use the Slack IncidentBot `/incident update` command to update:
 
 - Description
 - Priority
@@ -75,7 +75,7 @@ Update stakeholders on the Slack incident channel every 60 minutes, until the in
 ## Once the incident is resolved
 
 1. Update the running incident report
-2. Close the incident on using `/closeincident` command in Slack
+2. Close the incident on using `/incident close` command in Slack
 3. Confirm that the incident has been automatically resolved on the [service status dashboard](https://teacher-services-status.education.gov.uk/) (it may take 5 mins to update)
 
 ## Incident review
