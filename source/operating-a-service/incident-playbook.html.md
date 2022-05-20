@@ -21,7 +21,7 @@ The incident leads should [triage the incident](/operating-a-service/how-to-cate
 After triaging the issue, the tech lead should identify:
 - any upstream services which could be contributing to the issue
 - any downstream services likely to be affected by the issue
-and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy). 
+and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.5wrpa7wuk1l2). 
 
 
 ### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
