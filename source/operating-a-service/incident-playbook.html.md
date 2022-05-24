@@ -17,14 +17,23 @@ Self-organise to appoint:
 
 The incident leads should [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
 
-### 3. Create an incident Slack channel and inform the stakeholders (comms lead)
+### 3. Identify any other services involved (tech lead)
+After triaging the issue, the tech lead should identify:
+- any upstream services which could be contributing to the issue
+- any downstream services likely to be affected by the issue
+and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.5wrpa7wuk1l2). 
+
+
+### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
 
 1. Initiate the Slack IncidentBot by typing `/incident open` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
 2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
 3. Determine who needs to be contacted, based on the incident priority and affected services, using [the incident contact lists](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy).
 4.  Invite the appropriate people from the contact lists to the incident channel.
 
-### 4. Provide a service update to users outside DfE (comms lead)
+
+
+### 5. Provide a service update to users outside DfE (comms lead)
 
 The Teacher Services team maintains a publicly available [service status dashboard](https://teacher-services-status.education.gov.uk/). During an incident, the comms lead needs to explain what’s happening to users outside DfE. The comms lead will need a GitHub account to do this, or delegate updates to a colleague who has one.
 
@@ -35,14 +44,14 @@ To update the dashboard:
 1. Navigate to the appropriate incident issue on the [GitHub issues page](https://github.com/DFE-Digital/teacher-services-upptime/issues)
 2. Add a comment to the issue
 
-### 5. Start the incident report (any incident lead)
+### 6. Start the incident report (any incident lead)
 
 Create the incident report using the template in Google Drive:
 
 - Create a running [Incident Report using this template](https://docs.google.com/document/d/1HwKCPafnluOIhIAWbSD91zxt7w3q4FGDIVKS3d_SDFA/edit?usp=sharing)
 - Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://drive.google.com/drive/folders/12uWIF4beypUpEjejTRcKtV2PFadT5met)
 
-### 6. Decide whether to contact users about an incident (support lead)
+### 7. Decide whether to contact users about an incident (support lead)
 
 Contact your users if:
 
