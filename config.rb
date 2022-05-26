@@ -163,6 +163,15 @@ SERVICE_DOCS = [
     ),
   },
   {
+    title: "Apply for QTS in England decisions",
+    pages: GitHubRepoFetcher.instance.docs(
+      service_name: "Apply for QTS in England",
+      repo_name: "DFE-Digital/apply-for-qualified-teacher-status",
+      path_in_repo: "adr",
+      path_prefix: "services/apply-for-qts-in-england",
+    ),
+  },
+  {
     title: "Qualified Teachers API documentation",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Qualified Teachers API",
