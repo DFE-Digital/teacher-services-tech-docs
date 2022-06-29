@@ -18,11 +18,11 @@ Self-organise to appoint:
 The incident leads should [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
 
 ### 3. Identify any other services involved (tech lead)
-After triaging the issue, the tech lead should identify:
-- any upstream services which could be contributing to the issue
-- any downstream services likely to be affected by the issue
-and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.5wrpa7wuk1l2). 
 
+After triaging the issue, the tech lead should identify:
+
+- any upstream services which could be contributing to the issue
+- any downstream services likely to be affected by the issue and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.5wrpa7wuk1l2).
 
 ### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
 
@@ -30,8 +30,6 @@ and raise incidents where needed according to the [dependent services contact de
 2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
 3. Determine who needs to be contacted, based on the incident priority and affected services, using [the incident contact lists](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy).
 4.  Invite the appropriate people from the contact lists to the incident channel.
-
-
 
 ### 5. Provide a service update to users outside DfE (comms lead)
 

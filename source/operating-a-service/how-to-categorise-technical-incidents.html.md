@@ -57,8 +57,9 @@ Next highest level of incident where **two or more** of the following factors ap
 This incident level requires the full attention of the incident responders during business hours and takes priority over other non-emergency work.
 
 Examples:
-  * Total outage of ‘Publish’ during off-peak time.
-  * The bulk publishing function is down.
+
+* Total outage of ‘Publish’ during off-peak time.
+* The bulk publishing function is down.
 
 ### Stakeholder groups to inform
 
