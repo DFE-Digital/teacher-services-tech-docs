@@ -6,7 +6,7 @@ GovukTechDocs.configure(self)
 
 SERVICE_DOCS = [
   {
-    title: "Teacher Training API documentation",
+    title: "Publish teacher training courses API",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Teacher Training API",
       repo_name: "DFE-Digital/publish-teacher-training",
@@ -16,7 +16,7 @@ SERVICE_DOCS = [
     ),
   },
   {
-    title: "Teacher Training API decisions",
+    title: "Publish teacher training courses decisions",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Teacher Training API",
       repo_name: "DFE-Digital/publish-teacher-training",
