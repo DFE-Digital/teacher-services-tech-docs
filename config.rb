@@ -9,9 +9,9 @@ SERVICE_DOCS = [
     title: "Teacher Training API documentation",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Teacher Training API",
-      repo_name: "DFE-Digital/teacher-training-api",
+      repo_name: "DFE-Digital/publish-teacher-training",
       path_in_repo: "docs",
-      path_prefix: "services/teacher-training-api",
+      path_prefix: "services/publish-teacher-training",
       ignore_files: %w[api.md],
     ),
   },
@@ -19,9 +19,9 @@ SERVICE_DOCS = [
     title: "Teacher Training API decisions",
     pages: GitHubRepoFetcher.instance.docs(
       service_name: "Teacher Training API",
-      repo_name: "DFE-Digital/teacher-training-api",
+      repo_name: "DFE-Digital/publish-teacher-training",
       path_in_repo: "docs/adr",
-      path_prefix: "services/teacher-training-api",
+      path_prefix: "services/publish-teacher-training",
       ignore_files: %w[index.md],
     ),
   },

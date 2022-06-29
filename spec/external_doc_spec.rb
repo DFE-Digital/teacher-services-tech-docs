@@ -28,7 +28,7 @@ RSpec.describe ExternalDoc do
           File.read("spec/fixtures/markdown.md"),
           repo_name: "alphagov/lipsum",
           branch: "master",
-          path: path,
+          path:,
         ).to_s)
       end
 
