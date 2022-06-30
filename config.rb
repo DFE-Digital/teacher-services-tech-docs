@@ -1,237 +1,33 @@
-require "govuk_tech_docs"
-
-require_relative "lib/requires"
+require_relative "lib/teacher_services_tech_docs"
 
 GovukTechDocs.configure(self)
 
-SERVICE_DOCS = [
-  {
-    title: "Publish teacher training courses API",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Teacher Training API",
-      repo_name: "DFE-Digital/publish-teacher-training",
-      path_in_repo: "docs",
-      path_prefix: "services/publish-teacher-training",
-      ignore_files: %w[api.md],
-    ),
-  },
-  {
-    title: "Publish teacher training courses decisions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Teacher Training API",
-      repo_name: "DFE-Digital/publish-teacher-training",
-      path_in_repo: "docs/adr",
-      path_prefix: "services/publish-teacher-training",
-      ignore_files: %w[index.md],
-    ),
-  },
-  {
-    title: "Find teacher training",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Find teacher training",
-      repo_name: "DFE-Digital/find-teacher-training",
-      path_in_repo: "docs",
-      path_prefix: "services/find-teacher-training",
-    ),
-  },
-  {
-    title: "Register trainee teachers",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Register trainee teachers",
-      repo_name: "DFE-Digital/register-trainee-teachers",
-      path_in_repo: "docs",
-      path_prefix: "services/register-trainee-teachers",
-    ),
-  },
-  {
-    title: "Register trainee teachers decisions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Register trainee teachers",
-      repo_name: "DFE-Digital/register-trainee-teachers",
-      path_in_repo: "docs/adr",
-      path_prefix: "services/register-trainee-teachers",
-      ignore_files: %w[index.md template.md],
-    ),
-  },
-  {
-    title: "Apply for teacher training documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Apply for teacher training",
-      repo_name: "DFE-Digital/apply-for-teacher-training",
-      branch: "main",
-      path_in_repo: "docs",
-      path_prefix: "services/apply-for-teacher-training",
-    ),
-  },
-  {
-    title: "Apply for teacher training decisions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Apply for teacher training",
-      repo_name: "DFE-Digital/apply-for-teacher-training",
-      path_in_repo: "adr",
-      path_prefix: "services/apply-for-teacher-training",
-    ),
-  },
-  {
-    title: "Teaching vacancies documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Teaching vacancies",
-      repo_name: "DFE-Digital/teaching-vacancies",
-      path_in_repo: "documentation",
-      path_prefix: "services/teaching-vacancies",
-    ),
-  },
-  {
-    title: "Teaching vacancies decisions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Teaching vacancies",
-      repo_name: "DFE-Digital/teaching-vacancies",
-      path_in_repo: "documentation/adr",
-      path_prefix: "services/teaching-vacancies",
-    ),
-  },
-  {
-    title: "Get Into Teaching application documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Get Into Teaching",
-      repo_name: "DFE-Digital/get-into-teaching-app",
-      path_in_repo: "docs",
-      path_prefix: "services/get-into-teaching",
-    ),
-  },
-  {
-    title: "Get Into Teaching API documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Get Into Teaching",
-      repo_name: "DFE-Digital/get-into-teaching-api",
-      path_in_repo: "docs",
-      path_prefix: "services/get-into-teaching",
-    ),
-  },
-  {
-    title: "Get Teacher Training Adviser documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Get Into Teaching",
-      repo_name: "DFE-Digital/get-teacher-training-adviser-service",
-      path_in_repo: "docs",
-      path_prefix: "services/get-into-teaching",
-    ),
-  },
-  {
-    title: "Get Into Teaching Asset Manager",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Get Into Teaching",
-      repo_name: "DFE-Digital/GITISContent",
-      path_in_repo: "docs",
-      path_prefix: "services/get-into-teaching",
-    ),
-  },
-  {
-    title: "Get School Experience documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Get School Experience",
-      repo_name: "DFE-Digital/schools-experience",
-      path_in_repo: "docs",
-      path_prefix: "services/school-experience",
-    ),
-  },
-  {
-    title: "Monitoring",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Infrastructure",
-      repo_name: "DFE-Digital/cf-monitoring",
-      path_in_repo: "",
-      path_prefix: "services/cf-monitoring",
-    ),
-  },
-  {
-    title: "Github Actions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Infrastructure",
-      repo_name: "DFE-Digital/github-actions",
-      path_in_repo: "",
-      path_prefix: "services/github-actions",
-    ),
-  },
-  {
-    title: "Infrastructure",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Infrastructure",
-      repo_name: "DFE-Digital/bat-infrastructure",
-      path_in_repo: "",
-      path_prefix: "services/bat-infrastructure",
-    ),
-  },
-  {
-    title: "Apply for QTS in England decisions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Apply for QTS in England",
-      repo_name: "DFE-Digital/apply-for-qualified-teacher-status",
-      path_in_repo: "adr",
-      path_prefix: "services/apply-for-qts-in-england",
-    ),
-  },
-  {
-    title: "Qualified Teachers API documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Qualified Teachers API",
-      repo_name: "DFE-Digital/qualified-teachers-api",
-      path_in_repo: "docs",
-      path_prefix: "services/qualified-teachers-api",
-    ),
-  },
-  {
-    title: "Database of Qualified Teachers documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Database of Qualified Teachers",
-      repo_name: "DFE-Digital/database-of-qualified-teachers",
-      path_in_repo: "docs",
-      path_prefix: "services/database-of-qualified-teachers",
-    ),
-  },
-  {
-    title: "Find a lost TRN documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Find a lost TRN",
-      repo_name: "DFE-Digital/find-a-lost-trn",
-      path_in_repo: "docs",
-      path_prefix: "services/find-a-lost-trn",
-    ),
-  },
-  {
-    title: "Find a lost TRN decisions",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Find a lost TRN",
-      repo_name: "DFE-Digital/find-a-lost-trn",
-      path_in_repo: "adr",
-      path_prefix: "services/find-a-lost-trn",
-    ),
-  },
-  {
-    title: "Teacher Misconduct System documentation",
-    pages: GitHubRepoFetcher.instance.docs(
-      service_name: "Teacher Misconduct System",
-      repo_name: "DFE-Digital/teacher-misconduct-system",
-      path_in_repo: "docs",
-      path_prefix: "services/teacher-misconduct-system",
-    ),
-  },
-].freeze
+services = YAML.load_file("config/services.yml")
+
+services = services.reduce([]) do |list, service|
+  repo = TeacherServicesTechDocs::GitHub::Repo.new(
+    repo_name: service["repo_name"],
+    service_name: service["name"],
+  )
+
+  list + service["docsets"].map do |docset|
+    repo.load_docs(
+      path_in_repo: docset["path"],
+      ignore_files: docset.fetch("ignore_files", []),
+    )
+  end
+end
 
 ignore "templates/*"
 
 helpers do
-  def service_docs
-    SERVICE_DOCS
-  end
-
   def pages_by_category
-    PagesByCategory.new(sitemap)
+    TeacherServicesTechDocs::PagesByCategory.new(sitemap)
   end
 end
 
-SERVICE_DOCS.each do |service_doc|
-  service_doc[:pages].each do |page|
+services.each do |docset|
+  docset.each do |page|
     proxy page.fetch(:path), "templates/external_doc_template.html", page.fetch(:proxy_args)
   end
 end

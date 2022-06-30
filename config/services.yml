@@ -1,0 +1,81 @@
+- name: 'Publish teacher training courses'
+  repo_name: "DFE-Digital/publish-teacher-training"
+  docsets:
+    - path: "docs"
+      ignore_files:
+        - api.md
+    - path: "docs/adr"
+      ignore_files:
+        - index.md
+- name: 'Find teacher training'
+  repo_name: "DFE-Digital/find-teacher-training"
+  docsets:
+    - path: "docs"
+- name: 'Register trainee teachers'
+  repo_name: "DFE-Digital/register-trainee-teachers"
+  docsets:
+    - path: "docs"
+    - path: "docs/adr"
+      ignore_files:
+        - index.md
+        - template.md
+- name: 'Apply for teacher training'
+  repo_name: "DFE-Digital/apply-for-teacher-training"
+  docsets:
+    - path: "docs"
+    - path: "adr"
+- name: 'Teaching vacancies'
+  repo_name: "DFE-Digital/teaching-vacancies"
+  docsets:
+    - path: "documentation"
+    - path: "documentation/adr"
+- name: 'Get Into Teaching website'
+  repo_name: "DFE-Digital/get-into-teaching-app"
+  docsets:
+    - path: "docs"
+- name: 'Get Into Teaching API'
+  repo_name: "DFE-Digital/get-into-teaching-api"
+  docsets:
+    - path: "docs"
+- name: 'Get Into Teaching asset manager'
+  repo_name: "DFE-Digital/GITISContent"
+  docsets:
+    - path: "docs"
+- name: 'Get School Experience'
+  repo_name: "DFE-Digital/schools-experience"
+  docsets:
+    - path: "docs"
+- name: 'Monitoring'
+  repo_name: "DFE-Digital/cf-monitoring"
+  docsets:
+    - path: ""
+- name: 'GitHub Actions'
+  repo_name: "DFE-Digital/github-actions"
+  docsets:
+    - path: ""
+- name: 'Infrastructure'
+  repo_name: "DFE-Digital/bat-infrastructure"
+  docsets:
+    - path: ""
+- name: 'Apply for QTS in England'
+  repo_name: "DFE-Digital/apply-for-qualified-teacher-status"
+  docsets:
+    - path: "adr"
+    - path: "docs"
+- name: 'Qualified Teachers API'
+  repo_name: "DFE-Digital/qualified-teachers-api"
+  docsets:
+    - path: "docs"
+- name: 'Database of Qualified Teachers'
+  repo_name: "DFE-Digital/database-of-qualified-teachers"
+  docsets:
+    - path: "docs"
+- name: 'Find a lost TRN'
+  repo_name: "DFE-Digital/find-a-lost-trn"
+  docsets:
+    - path: "docs"
+    - path: "adr"
+- name: 'Teacher Misconduct System'
+  repo_name: "DFE-Digital/teacher-misconduct-system"
+  docsets:
+    - path: "docs"
