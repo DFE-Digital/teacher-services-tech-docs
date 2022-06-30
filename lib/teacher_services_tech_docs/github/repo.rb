@@ -13,7 +13,7 @@ module TeacherServicesTechDocs
         path_prefix = @repo_name.gsub("DFE-Digital", "services")
 
         pages = markdown_files.map do |file|
-          markdown = GitHub::MarkdownFile.new(name: file.name, path: file.path, contents: CachedHTTP.get_cached(file.download_url))
+          markdown = GitHub::MarkdownFile.new(name: file.name, path: file.path, contents: Base64.decode64(client.contents(@repo_name, path: file.path).content))
 
           {
             path: "#{path_prefix}/#{markdown.filename}.html",
@@ -45,9 +45,11 @@ module TeacherServicesTechDocs
 
       def client
         @client ||= begin
+          cache = ActiveSupport::Cache::FileStore.new(".cache", expires_in: 12.hours)
+
           stack = Faraday::RackBuilder.new do |builder|
-            builder.response :logger
-            builder.use Faraday::HttpCache, serializer: Marshal, shared_cache: false
+            builder.response :logger, nil, { headers: false, bodies: false }
+            builder.use FaradayMiddleware::Caching, cache
             builder.use Octokit::Response::RaiseError
             builder.use Faraday::Request::Retry, exceptions: Faraday::Request::Retry::DEFAULT_EXCEPTIONS + [Octokit::ServerError]
             builder.adapter Faraday.default_adapter
