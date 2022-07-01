@@ -79,3 +79,18 @@
   repo_name: "DFE-Digital/teacher-misconduct-system"
   docsets:
     - path: "docs"
+- name: "Claim additional payments for teaching"
+  repo_name: "DFE-Digital/claim-additional-payments-for-teaching"
+  docsets:
+    - path: "docs"
+- name: "Early careers framework"
+  repo_name: "DFE-Digital/early-careers-framework"
+  docsets:
+    - path: "documentation"
+- name: "ECF engage and learn"
+  repo_name: "DFE-Digital/ecf-engage-and-learn"
+  docsets:
+    - path: "documentation"
+- name: "National Professional Qualification registration"
+  repo_name: "DFE-Digital/npq-registration"
+  docsets: []
