@@ -1,19 +1,59 @@
 module TeacherServicesTechDocs
   module GitHub
     class Repo
+      Profile = Struct.new(:name,
+                           :rails,
+                           :ruby,
+                           :asdf,
+                           :dfe_analytics,
+                           :dfe_reference_data,
+                           :dfe_autocomplete,
+                           :default_branch,
+                           keyword_init: true)
+
       def initialize(repo_name:, service_name:)
         @repo_name = repo_name
         @service_name = service_name
       end
 
+      def profile
+        lockfile = client.get_file(@repo_name, "Gemfile.lock")
+        if lockfile.present?
+          deps = GitHub::Dependencies.new(lockfile.contents)
+        else
+          return nil
+        end
+
+        has_tool_versions = client.get_file(@repo_name, ".tool-versions").present? ? true : false
+
+        repo = client.get_repo(@repo_name)
+
+        Profile.new(
+          name: @repo_name,
+          rails: deps.rails_version,
+          dfe_analytics: deps.dfe_analytics_version,
+          dfe_reference_data: deps.dfe_reference_data_version,
+          dfe_autocomplete: deps.dfe_autocomplete_version,
+          ruby: deps.ruby_version,
+          asdf: has_tool_versions,
+          default_branch: repo.default_branch,
+        )
+      end
+
       def load_docs(path_in_repo:, ignore_files: [])
-        directory_contents = client.contents(@repo_name, path: path_in_repo)
-        branch = client.repo(@repo_name).default_branch
+        directory_contents = client.get_directory(@repo_name, path_in_repo)
         markdown_files = directory_contents.select { |doc| doc.name.end_with?(".md") && !doc.name.in?(ignore_files) }
+
+        branch = client.get_repo(@repo_name).default_branch
+
         path_prefix = @repo_name.gsub("DFE-Digital", "services")
 
         pages = markdown_files.map do |file|
-          markdown = GitHub::MarkdownFile.new(name: file.name, path: file.path, contents: Base64.decode64(client.contents(@repo_name, path: file.path).content))
+          markdown = GitHub::MarkdownFile.new(
+            name: file.name,
+            path: file.path,
+            contents: client.get_file(@repo_name, file.path).contents,
+          )
 
           {
             path: "#{path_prefix}/#{markdown.filename}.html",
@@ -44,23 +84,7 @@ module TeacherServicesTechDocs
     private
 
       def client
-        @client ||= begin
-          cache = ActiveSupport::Cache::FileStore.new(".cache", expires_in: 12.hours)
-
-          stack = Faraday::RackBuilder.new do |builder|
-            builder.response :logger, nil, { headers: false, bodies: false }
-            builder.use FaradayMiddleware::Caching, cache
-            builder.use Octokit::Response::RaiseError
-            builder.use Faraday::Request::Retry, exceptions: Faraday::Request::Retry::DEFAULT_EXCEPTIONS + [Octokit::ServerError]
-            builder.adapter Faraday.default_adapter
-          end
-
-          Octokit.middleware = stack
-
-          github_client = Octokit::Client.new(access_token: TeacherServicesTechDocs::GITHUB_TOKEN)
-          github_client.auto_paginate = true
-          github_client
-        end
+        GitHub::Client.new
       end
     end
   end
