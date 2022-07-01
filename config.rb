@@ -2,9 +2,9 @@ require_relative "lib/teacher_services_tech_docs"
 
 GovukTechDocs.configure(self)
 
-services = YAML.load_file("config/services.yml")
+service_list = YAML.load_file("config/services.yml")
 
-services = services.reduce([]) do |list, service|
+services = service_list.reduce([]) do |list, service|
   repo = TeacherServicesTechDocs::GitHub::Repo.new(
     repo_name: service["repo_name"],
     service_name: service["name"],
@@ -20,9 +20,22 @@ end
 
 ignore "templates/*"
 
+SERVICE_PROFILES = service_list.map do |service|
+  repo = TeacherServicesTechDocs::GitHub::Repo.new(
+    repo_name: service["repo_name"],
+    service_name: service["name"],
+  )
+
+  repo.profile
+end
+
 helpers do
   def pages_by_category
     TeacherServicesTechDocs::PagesByCategory.new(sitemap)
+  end
+
+  def service_profiles
+    SERVICE_PROFILES.compact
   end
 end
 

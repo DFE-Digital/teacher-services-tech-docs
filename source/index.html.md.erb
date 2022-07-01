@@ -42,6 +42,15 @@ Welcome to the technical documentation for apps and libraries in Teacher Service
 | DfE Analytics | [DFE-Digital/dfe-analytics](https://github.com/DFE-Digital/dfe-analytics) | Data Insights |
 | DfE Analytics Dataform | [DFE-Digital/dfe-analytics-dataform](https://github.com/DFE-Digital/dfe-analytics-dataform) | Data Insights |
 
+## Rails apps and dependencies
+
+| repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
+| --- | --- | --- | --- | --- | --- | --- |
+<% service_profiles.compact.each do |profile| %>
+| <%= [link_to(profile.name, "https://github.com/#{profile.name}") , profile.rails, profile.ruby, profile.dfe_analytics, profile.dfe_reference_data, profile.dfe_autocomplete].join(' | ') %> |
+<% end %>
+
+
 ## Table of contents
 
 ### Operating a service
