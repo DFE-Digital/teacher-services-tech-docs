@@ -9,6 +9,7 @@ gem "rake"
 # Include the tech docs gem
 gem "govuk_tech_docs"
 
+gem "dotenv"
 gem "faraday-http-cache"
 gem "faraday_middleware"
 gem "html-pipeline"

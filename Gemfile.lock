@@ -286,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  dotenv
   faraday-http-cache
   faraday_middleware
   govuk_tech_docs
