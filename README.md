@@ -4,6 +4,8 @@ This is the repo for the [Teacher Services tech docs](https://teacher-services-t
 
 ## Developing on this project
 
+Copy `.env.example` to `.env` and populate a GitHub token with read access to repos.
+
 To preview your new website locally, navigate to your project folder and run:
 
 ```sh

@@ -57,7 +57,7 @@ module TeacherServicesTechDocs
 
           Octokit.middleware = stack
 
-          github_client = Octokit::Client.new(access_token: ENV["GITHUB_TOKEN"])
+          github_client = Octokit::Client.new(access_token: TeacherServicesTechDocs::GITHUB_TOKEN)
           github_client.auto_paginate = true
           github_client
         end

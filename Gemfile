@@ -13,6 +13,7 @@ gem "faraday-http-cache"
 gem "faraday_middleware"
 gem "html-pipeline"
 gem "octokit"
+gem "dotenv"
 gem "rubocop-govuk"
 
 # Testing
