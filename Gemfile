@@ -17,5 +17,6 @@ gem "rubocop-govuk"
 
 # Testing
 gem "capybara"
+gem "pry"
 gem "rspec"
 gem "webmock"
