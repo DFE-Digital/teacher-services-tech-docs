@@ -23,10 +23,10 @@ module TeacherServicesTechDocs
         }
 
         context[:subpage_url] =
-          URI.join(context[:base_url], File.join(".", File.dirname(@path), "/"))
+          URI.join(context[:base_url], ::File.join(".", ::File.dirname(@path), "/"))
 
         context[:image_subpage_url] =
-          URI.join(context[:image_base_url], File.join(".", File.dirname(@path), "/"))
+          URI.join(context[:image_base_url], ::File.join(".", ::File.dirname(@path), "/"))
 
         filters = [
           HTML::Pipeline::MarkdownFilter,
