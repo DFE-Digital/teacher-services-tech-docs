@@ -1,3 +1,4 @@
+---
 # Host to use for canonical URL generation (without trailing slash)
 host: teacher-services-tech-docs.london.cloudapps.digital
 
@@ -11,7 +12,8 @@ phase: Experimental
 header_links:
   Documentation: /
 
-# Enables search functionality. This indexes pages only and is not recommended for single-page sites.
+# Enables search functionality. This indexes pages only and is not recommended
+# for single-page sites.
 enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)

@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: 'Lint YAML'
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: config/*.yml
+
       - name: Set up gem cache
         uses: actions/cache@v1
         with:

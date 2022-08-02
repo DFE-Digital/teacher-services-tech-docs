@@ -1,3 +1,4 @@
+---
 - name: 'Publish teacher training courses'
   repo_name: "DFE-Digital/publish-teacher-training"
   docsets:
@@ -83,7 +84,7 @@
   repo_name: "DFE-Digital/claim-additional-payments-for-teaching"
   docsets:
     - path: "docs"
-name: "Get an Identity"
+- name: "Get an Identity"
   repo_name: "DFE-Digital/get-an-identity"
   docsets:
     - path: "docs"
