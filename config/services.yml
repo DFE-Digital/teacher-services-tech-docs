@@ -83,6 +83,10 @@
   repo_name: "DFE-Digital/claim-additional-payments-for-teaching"
   docsets:
     - path: "docs"
+name: "Get an Identity"
+  repo_name: "DFE-Digital/get-an-identity"
+  docsets:
+    - path: "docs"
 - name: "Early careers framework"
   repo_name: "DFE-Digital/early-careers-framework"
   docsets:
