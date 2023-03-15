@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teacher-services-tech-docs
+  labels:
+    app: teacher-services-tech-docs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: teacher-services-tech-docs
+  template:
+    metadata:
+      labels:
+        app: teacher-services-tech-docs
+    spec:
+      nodeSelector:
+        teacherservices.cloud/node_pool: applications
+        kubernetes.io/os: linux
+      containers:
+      - name: teacher-services-tech-docs
+        image: ghcr.io/dfe-digital/teacher-services-tech-docs:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: 64M
+            cpu: 0.1
+          limits:
+            memory: 64M
+            cpu: 1
