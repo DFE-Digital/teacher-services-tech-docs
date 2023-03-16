@@ -1,6 +1,6 @@
 # Teacher Services tech docs
 
-This is the repo for the [Teacher Services tech docs](https://teacher-services-tech-docs.london.cloudapps.digital).
+This is the repo for the [Teacher Services tech docs](https://teacher-services-tech-docs.teacherservices.cloud).
 
 ## Developing on this project
 
@@ -30,7 +30,7 @@ Every time you run this command, the `build` folder gets generated from scratch.
 
 ## Deployment
 
-The site is deployed automatically to the GOV.UK PaaS whenever `main` branch is updated. 
+The site is deployed automatically to the AKS production cluster whenever `main` branch is updated.
 
 ## Troubleshooting
 

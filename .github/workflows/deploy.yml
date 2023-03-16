@@ -1,4 +1,4 @@
-name: Deploy to GOV.UK PaaS
+name: Deploy to AKS production cluster
 
 on:
   push:
@@ -8,6 +8,10 @@ on:
     - cron: '0 6 * * 1-5'
   workflow_dispatch:
 
+
+env:
+  DOCKER_IMAGE: ghcr.io/dfe-digital/teacher-services-tech-docs
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,18 +19,44 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
 
     - run: bundle exec middleman build
 
-    - uses: DFE-Digital/github-actions/setup-cf-cli@master
-      name: Install cf CLI
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
       with:
-        CF_USERNAME: ${{ secrets.CF_USER }}
-        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
-        CF_SPACE_NAME: bat-qa
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
-    - run: cf push teacher-services-tech-docs
+    - name: Build Docker Image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        tags: |
+          ${{env.DOCKER_IMAGE}}:${{ github.sha }}
+          ${{env.DOCKER_IMAGE}}:latest
+        push: true
+
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/aks-set-context@v3
+      with:
+        resource-group: s189p01-tsc-pd-rg
+        cluster-name: s189p01-tsc-production-aks
+
+    - name: Deploy to AKS
+      uses: Azure/k8s-deploy@v4
+      with:
+        namespace: bat-production
+        manifests: |
+            manifests
+        images: ${{env.DOCKER_IMAGE}}:${{ github.sha }}
+        annotate-namespace: false
+        pull-images: false

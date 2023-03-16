@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: teacher-services-tech-docs
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: teacher-services-tech-docs.teacherservices.cloud
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        backend:
+          service:
+            name: teacher-services-tech-docs
+            port:
+              number: 80
