@@ -1,6 +1,6 @@
 ---
 # Host to use for canonical URL generation (without trailing slash)
-host: teacher-services-tech-docs.teacherservices.cloud
+host: tech-docs.teacherservices.cloud
 
 # Header-related options
 show_govuk_logo: false
