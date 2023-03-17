@@ -1,6 +1,6 @@
 # Teacher Services tech docs
 
-This is the repo for the [Teacher Services tech docs](https://teacher-services-tech-docs.teacherservices.cloud).
+This is the repo for the [Teacher Services tech docs](https://tech-docs.teacherservices.cloud).
 
 ## Developing on this project
 
