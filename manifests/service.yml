@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: teacher-services-tech-docs
+  name: teacher-services-development
 spec:
   selector:
-    app: teacher-services-tech-docs
+    app: teacher-services-development
   ports:
     - protocol: TCP
       port: 80
