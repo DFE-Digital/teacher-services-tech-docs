@@ -8,10 +8,6 @@
     - path: "docs/adr"
       ignore_files:
         - index.md
-- name: 'Find teacher training'
-  repo_name: "DFE-Digital/find-teacher-training"
-  docsets:
-    - path: "docs"
 - name: 'Register trainee teachers'
   repo_name: "DFE-Digital/register-trainee-teachers"
   docsets:
