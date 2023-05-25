@@ -95,3 +95,13 @@
 - name: "National Professional Qualification registration"
   repo_name: "DFE-Digital/npq-registration"
   docsets: []
+- name: "Access your teaching qualifications"
+  repo_name: "DFE-Digital/access-your-teaching-qualifications"
+  docsets:
+    - path: "adr"
+    - path: "docs"
+- name: "Refer serious misconduct by a teacher"
+  repo_name: "DFE-Digital/refer-serious-misconduct"
+  docsets:
+    - path: "adr"
+    - path: "docs"
