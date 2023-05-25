@@ -21,3 +21,5 @@ gem "capybara"
 gem "pry"
 gem "rspec"
 gem "webmock"
+
+gem "haml", "~> 5.0"
