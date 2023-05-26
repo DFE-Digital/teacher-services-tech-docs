@@ -128,3 +128,15 @@
   docsets:
     - path: "adr"
     - path: "docs"
+- name: "Qualified teachers API"
+  repo_name: "DFE-Digital/qualified-teachers-api"
+  language: 'cs'
+  csproj_path: 'QualifiedTeachersApi/src/QualifiedTeachersApi/QualifiedTeachersApi.csproj'
+  docsets:
+    - path: "docs"
+- name: "Get an identity"
+  repo_name: "DFE-Digital/get-an-identity"
+  language: 'cs'
+  csproj_path: 'dotnet-authserver/src/TeacherIdentity.AuthServer/TeacherIdentity.AuthServer.csproj'
+  docsets:
+    - path: "docs"
