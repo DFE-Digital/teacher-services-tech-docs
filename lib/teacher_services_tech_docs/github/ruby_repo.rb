@@ -11,22 +11,23 @@ module TeacherServicesTechDocs
                            :default_branch,
                            keyword_init: true)
 
-      def initialize(repo_name:, service_name:)
+      def initialize(repo_name:, service_name:, client: GitHub::Client.new)
         @repo_name = repo_name
         @service_name = service_name
+        @client = client
       end
 
       def profile
-        lockfile = client.get_file(@repo_name, "Gemfile.lock")
+        lockfile = @client.get_file(@repo_name, "Gemfile.lock")
         if lockfile.present?
           deps = GitHub::RubyDependencies.new(lockfile.contents)
         else
           return nil
         end
 
-        has_tool_versions = client.get_file(@repo_name, ".tool-versions").present? ? true : false
+        has_tool_versions = @client.get_file(@repo_name, ".tool-versions").present? ? true : false
 
-        repo = client.get_repo(@repo_name)
+        repo = @client.get_repo(@repo_name)
 
         Profile.new(
           name: @repo_name,
@@ -41,10 +42,10 @@ module TeacherServicesTechDocs
       end
 
       def load_docs(path_in_repo:, ignore_files: [])
-        directory_contents = client.get_directory(@repo_name, path_in_repo)
+        directory_contents = @client.get_directory(@repo_name, path_in_repo)
         markdown_files = directory_contents.select { |doc| doc.name.end_with?(".md") && !doc.name.in?(ignore_files) }
 
-        branch = client.get_repo(@repo_name).default_branch
+        branch = @client.get_repo(@repo_name).default_branch
 
         path_prefix = @repo_name.gsub("DFE-Digital", "services")
 
@@ -52,7 +53,7 @@ module TeacherServicesTechDocs
           markdown = GitHub::MarkdownFile.new(
             name: file.name,
             path: file.path,
-            contents: client.get_file(@repo_name, file.path).contents,
+            contents: @client.get_file(@repo_name, file.path).contents,
           )
 
           {
@@ -79,12 +80,6 @@ module TeacherServicesTechDocs
         pages.sort_by do |page|
           page.fetch(:path)
         end
-      end
-
-    private
-
-      def client
-        GitHub::Client.new
       end
     end
   end
