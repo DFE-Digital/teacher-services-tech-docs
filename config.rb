@@ -29,6 +29,16 @@ RUBY_SERVICE_PROFILES = service_list.select{ |s| s['language'] == 'ruby' }.map d
   repo.profile
 end
 
+CS_SERVICE_PROFILES = service_list.select{ |s| s['language'] == 'cs' }.map do |service|
+  repo = TeacherServicesTechDocs::GitHub::CsRepo.new(
+    repo_name: service["repo_name"],
+    csproj_path: service["csproj_path"],
+    service_name: service["name"],
+  )
+
+  repo.profile
+end
+
 helpers do
   def pages_by_category
     TeacherServicesTechDocs::PagesByCategory.new(sitemap)
@@ -36,6 +46,10 @@ helpers do
 
   def ruby_service_profiles
     RUBY_SERVICE_PROFILES.compact
+  end
+
+  def cs_service_profiles
+    CS_SERVICE_PROFILES.compact
   end
 end
 
