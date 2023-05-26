@@ -71,11 +71,6 @@
   docsets:
     - path: "adr"
     - path: "docs"
-- name: 'Qualified Teachers API'
-  repo_name: "DFE-Digital/qualified-teachers-api"
-  language: 'ruby'
-  docsets:
-    - path: "docs"
 - name: 'Database of Qualified Teachers'
   repo_name: "DFE-Digital/database-of-qualified-teachers"
   language: 'ruby'
@@ -128,3 +123,23 @@
   docsets:
     - path: "adr"
     - path: "docs"
+- name: "Teaching record system"
+  repo_name: "DFE-Digital/teaching-record-system"
+  language: 'cs'
+  csproj_path: >-
+    TeachingRecordSystem/src/TeachingRecordSystem/TeachingRecordSystem.csproj
+  docsets:
+    - path: "docs"
+- name: "Get an identity"
+  repo_name: "DFE-Digital/get-an-identity"
+  language: 'cs'
+  csproj_path: >-
+    dotnet-authserver/src/TeacherIdentity.AuthServer/TeacherIdentity.AuthServer.csproj
+  docsets:
+    - path: "docs"
+- name: 'GIT CRM API'
+  repo_name: 'DFE-Digital/get-into-teaching-api'
+  language: 'cs'
+  csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
+  docsets:
+    - path: 'docs'
