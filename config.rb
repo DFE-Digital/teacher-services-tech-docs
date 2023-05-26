@@ -20,7 +20,7 @@ end
 
 ignore "templates/*"
 
-RUBY_SERVICE_PROFILES = service_list.select{ |s| s['language'] == 'ruby' }.map do |service|
+RUBY_SERVICE_PROFILES = service_list.select { |s| s["language"] == "ruby" }.map do |service|
   repo = TeacherServicesTechDocs::GitHub::RubyRepo.new(
     repo_name: service["repo_name"],
     service_name: service["name"],
@@ -29,7 +29,7 @@ RUBY_SERVICE_PROFILES = service_list.select{ |s| s['language'] == 'ruby' }.map d
   repo.profile
 end
 
-CS_SERVICE_PROFILES = service_list.select{ |s| s['language'] == 'cs' }.map do |service|
+CS_SERVICE_PROFILES = service_list.select { |s| s["language"] == "cs" }.map do |service|
   repo = TeacherServicesTechDocs::GitHub::CsRepo.new(
     repo_name: service["repo_name"],
     csproj_path: service["csproj_path"],

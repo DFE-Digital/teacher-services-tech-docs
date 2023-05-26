@@ -25,4 +25,3 @@ class FakeGithubClient
     @repo_stubs[repo][file] = contents
   end
 end
-

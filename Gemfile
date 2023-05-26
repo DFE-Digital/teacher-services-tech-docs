@@ -13,9 +13,9 @@ gem "dotenv"
 gem "faraday-http-cache"
 gem "faraday_middleware"
 gem "html-pipeline"
+gem "nokogiri"
 gem "octokit"
 gem "rubocop-govuk"
-gem "nokogiri"
 
 # Testing
 gem "capybara"
