@@ -1,6 +1,6 @@
 module TeacherServicesTechDocs
   module GitHub
-    class Dependencies
+    class RubyDependencies
       def initialize(lockfile_contents)
         @parsed_lockfile = Bundler::LockfileParser.new(lockfile_contents)
       end

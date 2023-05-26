@@ -1,6 +1,6 @@
 module TeacherServicesTechDocs
   module GitHub
-    class Repo
+    class RubyRepo
       Profile = Struct.new(:name,
                            :rails,
                            :ruby,
@@ -19,7 +19,7 @@ module TeacherServicesTechDocs
       def profile
         lockfile = client.get_file(@repo_name, "Gemfile.lock")
         if lockfile.present?
-          deps = GitHub::Dependencies.new(lockfile.contents)
+          deps = GitHub::RubyDependencies.new(lockfile.contents)
         else
           return nil
         end

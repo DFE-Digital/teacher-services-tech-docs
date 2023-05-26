@@ -46,7 +46,7 @@ Welcome to the technical documentation for apps and libraries in Teacher Service
 
 | repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
 | --- | --- | --- | --- | --- | --- | --- |
-<% service_profiles.compact.each do |profile| %>
+<% ruby_service_profiles.compact.each do |profile| %>
 | <%= [link_to(profile.name, "https://github.com/#{profile.name}") , profile.rails, profile.ruby, profile.dfe_analytics, profile.dfe_reference_data, profile.dfe_autocomplete].join(' | ') %> |
 <% end %>
 
