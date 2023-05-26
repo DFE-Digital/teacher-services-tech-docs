@@ -1,6 +1,7 @@
 ---
 - name: 'Publish teacher training courses'
   repo_name: "DFE-Digital/publish-teacher-training"
+  language: 'ruby'
   docsets:
     - path: "docs"
       ignore_files:
@@ -10,6 +11,7 @@
         - index.md
 - name: 'Register trainee teachers'
   repo_name: "DFE-Digital/register-trainee-teachers"
+  language: 'ruby'
   docsets:
     - path: "docs"
     - path: "docs/adr"
@@ -18,90 +20,111 @@
         - template.md
 - name: 'Apply for teacher training'
   repo_name: "DFE-Digital/apply-for-teacher-training"
+  language: 'ruby'
   docsets:
     - path: "docs"
     - path: "adr"
 - name: 'Teaching vacancies'
   repo_name: "DFE-Digital/teaching-vacancies"
+  language: 'ruby'
   docsets:
     - path: "documentation"
     - path: "documentation/adr"
 - name: 'Get Into Teaching website'
   repo_name: "DFE-Digital/get-into-teaching-app"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: 'Get Into Teaching API'
   repo_name: "DFE-Digital/get-into-teaching-api"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: 'Get Into Teaching asset manager'
   repo_name: "DFE-Digital/GITISContent"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: 'Get School Experience'
   repo_name: "DFE-Digital/schools-experience"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: 'Monitoring'
   repo_name: "DFE-Digital/cf-monitoring"
+  language: 'ruby'
   docsets:
     - path: ""
 - name: 'GitHub Actions'
   repo_name: "DFE-Digital/github-actions"
+  language: 'ruby'
   docsets:
     - path: ""
 - name: 'Infrastructure'
   repo_name: "DFE-Digital/bat-infrastructure"
+  language: 'ruby'
   docsets:
     - path: ""
 - name: 'Apply for QTS in England'
   repo_name: "DFE-Digital/apply-for-qualified-teacher-status"
+  language: 'ruby'
   docsets:
     - path: "adr"
     - path: "docs"
 - name: 'Qualified Teachers API'
   repo_name: "DFE-Digital/qualified-teachers-api"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: 'Database of Qualified Teachers'
   repo_name: "DFE-Digital/database-of-qualified-teachers"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: 'Find a lost TRN'
   repo_name: "DFE-Digital/find-a-lost-trn"
+  language: 'ruby'
   docsets:
     - path: "docs"
     - path: "adr"
 - name: 'Teacher Misconduct System'
   repo_name: "DFE-Digital/teacher-misconduct-system"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: "Claim additional payments for teaching"
   repo_name: "DFE-Digital/claim-additional-payments-for-teaching"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: "Get an Identity"
   repo_name: "DFE-Digital/get-an-identity"
+  language: 'ruby'
   docsets:
     - path: "docs"
 - name: "Early careers framework"
   repo_name: "DFE-Digital/early-careers-framework"
+  language: 'ruby'
   docsets:
     - path: "documentation"
 - name: "ECF engage and learn"
   repo_name: "DFE-Digital/ecf-engage-and-learn"
+  language: 'ruby'
   docsets:
     - path: "documentation"
 - name: "National Professional Qualification registration"
   repo_name: "DFE-Digital/npq-registration"
+  language: 'ruby'
   docsets: []
 - name: "Access your teaching qualifications"
   repo_name: "DFE-Digital/access-your-teaching-qualifications"
+  language: 'ruby'
   docsets:
     - path: "adr"
     - path: "docs"
 - name: "Refer serious misconduct by a teacher"
   repo_name: "DFE-Digital/refer-serious-misconduct"
+  language: 'ruby'
   docsets:
     - path: "adr"
     - path: "docs"
