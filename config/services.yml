@@ -143,3 +143,27 @@
   csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
   docsets:
     - path: 'docs'
+- name: "Teacher pay calculator"
+  repo_name: "DFE-Digital/teacher-pay-calculator"
+  language: 'ruby'
+  docsets: []
+- name: "Refer a teacher for serious misconduct"
+  repo_name: "DFE-Digital/refer-serious-misconduct"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+- name: "Check the Children's barred list"
+  repo_name: "DFE-Digital/check-childrens-barred-list"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+- name: "Access your teaching qualifications"
+  repo_name: "DFE-Digital/access-your-teaching-qualifications"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+- name: "Get a teacher relocation payment"
+  repo_name: "DFE-Digital/get-a-teacher-relocation-payment"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
