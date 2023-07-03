@@ -31,6 +31,22 @@ RSpec.describe TeacherServicesTechDocs::GitHub::MarkdownFile do
       it { is_expected.to eq("<p>These curly quotes “make commonmarker throw an exception”</p>") }
     end
 
+    context "with non-breaking spaces in the title" do
+      context "as \\xC2\\xA0" do
+        let(:contents) { "#\xC2\xA0title" }
+        subject(:title) { markdown_file.title }
+
+        it { is_expected.to eq("title") }
+      end
+
+      context "as \\u00A0" do
+        let(:contents) { "#\u00A0title" }
+        subject(:title) { markdown_file.title }
+
+        it { is_expected.to eq("title") }
+      end
+    end
+
     context "when passed a repo name and branch" do
       let(:path) { "markdown.md" }
       let(:contents) do

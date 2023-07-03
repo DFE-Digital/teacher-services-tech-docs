@@ -38,15 +38,19 @@ module TeacherServicesTechDocs
 
         HTML::Pipeline
           .new(filters)
-          .to_html(@contents.to_s.force_encoding("UTF-8"), context)
+          .to_html(contents, context)
+      end
+
+      def contents
+        @contents.to_s.force_encoding("UTF-8")
       end
 
       def title
-        markdown_title = @contents.split("\n")[0].to_s.match(/#(.+)/)
+        markdown_title = contents.split("\n")[0].to_s.match(/#(.+)/)
 
         return filename unless markdown_title
 
-        markdown_title[1].strip
+        markdown_title[1].gsub(/[[:space:]]/, " ").strip
       end
 
       def filename
