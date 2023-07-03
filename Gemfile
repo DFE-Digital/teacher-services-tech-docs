@@ -13,6 +13,7 @@ gem "dotenv"
 gem "faraday-http-cache"
 gem "faraday_middleware"
 gem "html-pipeline"
+gem "nokogiri"
 gem "octokit"
 gem "rubocop-govuk"
 
@@ -21,3 +22,5 @@ gem "capybara"
 gem "pry"
 gem "rspec"
 gem "webmock"
+
+gem "haml", "~> 5.0"

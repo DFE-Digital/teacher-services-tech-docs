@@ -5,7 +5,7 @@ GovukTechDocs.configure(self)
 service_list = YAML.load_file("config/services.yml")
 
 services = service_list.reduce([]) do |list, service|
-  repo = TeacherServicesTechDocs::GitHub::Repo.new(
+  repo = TeacherServicesTechDocs::GitHub::RubyRepo.new(
     repo_name: service["repo_name"],
     service_name: service["name"],
   )
@@ -20,9 +20,19 @@ end
 
 ignore "templates/*"
 
-SERVICE_PROFILES = service_list.map do |service|
-  repo = TeacherServicesTechDocs::GitHub::Repo.new(
+RUBY_SERVICE_PROFILES = service_list.select { |s| s["language"] == "ruby" }.map do |service|
+  repo = TeacherServicesTechDocs::GitHub::RubyRepo.new(
     repo_name: service["repo_name"],
+    service_name: service["name"],
+  )
+
+  repo.profile
+end
+
+CS_SERVICE_PROFILES = service_list.select { |s| s["language"] == "cs" }.map do |service|
+  repo = TeacherServicesTechDocs::GitHub::CsRepo.new(
+    repo_name: service["repo_name"],
+    csproj_path: service["csproj_path"],
     service_name: service["name"],
   )
 
@@ -34,8 +44,12 @@ helpers do
     TeacherServicesTechDocs::PagesByCategory.new(sitemap)
   end
 
-  def service_profiles
-    SERVICE_PROFILES.compact
+  def ruby_service_profiles
+    RUBY_SERVICE_PROFILES.compact
+  end
+
+  def cs_service_profiles
+    CS_SERVICE_PROFILES.compact
   end
 end
 
