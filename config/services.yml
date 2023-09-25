@@ -102,8 +102,8 @@
   language: 'ruby'
   docsets:
     - path: "documentation"
-- name: "ECF engage and learn"
-  repo_name: "DFE-Digital/ecf-engage-and-learn"
+- name: "Support for early-career teachers"
+  repo_name: "DFE-Digital/support-for-early-career-teachers"
   language: 'ruby'
   docsets:
     - path: "documentation"
