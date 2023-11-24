@@ -6,7 +6,7 @@ module TeacherServicesTechDocs
       end
 
       def rails_version
-        @parsed_lockfile.specs.find { |s| s.name == "rails" }.version.to_s
+        @parsed_lockfile.specs.find { |s| s.name == "rails" }&.version&.to_s
       end
 
       def dfe_analytics_version
