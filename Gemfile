@@ -16,6 +16,7 @@ gem "html-pipeline"
 gem "nokogiri"
 gem "octokit"
 gem "rubocop-govuk"
+gem "solargraph"
 
 # Testing
 gem "capybara"
