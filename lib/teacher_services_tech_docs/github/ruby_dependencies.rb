@@ -1,8 +1,10 @@
 module TeacherServicesTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(lockfile_contents)
-        @parsed_lockfile = Bundler::LockfileParser.new(lockfile_contents)
+      def initialize(lockfile:, tool_versions_file: nil, ruby_version_file: nil)
+        @lockfile = lockfile
+        @tool_versions_file = tool_versions_file
+        @ruby_version_file = ruby_version_file
       end
 
       def rails_version
@@ -21,14 +23,32 @@ module TeacherServicesTechDocs
         get_dependency_version("dfe-reference-data")
       end
 
+      def has_tool_versions
+        @tool_versions_file.present?
+      end
+
       def ruby_version
-        Gem::Version.new(@parsed_lockfile.ruby_version.gsub("ruby ", "")).release.to_s
+        version = if parsed_lockfile && parsed_lockfile.ruby_version.present?
+                    parsed_lockfile.ruby_version.gsub("ruby ", "")
+                  elsif @ruby_version_file.present?
+                    @ruby_version_file
+                    # TODO: support reading ruby version from tool-versions if not in Gemfile
+                    # (no repos do this rn)
+                  end
+
+        Gem::Version.new(version).release.to_s if version
       end
 
     private
 
       def get_dependency_version(dep)
-        @parsed_lockfile.specs.find { |s| s.name == dep }&.version&.to_s
+        parsed_lockfile && parsed_lockfile.specs.find { |s| s.name == dep }&.version&.to_s
+      end
+
+      def parsed_lockfile
+        if @lockfile
+          @parsed_lockfile ||= Bundler::LockfileParser.new(@lockfile)
+        end
       end
     end
   end

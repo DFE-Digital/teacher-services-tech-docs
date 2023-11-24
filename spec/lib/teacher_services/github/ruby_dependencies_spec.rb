@@ -17,7 +17,7 @@ RSpec.describe TeacherServicesTechDocs::GitHub::RubyDependencies do
   end
 
   it "correctly reports versions" do
-    deps = described_class.new(lockfile_contents)
+    deps = described_class.new(lockfile: lockfile_contents)
     expect(deps.rails_version).to eq("7.0.8")
     expect(deps.dfe_analytics_version).to eq("1.2.0")
     expect(deps.dfe_autocomplete_version).to eq("1.3.0")
@@ -26,7 +26,10 @@ RSpec.describe TeacherServicesTechDocs::GitHub::RubyDependencies do
 
   it "correctly returns null when a gem is not present" do
     lockfile_without_rails = lockfile_contents.split("\n").reject { |l| l =~ /rails/ }.join("\n")
-    deps = described_class.new(lockfile_without_rails)
+    deps = described_class.new(lockfile: lockfile_without_rails)
     expect(deps.rails_version).to eq(nil)
+  end
+
+  it "falls back to the .ruby-version file if present" do
   end
 end
