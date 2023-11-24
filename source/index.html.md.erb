@@ -6,42 +6,6 @@ title: Teacher Services tech docs
 
 Welcome to the technical documentation for apps and libraries in Teacher Services. This site is used internally in the Department for Education.
 
-## Repositories we own
-
-| Name | URL | Team |
-| --- | --- | --- |
-| Apply for teacher training | [DFE-Digital/apply-for-teacher-training](https://github.com/DFE-Digital/apply-for-teacher-training) | Candidate & Provendor |
-| Apply for teacher training tests | [DFE-Digital/apply-for-teacher-training-tests](https://github.com/DFE-Digital/apply-for-teacher-training-tests) | Candidate & Provendor |
-| Apply ops dashboard | [DFE-Digital/apply-ops-dashboard](https://github.com/DFE-Digital/apply-ops-dashboard) | Candidate & Provendor |
-| BAT tech team guide | [DFE-Digital/bat-tech-guide](https://github.com/DFE-Digital/bat-tech-guide) | Publish/Register, Candidate & Provendor |
-| Find teacher training | [DFE-Digital/find-teacher-training](https://github.com/DFE-Digital/find-teacher-training) | Candidate |
-| Find teacher training tests | [DFE-Digital/find-teacher-training-tests](https://github.com/DFE-Digital/find-teacher-training-tests) | Candidate |
-| GOV.UK Markdown | [DFE-Digital/govuk_markdown](https://github.com/DFE-Digital/govuk_markdown) | Candidate & Provendor |
-| Publish teacher training | [DFE-Digital/publish-teacher-training](https://github.com/DFE-Digital/publish-teacher-training) | Publish & Register |
-| Register trainee teachers | [DFE-Digital/register-trainee-teachers](https://github.com/DFE-Digital/register-trainee-teachers) | Publish & Register |
-| Publish teacher training courses | [DFE-Digital/publish-teacher-training](https://github.com/DFE-Digital/publish-teacher-training) | Publish & Register |
-| Teaching vacancies | [DFE-Digital/teaching-vacancies](https://github.com/DFE-Digital/teaching-vacancies) | Teaching vacancies |
-| Get Into Teaching Application | [DFE-Digital/get-into-teaching-app](https://github.com/DFE-Digital/get-into-teaching-app) | Get Into Teaching |
-| Get Into Teaching API | [DFE-Digital/get-into-teaching-api](https://github.com/DFE-Digital/get-into-teaching-api) | Get Into Teaching |
-| Get Teacher Training Adviser | [DFE-Digital/get-teacher-training-adviser-service](https://github.com/DFE-Digital/get-teacher-training-adviser-service) | Get Into Teaching |
-| Get Into Teaching Asset Manager | [DFE-Digital/GITISContent](https://github.com/DFE-Digital/GITISContent) | Get Into Teaching |
-| Get School Experience | [DFE-Digital/schools-experience](https://github.com/DFE-Digital/schools-experience) | Get School Experience |
-| Monitoring | [DFE-Digital/cf-monitoring](https://github.com/DFE-Digital/cf-monitoring) | Teacher Services Infrastructure |
-| Github Actions | [DFE-Digital/github-actions](https://github.com/DFE-Digital/github-actions) | Teacher Services Infrastructure |
-| Infrastructure | [DFE-Digital/bat-infrastructure](https://github.com/DFE-Digital/bat-infrastructure) | Teacher Services Infrastructure |
-| Uptime | [DFE-Digital/teacher-services-upptime](https://github.com/DFE-Digital/teacher-services-upptime) | Teacher Services Infrastructure |
-| Apply for Qualified Teacher Status in England | [DFE-Digital/apply-for-qualified-teacher-status](https://github.com/DFE-Digital/apply-for-qualified-teacher-status) | Teaching Regulation Agency |
-| Database of Qualified Teachers | [DFE-Digital/database-of-qualified-teachers](https://github.com/DFE-Digital/database-of-qualified-teachers) | Teaching Regulation Agency |
-| Find a lost TRN | [DFE-Digital/find-a-lost-trn](https://github.com/DFE-Digital/find-a-lost-trn) | Teaching Regulation Agency |
-| Qualified Teachers API | [DFE-Digital/qualified-teachers-api](https://github.com/DFE-Digital/qualified-teachers-api) | Teaching Regulation Agency |
-| Teacher Misconduct System | [DFE-Digital/teacher-misconduct-system](https://github.com/DFE-Digital/teacher-misconduct-system) | Teaching Regulation Agency |
-| Teacher Services technical documentation | [DFE-Digital/teacher-services-tech.docs](https://github.com/DFE-Digital/teacher-services-tech-docs) | Teacher Services Infrastructure |
-| DfE Reference Data | [DFE-Digital/dfe-reference-data](https://github.com/DFE-Digital/dfe-reference-data) | Teacher Services Infrastructure |
-| BAT Data Maps | [DFE-Digital/bat-data-maps](https://github.com/DFE-Digital/bat-data-maps) | Teacher Services Infrastructure |
-| BAT Dataform | [DFE-Digital/bat-dataform](https://github.com/DFE-Digital/bat-dataform) | Data Insights |
-| DfE Analytics | [DFE-Digital/dfe-analytics](https://github.com/DFE-Digital/dfe-analytics) | Data Insights |
-| DfE Analytics Dataform | [DFE-Digital/dfe-analytics-dataform](https://github.com/DFE-Digital/dfe-analytics-dataform) | Data Insights |
-
 ## Rails apps and dependencies
 
 | repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
@@ -57,7 +21,6 @@ Welcome to the technical documentation for apps and libraries in Teacher Service
 <% cs_service_profiles.compact.each do |profile| %>
 | <%= [link_to(profile.name, "https://github.com/#{profile.name}") , profile.target_framework, profile.dfe_analytics_version].join(' | ') %> |
 <% end %>
-
 
 ## Table of contents
 
