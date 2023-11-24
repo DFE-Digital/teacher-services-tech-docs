@@ -35,14 +35,9 @@
   language: 'ruby'
   docsets:
     - path: "docs"
-- name: 'Get Into Teaching API'
-  repo_name: "DFE-Digital/get-into-teaching-api"
-  language: 'ruby'
-  docsets:
-    - path: "docs"
 - name: 'Get Into Teaching asset manager'
   repo_name: "DFE-Digital/GITISContent"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: "docs"
 - name: 'Get School Experience'
@@ -52,12 +47,12 @@
     - path: "docs"
 - name: 'Monitoring'
   repo_name: "DFE-Digital/cf-monitoring"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: ""
 - name: 'GitHub Actions'
   repo_name: "DFE-Digital/github-actions"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: ""
 - name: 'Infrastructure'
@@ -73,7 +68,7 @@
     - path: "docs"
 - name: 'Database of Qualified Teachers'
   repo_name: "DFE-Digital/database-of-qualified-teachers"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: "docs"
 - name: 'Find a lost TRN'
@@ -84,16 +79,11 @@
     - path: "adr"
 - name: 'Teacher Misconduct System'
   repo_name: "DFE-Digital/teacher-misconduct-system"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: "docs"
 - name: "Claim additional payments for teaching"
   repo_name: "DFE-Digital/claim-additional-payments-for-teaching"
-  language: 'ruby'
-  docsets:
-    - path: "docs"
-- name: "Get an Identity"
-  repo_name: "DFE-Digital/get-an-identity"
   language: 'ruby'
   docsets:
     - path: "docs"
@@ -141,5 +131,19 @@
   repo_name: 'DFE-Digital/get-into-teaching-api'
   language: 'cs'
   csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
+  docsets:
+    - path: 'docs'
+- name: "Teacher pay calculator"
+  repo_name: "DFE-Digital/teacher-pay-calculator"
+  language: 'ruby'
+  docsets: []
+- name: "Check the Children's Barred List"
+  repo_name: "DFE-Digital/check-childrens-barred-list"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+- name: "Get a teacher relocation payment"
+  repo_name: "DFE-Digital/get-a-teacher-relocation-payment"
+  language: 'ruby'
   docsets:
     - path: 'docs'

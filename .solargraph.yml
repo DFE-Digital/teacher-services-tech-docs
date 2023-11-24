@@ -1,0 +1,9 @@
+---
+include:
+  - "**/*.rb"
+exclude:
+  - spec/**/*
+reporters:
+  - rubocop
+formatter:
+  rubocop:
