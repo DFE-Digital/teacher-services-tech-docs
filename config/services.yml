@@ -143,3 +143,12 @@
   csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
   docsets:
     - path: 'docs'
+- name: "ITT Mentor Services"
+  repo_name: 'DFE-Digital/itt-mentor-services'
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+    - path: 'docs/adr'
+      ignore_files:
+        - index.md
+        - template.md
