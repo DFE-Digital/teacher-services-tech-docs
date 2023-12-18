@@ -102,11 +102,6 @@
   language: 'ruby'
   docsets:
     - path: "documentation"
-- name: "Support for early-career teachers"
-  repo_name: "DFE-Digital/support-for-early-career-teachers"
-  language: 'ruby'
-  docsets:
-    - path: "documentation"
 - name: "National Professional Qualification registration"
   repo_name: "DFE-Digital/npq-registration"
   language: 'ruby'
