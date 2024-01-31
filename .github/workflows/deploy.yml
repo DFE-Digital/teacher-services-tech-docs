@@ -46,10 +46,17 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Set up kubelogin for non-interactive login
+      uses: azure/use-kubelogin@v1
+      with:
+        kubelogin-version: 'v0.0.34'
+
     - uses: azure/aks-set-context@v3
       with:
         resource-group: s189p01-tsc-pd-rg
         cluster-name: s189p01-tsc-production-aks
+        use-kubelogin: true
+        admin: 'false'
 
     - name: Deploy to AKS
       uses: Azure/k8s-deploy@v4
