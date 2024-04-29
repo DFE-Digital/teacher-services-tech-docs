@@ -22,13 +22,13 @@ The incident leads should [triage the incident](/operating-a-service/how-to-cate
 After triaging the issue, the tech lead should identify:
 
 - any upstream services which could be contributing to the issue
-- any downstream services likely to be affected by the issue and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.5wrpa7wuk1l2).
+- any downstream services likely to be affected by the issue and raise incidents where needed
 
 ### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
 
 1. Initiate the Slack IncidentBot by typing `/incident open` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
 2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
-3. Determine who needs to be contacted, based on the incident priority and affected services, using [the incident contact lists](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy).
+3. Determine who needs to be contacted, based on the incident priority and affected services. Use the incident contact list if you have one for your service.
 4.  Invite the appropriate people from the contact lists to the incident channel.
 
 ### 5. Provide a service update to users outside DfE (comms lead)
@@ -44,10 +44,10 @@ To update the dashboard:
 
 ### 6. Start the incident report (any incident lead)
 
-Create the incident report using the template in Google Drive:
+Create the incident report using the template in Sharepoint:
 
-- Create a running [Incident Report using this template](https://docs.google.com/document/d/1HwKCPafnluOIhIAWbSD91zxt7w3q4FGDIVKS3d_SDFA/edit?usp=sharing)
-- Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://drive.google.com/drive/folders/12uWIF4beypUpEjejTRcKtV2PFadT5met)
+- Create a running [Incident Report using this template](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Incident%20report%20template.docx?d=w492d660483b642d3ba573293b133ff1c&csf=1&web=1&e=mW0xQJ)
+- Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP)
 
 ### 7. Decide whether to contact users about an incident (support lead)
 
@@ -84,15 +84,13 @@ Update stakeholders on the Slack incident channel every 60 minutes, until the in
 1. Update the running incident report
 2. Close the incident on using `/incident close` command in Slack
 3. Confirm that the incident has been automatically resolved on the [service status dashboard](https://teacher-services-status.education.gov.uk/) (it may take 5 mins to update)
+4. If this was a P1 incident, then it needs to be reported as a Major Incident to the central DfE team. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
 
 ## Incident review
 
 1. Hold an incident and lesson learned review following a [blameless post mortem culture](https://codeascraft.com/2012/05/22/blameless-postmortems/) so your service can improve.
   1. Write up an incident review with recommendations.
   2. The report introduction should be written in plain English, avoiding technical jargon whenever possible.
-2. Publish the incident review to the [incident reports folder in Google Drive](https://drive.google.com/drive/folders/12uWIF4beypUpEjejTRcKtV2PFadT5met).
+2. Publish the incident review to the [incident reports folder in Sharepoint](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP).
 3. Report on the incident as part of the A3 report to the Teacher Services Board.
-
-## Related links
-
-[GIT/BAT incident alerting and service support during holiday periods](https://docs.google.com/document/d/1Jo6lgN1_V3iCLE-sc950pgZ6RE1YuqU6uP3m7Smw15U/edit)
+4. If this was a P1, update the previously created Major incident report with any lessons learnt. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
