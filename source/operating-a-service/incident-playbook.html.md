@@ -26,10 +26,10 @@ After triaging the issue, the tech lead should identify:
 
 ### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
 
-1. Initiate the Slack IncidentBot by typing `/incident open` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
+1. Initiate the Slack IncidentBot by typing `/incident open` in the message box on the service Slack channel or #teacher-services-infra. Hit Enter.
 2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
-3. Determine who needs to be contacted, based on the incident priority and affected services. Use the incident contact list if you have one for your service.
-4.  Invite the appropriate people from the contact lists to the incident channel.
+3. Determine who needs to be contacted, based on the incident priority and affected services. Use the contacts from the [Teacher services list](https://educationgovuk.sharepoint.com.mcas.ms/sites/teacher-services-infrastructure/Lists/Teacher%20services%20list/AllItems.aspx) and the incident contact list if you have one for your service. It may include critical user groups like lead providers. Make sure to include PDM, SRO, DD in case of a P1 incident.
+4. Invite the appropriate people from the contact lists to the incident channel.
 
 ### 5. Provide a service update to users outside DfE (comms lead)
 
