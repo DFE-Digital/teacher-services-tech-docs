@@ -58,6 +58,10 @@ Contact your users if:
 
 Informing users about incidents is generally considered best practice, but should be decided on a case by case basis with the product and service managers.
 
+### 8. If the incident requires invocation of Disaster Recovery procedures
+
+Follow the [Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md)
+
 ## While the incident is in progress (all incident leads)
 
 Keep all conversations and status updates about the incident on the dedicated Slack incident channel.
