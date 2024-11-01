@@ -2,6 +2,19 @@
 
 This is the repo for the [Teacher Services tech docs](https://tech-docs.teacherservices.cloud).
 
+### Install build dependencies with ASDF
+
+The required versions of build tools are defined in [.tool-versions](.tool-versions). These can be automatically installed with [asdf-vm](https://asdf-vm.com/), see their [installation instructions](https://asdf-vm.com/#/core-manage-asdf).
+
+Install the plugin specified in `.tool-versions`
+
+```bash
+asdf plugin add ruby
+asdf install
+```
+
+(We don't mandate asdf, you can use other tools if you prefer.)
+
 ## Developing on this project
 
 Copy `.env.example` to `.env` and populate a GitHub token with read access to repos.
