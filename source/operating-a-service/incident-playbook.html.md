@@ -13,6 +13,12 @@ Self-organise to appoint:
 3. the **Incident support lead**
     (responsible for monitoring Zendesk and alerting the team to any changes in the queues and severity of experience of users).
 
+Notes:
+
+- The comms lead will typically be the delivery manager of the main affected service. If that person is not available, the product manager could take on this role, or a DM from another service.
+- The tech lead will typically be the tech lead of the main affected service, or another developer from the team.
+- The support lead will typically be assigned by the support team.
+
 ### 2. Triage the incident (all incident leads)
 
 The incident leads should [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
@@ -21,8 +27,8 @@ The incident leads should [triage the incident](/operating-a-service/how-to-cate
 
 After triaging the issue, the tech lead should identify:
 
-- any upstream services which could be contributing to the issue
-- any downstream services likely to be affected by the issue and raise incidents where needed
+- any upstream services (both inside and outside DfE) which could be contributing to the issue
+- any downstream services (both inside and outside DfE) likely to be affected by the issue and raise incidents where needed
 
 ### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
 
