@@ -7,6 +7,7 @@ Ask:
 * What’s the urgency and why?
 * What’s the impact on our users and services?
 * What’s the extent of the issue and what services and users are affected?
+* Are there any security or data privacy implications?
 
 Use the answers to:
 
@@ -19,17 +20,19 @@ The categories are fluid and incidents can increase / decrease in priority follo
 
 ### Description
 
-Highest and most serious level of incident where **two or more** of the following factors apply:
+Highest and most serious level of incident where **one or more** of the following factors apply:
 
 * 60-100% of users affected.
 * Damage to reputation of service is likely to be high.
 * Support staff are mostly or completely unable to resolve tickets due to service being down.
+* Personally identifiable information (PII) or other sensitive data is at risk.
 
 Examples:
 
 * Total outage of ‘Apply for teacher training’ at any time
 * Total outage of ‘Publish postgraduate teacher training courses’ during ‘peak’ time, which is July-October.
 * Primary search filter on ‘Find postgraduate teacher training courses’ going down. This includes location search and subject selection.
+* Users of 'Register trainee teachers' are able to view PII for trainees from other institutions.
 
 ### Stakeholder groups to inform
 
@@ -37,6 +40,7 @@ Team:
 
 * Team
 * Service support staff
+* Architecture team if there are security/privacy implications
 
 Senior stakeholders:
 
