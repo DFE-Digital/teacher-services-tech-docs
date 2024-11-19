@@ -147,12 +147,6 @@
       ignore_files:
         - index.md
         - template.md
-- name: "Claim Additional Payments for Teaching"
-  repo_name: 'DFE-Digital/claim-additional-payments-for-teaching'
-  language: 'ruby'
-  docsets:
-    - path: 'docs'
-    - path: 'docs/architecture-decisions'
 - name: "Teacher Pay Calculator"
   repo_name: 'DFE-Digital/teacher-pay-calculator'
   language: 'ruby'
