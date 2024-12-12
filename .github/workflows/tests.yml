@@ -17,7 +17,7 @@ jobs:
           file_or_dir: config/*.yml
 
       - name: Set up gem cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
