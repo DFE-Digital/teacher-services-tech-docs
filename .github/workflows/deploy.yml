@@ -16,7 +16,7 @@ env:
   DOCKER_IMAGE: ghcr.io/dfe-digital/teacher-services-tech-docs
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ github.token }}
@@ -39,8 +39,18 @@ jobs:
         reuse-cache: true
         snyk-token: ${{ secrets.SNYK_TOKEN }}
 
+  deploy:
+    if: github.event_name == 'push' || github.event_name ==  'schedule' || github.event_name ==  'workflow_dispatch'
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    permissions:
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v4
+
     - uses: azure/login@v2
-      if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -48,12 +58,10 @@ jobs:
 
     - name: Set up kubelogin for non-interactive login
       uses: azure/use-kubelogin@v1.2
-      if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         kubelogin-version: 'v0.1.6'
 
     - uses: azure/aks-set-context@v4
-      if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         resource-group: s189p01-tsc-pd-rg
         cluster-name: s189p01-tsc-production-aks
@@ -62,11 +70,10 @@ jobs:
 
     - name: Deploy to AKS
       uses: Azure/k8s-deploy@v5
-      if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         namespace: common-production
         manifests: |
-           manifests
+          manifests
         images: ${{env.DOCKER_IMAGE}}:${{ github.sha }}
         annotate-namespace: false
         pull-images: false
