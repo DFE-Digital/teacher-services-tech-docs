@@ -17,7 +17,7 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
@@ -34,7 +34,7 @@ jobs:
         reuse-cache: true
         snyk-token: ${{ secrets.SNYK_TOKEN }}
 
-    - uses: azure/login@v1
+    - uses: azure/login@v2
       if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -42,12 +42,12 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Set up kubelogin for non-interactive login
-      uses: azure/use-kubelogin@v1
+      uses: azure/use-kubelogin@v1.2
       if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
-        kubelogin-version: 'v0.0.34'
+        kubelogin-version: 'v0.1.6'
 
-    - uses: azure/aks-set-context@v3
+    - uses: azure/aks-set-context@v4
       if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         resource-group: s189p01-tsc-pd-rg
@@ -56,7 +56,7 @@ jobs:
         admin: 'false'
 
     - name: Deploy to AKS
-      uses: Azure/k8s-deploy@v4
+      uses: Azure/k8s-deploy@v5
       if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
         namespace: common-production
