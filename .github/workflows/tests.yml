@@ -16,22 +16,10 @@ jobs:
         with:
           file_or_dir: config/*.yml
 
-      - name: Set up gem cache
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
-
       - name: 'Set up Ruby from .ruby-version'
         uses: ruby/setup-ruby@v1
-
-      - name: 'Install dependencies and set up databases'
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+        with:
+          bundler-cache: true
 
       - name: 'Run tests'
         run: |
