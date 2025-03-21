@@ -59,7 +59,7 @@ jobs:
       uses: Azure/k8s-deploy@v4
       if: github.ref == 'refs/heads/main' || github.event_name ==  'schedule'
       with:
-        namespace: bat-production
+        namespace: common-production
         manifests: |
            manifests
         images: ${{env.DOCKER_IMAGE}}:${{ github.sha }}
