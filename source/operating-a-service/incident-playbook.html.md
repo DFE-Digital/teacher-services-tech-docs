@@ -39,9 +39,9 @@ After triaging the issue, the tech lead should identify:
 
 ### 5. Provide a service update to users outside DfE (comms lead)
 
-The Teacher Services team maintains a publicly available [service status dashboard](https://teacher-services-status.education.gov.uk/). During an incident, the comms lead needs to explain what’s happening to users outside DfE. The comms lead will need a GitHub account to do this, or delegate updates to a colleague who has one.
+The Teacher Services team maintains a publicly available [service status dashboard](https://teacher-services-status.education.gov.uk/). During an incident, the comms lead needs to explain what's happening to users outside DfE. The comms lead will need a GitHub account to do this, or delegate updates to a colleague who has one.
 
-The updates are managed via GitHub Actions and issues on the [teacher-services-upptime repository on GitHub](https://github.com/DFE-Digital/teacher-services-upptime). If a service’s automatic health check is failing continuously, an issue will be created within 5 minutes of the failure occurring and the dashboard will start reporting a service issue.
+The updates are managed via GitHub Actions and issues on the [teacher-services-upptime repository on GitHub](https://github.com/DFE-Digital/teacher-services-upptime). If a service's automatic health check is failing continuously, an issue will be created within 5 minutes of the failure occurring and the dashboard will start reporting a service issue.
 
 To update the dashboard:
 
@@ -53,7 +53,7 @@ To update the dashboard:
 Create the incident report using the template in Sharepoint:
 
 - Create a running [Incident Report using this template](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Incident%20report%20template.docx?d=w492d660483b642d3ba573293b133ff1c&csf=1&web=1&e=mW0xQJ)
-- Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP)
+- Rename the created file to include today's date and save as a new file in the [Incident reports folder](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP)
 
 ### 7. Decide whether to contact users about an incident (support lead)
 
@@ -67,6 +67,15 @@ Informing users about incidents is generally considered best practice, but shoul
 ### 8. If the incident requires invocation of Disaster Recovery procedures
 
 Follow the [Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md)
+
+### 9. For Azure infrastructure incidents, follow the escalation chain
+
+If the incident is related to Azure infrastructure, follow this escalation chain:
+
+1. Teacher Services SLT
+2. DfE CDTO and Matthew Evans (Deputy Director of Cloud Infrastructure and Platforms)
+3. Mark Balcon (mark.balcon@microsoft.com), our account manager with Microsoft
+4. Chessa Estaya (Chessa.ESTUYA@education.gov.uk), our Microsoft unified support contract account manager
 
 ## While the incident is in progress (all incident leads)
 
