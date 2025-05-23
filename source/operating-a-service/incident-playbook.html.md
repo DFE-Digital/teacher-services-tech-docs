@@ -23,6 +23,8 @@ Notes:
 
 The incident leads should [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
 
+Note that for Google BigQuery the incident should not be higher than a P2.
+
 ### 3. Identify any other services involved (tech lead)
 
 After triaging the issue, the tech lead should identify:
@@ -66,7 +68,10 @@ Informing users about incidents is generally considered best practice, but shoul
 
 ### 8. If the incident requires invocation of Disaster Recovery procedures
 
-Follow the [Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md)
+For TS hosted services follow the [TS Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md)
+
+For Google BigQuery follow the [TS Analytics Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-analytics-cloud/blob/main/documentation/disaster-recovery.md)
+
 
 ## While the incident is in progress (all incident leads)
 
