@@ -26,11 +26,13 @@ If an incident is confirmed, it is best to declare the incident as soon as possi
 
 The person declaring the incident should attempt to [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
 
+Note that for Google BigQuery the incident should not be higher than a P2.
+
 You can always update this later if needed.
 
 ### 3. Create an incident Slack channel (any incident lead)
 
-Initiate the Slack IncidentBot by sending the message `/incident open` in your service Slack channel or #teacher-services-infra. 
+Initiate the Slack IncidentBot by sending the message `/incident open` in your service Slack channel or #teacher-services-infra.
 
 Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
 
@@ -88,7 +90,9 @@ To update the dashboard:
 
 ### 9. If the incident requires invocation of Disaster Recovery procedures
 
-Follow the [Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md) and any other specific documentation for the service.
+For TS hosted services follow the [TS Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md) and any other specific documentation for the service.
+
+For Google BigQuery follow the [TS Analytics Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-analytics-cloud/blob/main/documentation/disaster-recovery.md)
 
 ## Provide updates during the incident (usually comms lead)
 
