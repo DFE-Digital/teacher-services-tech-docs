@@ -35,7 +35,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         context: .
-        max-cache: true
+        max-cache: false
         reuse-cache: true
         snyk-token: ${{ secrets.SNYK_TOKEN }}
 
