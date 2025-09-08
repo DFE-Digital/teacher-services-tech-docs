@@ -1,6 +1,6 @@
-# Teacher Services tech docs
+# Schools Digital tech docs
 
-This is the repo for the [Teacher Services tech docs](https://tech-docs.teacherservices.cloud).
+This is the repo for the [Schools Digital tech docs](https://tech-docs.teacherservices.cloud).
 
 ### Install build dependencies with ASDF
 
