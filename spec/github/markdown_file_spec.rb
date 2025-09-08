@@ -1,6 +1,6 @@
 require "capybara/rspec"
 
-RSpec.describe TeacherServicesTechDocs::GitHub::MarkdownFile do
+RSpec.describe SchoolsDigitalTechDocs::GitHub::MarkdownFile do
   let(:name) { "my_file.md" }
   let(:path) { "docs/my_file.md" }
   let(:contents) { "" }

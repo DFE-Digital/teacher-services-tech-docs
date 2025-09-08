@@ -1,4 +1,4 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     class MarkdownFile
       def initialize(name:, path:, contents:)
