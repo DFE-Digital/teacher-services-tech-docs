@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe TeacherServicesTechDocs::GitHub::RubyRepo do
+RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
   it "parses a Gemfile.lock correctly" do
     client = FakeGithubClient.new
     client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))

@@ -1,4 +1,4 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     module MarkdownDocs
       def load_docs(path_in_repo:, ignore_files: [])

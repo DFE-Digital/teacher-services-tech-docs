@@ -1,7 +1,7 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     class CsRepo
-      include TeacherServicesTechDocs::GitHub::MarkdownDocs
+      include SchoolsDigitalTechDocs::GitHub::MarkdownDocs
 
       Profile = Struct.new(:name,
                            :target_framework,

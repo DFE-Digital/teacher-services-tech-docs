@@ -1,4 +1,4 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     class RubyRepo
       include MarkdownDocs

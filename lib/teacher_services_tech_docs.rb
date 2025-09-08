@@ -31,6 +31,6 @@ require "teacher_services_tech_docs/github/markdown_file"
 require "teacher_services_tech_docs/github/ruby_dependencies"
 require "teacher_services_tech_docs/github/cs_dependencies"
 
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   GITHUB_TOKEN = ENV.fetch("GITHUB_TOKEN")
 end
