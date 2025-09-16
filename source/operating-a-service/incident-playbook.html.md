@@ -30,13 +30,19 @@ Note that for Google BigQuery the incident should not be higher than a P2.
 
 You can always update this later if needed.
 
-### 3. Create an incident Slack channel (any incident lead)
+### 3. Open an incident thread in Teams (any incident lead)
 
-Initiate the Slack IncidentBot by sending the message `/incident open` in your service Slack channel or #teacher-services-infra.
+In the Incidents channel in the Schools Digital Teams team, start a new thread with the following information:
 
-Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
+- Incident title
+- Incident priority (P1, P2, P3)
+- Affected service(s)
+- Incident comms lead
+- Incident tech lead
+- Incident support lead
+- Short description of the incident
 
-Add vital people as soon as you can to the Slack channel. The comms lead can focus on adding any others later.
+Tag vital people as soon as you can to the Teams thread. The comms lead can focus on adding any others later.
 
 ### 4. Focus on fixing the incident (usually tech lead)
 
@@ -46,13 +52,13 @@ If the incident is not of a technical nature, for example, as the result of a da
 
 ### 5. Determine who to contact and how (comms lead)
 
-Determine who needs to be contacted, based on the incident priority and affected services. 
+Determine who needs to be contacted, based on the incident priority and affected services.
 
 Use the contacts from the [Teacher services list](https://educationgovuk.sharepoint.com.mcas.ms/sites/teacher-services-infrastructure/Lists/Teacher%20services%20list/AllItems.aspx) and your service's contact list if you have one.
 
 It may be best to include critical user groups like lead providers, or other external organisations we work with. Make sure to include programme delivery managers, deputy directors and service owners in case of a P1 incident.
 
-You need to decide how to contact them as well. You might need to use email, Teams, Slack or a combination to make sure you reach everyone. You can also add them to the Slack incident channel. 
+You need to decide how to contact them as well. You might need to use email or Teams or a combination to make sure you reach everyone. You can also tag them in the Teams incident channel.
 
 ### 6. Identify any other services involved (any leads)
 
@@ -61,7 +67,7 @@ The leads should identify:
 - any upstream services (both inside and outside DfE) which could be contributing to the issue
 - any downstream services (both inside and outside DfE) likely to be affected by the issue
 
-After doing this, you might review the priority of the incident. It may be necessary to contact the upstream or downstream service teams so they can raise incidents in those services. This is the responsibility of the comms lead. 
+After doing this, you might review the priority of the incident. It may be necessary to contact the upstream or downstream service teams so they can raise incidents in those services. This is the responsibility of the comms lead.
 
 ### 7. Start the incident report (comms lead)
 
@@ -69,6 +75,7 @@ Create the incident report using the template in Sharepoint:
 
 - Create a running [Incident Report using this template](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Incident%20report%20template.docx?d=w492d660483b642d3ba573293b133ff1c&csf=1&web=1&e=mW0xQJ)
 - Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP)
+- Link the incident report in the Teams incident thread
 
 ### 8. Decide whether to contact users about an incident (all leads)
 
@@ -96,22 +103,14 @@ For Google BigQuery follow the [TS Analytics Cloud Disaster Recovery procedure](
 
 ## Provide updates during the incident (usually comms lead)
 
-Keep all conversations and status updates about the incident on the dedicated Slack incident channel.
+Keep all conversations and status updates about the incident on the dedicated Teams incident thread.
 
-Use the Slack IncidentBot `/incident update` command to update:
-
-- Description
-- Priority
-- Leads
-
-Update stakeholders on the Slack incident channel regularly, until the incident has been resolved. This might be every hour for high risk incidents, but at least every time something changes. Make sure your team is kept updated too by linking them to the incident channel.
-
-You might also need to send emails or Teams messages to make sure all contacts are updated.
+Update stakeholders on the incident thread regularly, until the incident has been resolved. This might be every hour for high risk incidents, but at least every time something changes. Make sure your team is kept updated too by linking them to the incident thread.
 
 ## Close and finish reporting on the incident
 
 1. Update the running incident report
-2. Close the incident on using `/incident close` command in Slack
+2. Update the Teams incident thread
 3. Confirm that the incident has been automatically resolved on the [service status dashboard](https://teacher-services-status.education.gov.uk/) (it may take 5 mins to update)
 4. If this was a P1 incident, then it needs to be reported as a Major Incident to the central DfE team. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
 
@@ -124,4 +123,4 @@ You might also need to send emails or Teams messages to make sure all contacts a
 3. Report on the incident as part of the A3 report to the Teacher Services Board.
 4. If this was a P1, update the previously created Major incident report with any lessons learnt. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
 
-You might want to consider doing a retro for any services involved in the incident as well, to ensure all lessons are learnt. You could also share your findings on the wider Teacher Services Slack channel or in Show and tell to help others better address or avoid incidents in future.
+You might want to consider doing a retro for any services involved in the incident as well, to ensure all lessons are learnt. You could also share your findings on the wider Schools Digital Teams channel or in Show and tell to help others better address or avoid incidents in future.
