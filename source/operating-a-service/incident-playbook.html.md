@@ -32,7 +32,7 @@ You can always update this later if needed.
 
 ### 3. Open an incident thread in Teams (any incident lead)
 
-In the Incidents channel in the Schools Digital Teams team, start a new thread with the following information:
+In the [Incidents channel](https://teams.microsoft.com/l/channel/19%3Ab099c54f6ee24635950791f9d837d0a5%40thread.tacv2/SD%20Incidents?groupId=5e035efe-5b2b-491b-9e3e-d832445e4ad1&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9) in the Schools Digital Teams team, start a new thread with the following information:
 
 - Incident title
 - Incident priority (P1, P2, P3)
