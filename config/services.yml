@@ -157,3 +157,9 @@
   docsets:
     - path: 'docs'
     - path: 'docs/adr'
+- name: "Get Information About Pupils"
+  repo_name: 'DFE-Digital/get-information-about-pupils'
+  language: 'cs'
+  csproj_path: 'DfE.GIAP.All/src/DfE.GIAP.Core/DfE.GIAP.Core.csproj'
+  docsets:
+    - path: 'docs'
