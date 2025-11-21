@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged:1.27.5-alpine3.21
+FROM nginxinc/nginx-unprivileged:1.29.2-alpine3.22
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
