@@ -118,13 +118,6 @@
   docsets:
     - path: "adr"
     - path: "docs"
-- name: "Teaching record system"
-  repo_name: "DFE-Digital/teaching-record-system"
-  language: 'cs'
-  csproj_path: >-
-    TeachingRecordSystem/src/TeachingRecordSystem/TeachingRecordSystem.csproj
-  docsets:
-    - path: "docs"
 - name: "Get an identity"
   repo_name: "DFE-Digital/get-an-identity"
   language: 'cs'
@@ -163,3 +156,24 @@
   csproj_path: 'DfE.GIAP.All/src/DfE.GIAP.Core/DfE.GIAP.Core.csproj'
   docsets:
     - path: 'docs'
+- name: "SAP Public"
+  repo_name: 'DFE-Digital/sap-public'
+  language: 'cs'
+  csproj_path: 'SAPPub.Core/SAPPub.Core.csproj'
+  docsets: []
+- name: "SAP Sector"
+  repo_name: 'DFE-Digital/sap-sector'
+  language: 'cs'
+  csproj_path: 'SAPSec.Core/SAPSec.Core.csproj'
+  docsets: []
+- name: "Teacher Training Entitlement"
+  repo_name: "DFE-Digital/teacher-training-entitlement"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+- name: "Teaching record system"
+  repo_name: "DFE-Digital/teaching-record-system"
+  language: 'cs'
+  csproj_path: 'TeachingRecordSystem/Directory.Build.props'
+  docsets:
+    - path: "docs"
