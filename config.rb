@@ -39,6 +39,10 @@ CS_SERVICE_PROFILES = service_list.select { |s| s["language"] == "cs" }.map do |
   repo.profile
 end
 
+if RUBY_SERVICE_PROFILES.length + CS_SERVICE_PROFILES.length != services.length
+  raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}")
+end
+
 helpers do
   def pages_by_category
     TeacherServicesTechDocs::PagesByCategory.new(sitemap)
