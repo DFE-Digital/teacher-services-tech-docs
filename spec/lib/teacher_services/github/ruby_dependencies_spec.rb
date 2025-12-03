@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe TeacherServicesTechDocs::GitHub::RubyDependencies do
+RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   let :lockfile_contents do
     <<~GEMFILE_LOCK
       GEM
