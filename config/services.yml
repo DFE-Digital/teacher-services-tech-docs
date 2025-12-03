@@ -37,7 +37,8 @@
     - path: "docs"
 - name: 'Get Into Teaching API'
   repo_name: "DFE-Digital/get-into-teaching-api"
-  language: 'ruby'
+  language: 'cs'
+  csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
   docsets:
     - path: "docs"
 - name: 'Get Into Teaching asset manager'
