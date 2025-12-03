@@ -26,6 +26,8 @@ RUBY_SERVICE_PROFILES = service_list.select { |s| s["language"] == "ruby" }.map 
     service_name: service["name"],
   )
 
+  raise "No profile created for #{service}" unless repo.profile
+
   repo.profile
 end
 
@@ -36,10 +38,22 @@ CS_SERVICE_PROFILES = service_list.select { |s| s["language"] == "cs" }.map do |
     service_name: service["name"],
   )
 
+  raise "No profile created for #{repo.service} " unless repo.profile
+
   repo.profile
 end
 
 if RUBY_SERVICE_PROFILES.length + CS_SERVICE_PROFILES.length != services.length
+  ALL_SERVICE_NAMES = service_list.map do |service|
+    service["name"]
+  end
+
+  MAPPED_SERVICE_NAMES = (CS_SERVICE_PROFILES + RUBY_SERVICE_PROFILES).map do |repo|
+    repo.service_name
+  end
+
+  puts Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES)
+
   raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}")
 end
 
