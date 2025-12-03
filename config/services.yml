@@ -92,11 +92,6 @@
   language: 'ruby'
   docsets:
     - path: "documentation"
-- name: "Support for early-career teachers"
-  repo_name: "DFE-Digital/support-for-early-career-teachers"
-  language: 'ruby'
-  docsets:
-    - path: "documentation"
 - name: "National Professional Qualification registration"
   repo_name: "DFE-Digital/npq-registration"
   language: 'ruby'
@@ -131,6 +126,31 @@
   repo_name: 'DFE-Digital/get-into-teaching-api'
   language: 'cs'
   csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
+  docsets:
+    - path: 'docs'
+- name: "ITT Mentor Services"
+  repo_name: 'DFE-Digital/itt-mentor-services'
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+    - path: 'docs/adr'
+      ignore_files:
+        - index.md
+        - template.md
+- name: "Teacher Pay Calculator"
+  repo_name: 'DFE-Digital/teacher-pay-calculator'
+  language: 'ruby'
+  docsets: []
+- name: "Get a Teacher Relocation Payment"
+  repo_name: 'DFE-Digital/get-a-teacher-relocation-payment'
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
+    - path: 'docs/adr'
+- name: "Get Information About Pupils"
+  repo_name: 'DFE-Digital/get-information-about-pupils'
+  language: 'cs'
+  csproj_path: 'DfE.GIAP.All/src/DfE.GIAP.Core/DfE.GIAP.Core.csproj'
   docsets:
     - path: 'docs'
 - name: "Teacher pay calculator"

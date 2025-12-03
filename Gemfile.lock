@@ -321,6 +321,7 @@ DEPENDENCIES
   govuk_tech_docs
   haml (~> 5.0)
   html-pipeline
+  middleman
   nokogiri
   octokit
   pry

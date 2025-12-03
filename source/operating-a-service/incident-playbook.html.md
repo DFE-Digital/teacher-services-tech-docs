@@ -9,47 +9,75 @@ Self-organise to appoint:
 1.  the **Incident comms lead**
     (responsible for communicating and alerts to users and stakeholders)
 2.  the **Incident tech lead**
-    (responsible for technical direction and communicating to the comms lead)
+    (responsible for technical direction for fixing the incident and communicating to the comms lead)
 3. the **Incident support lead**
     (responsible for monitoring Zendesk and alerting the team to any changes in the queues and severity of experience of users).
 
-### 2. Triage the incident (all incident leads)
+Who will usually be in these lead roles
+- The comms lead will typically be the delivery manager of the main affected service. If that person is not available, the product manager could take on this role, or a DM from another service.
+- The tech lead will typically be the tech lead of the main affected service, or another developer from the team.
+- The support lead will typically be assigned by the support team.
 
-The incident leads should [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
+For an incident that is cross-service, try to appoint whoever is available. The comms lead would usually be the program delivery manager or an experienced delivery manager from one of the service teams. The tech lead would usually be the lead developer or a tech lead from one of the service teams. 
 
-### 3. Identify any other services involved (tech lead)
+If an incident is confirmed, it is best to declare the incident as soon as possible. You can always update who is in these roles later.
 
-After triaging the issue, the tech lead should identify:
+### 2. Triage the incident (any incident lead)
 
-- any upstream services which could be contributing to the issue
-- any downstream services likely to be affected by the issue and raise incidents where needed according to the [dependent services contact details](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.5wrpa7wuk1l2).
+The person declaring the incident should attempt to [triage the incident](/operating-a-service/how-to-categorise-technical-incidents.html) (P1, P2, P3).
 
-### 4. Create an incident Slack channel and inform the stakeholders (comms lead)
+Note that for Google BigQuery the incident should not be higher than a P2.
 
-1. Initiate the Slack IncidentBot by typing `/incident open` in the message box on #twd_git_bat channel or the #tra_digital channel (as appropriate), and hit Enter.
-2. Complete the details in the IncidentBot template, and press Enter, which will automatically create a dedicated Slack channel for the incident.
-3. Determine who needs to be contacted, based on the incident priority and affected services, using [the incident contact lists](https://docs.google.com/document/d/1E3sL-Om_NPHWHdYdLykVuiWux_6AmR5pn5KjIkQYHaI/edit#bookmark=id.djbosiwhbjjy).
-4.  Invite the appropriate people from the contact lists to the incident channel.
+You can always update this later if needed.
 
-### 5. Provide a service update to users outside DfE (comms lead)
+### 3. Open an incident thread in Teams (any incident lead)
 
-The Teacher Services team maintains a publicly available [service status dashboard](https://teacher-services-status.education.gov.uk/). During an incident, the comms lead needs to explain what’s happening to users outside DfE. The comms lead will need a GitHub account to do this, or delegate updates to a colleague who has one.
+In the [Incidents channel](https://teams.microsoft.com/l/channel/19%3Ab099c54f6ee24635950791f9d837d0a5%40thread.tacv2/SD%20Incidents?groupId=5e035efe-5b2b-491b-9e3e-d832445e4ad1&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9) in the Schools Digital Teams team, start a new thread with the following information:
 
-The updates are managed via GitHub Actions and issues on the [teacher-services-upptime repository on GitHub](https://github.com/DFE-Digital/teacher-services-upptime). If a service’s automatic health check is failing continuously, an issue will be created within 5 minutes of the failure occurring and the dashboard will start reporting a service issue.
+- Incident title
+- Incident priority (P1, P2, P3)
+- Affected service(s)
+- Incident comms lead
+- Incident tech lead
+- Incident support lead
+- Short description of the incident
 
-To update the dashboard:
+Tag vital people as soon as you can to the Teams thread. The comms lead can focus on adding any others later.
 
-1. Navigate to the appropriate incident issue on the [GitHub issues page](https://github.com/DFE-Digital/teacher-services-upptime/issues)
-2. Add a comment to the issue
+### 4. Focus on fixing the incident (usually tech lead)
 
-### 6. Start the incident report (any incident lead)
+The tech lead should be focused on either fixing the incident themselves or giving direction to other developers to do so.
 
-Create the incident report using the template in Google Drive:
+If the incident is not of a technical nature, for example, as the result of a data breach, others might lead on resolving the incident.
 
-- Create a running [Incident Report using this template](https://docs.google.com/document/d/1HwKCPafnluOIhIAWbSD91zxt7w3q4FGDIVKS3d_SDFA/edit?usp=sharing)
-- Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://drive.google.com/drive/folders/12uWIF4beypUpEjejTRcKtV2PFadT5met)
+### 5. Determine who to contact and how (comms lead)
 
-### 7. Decide whether to contact users about an incident (support lead)
+Determine who needs to be contacted, based on the incident priority and affected services.
+
+Use the contacts from the [Schools Digital list](https://educationgovuk.sharepoint.com.mcas.ms/sites/teacher-services-infrastructure/Lists/Teacher%20services%20list/AllItems.aspx) and your service's contact list if you have one.
+
+It may be best to include critical user groups like lead providers, or other external organisations we work with. Make sure to include programme delivery managers, deputy directors and service owners in case of a P1 incident.
+
+You need to decide how to contact them as well. You might need to use email or Teams or a combination to make sure you reach everyone. You can also tag them in the Teams incident channel.
+
+### 6. Identify any other services involved (any leads)
+
+The leads should identify:
+
+- any upstream services (both inside and outside DfE) which could be contributing to the issue
+- any downstream services (both inside and outside DfE) likely to be affected by the issue
+
+After doing this, you might review the priority of the incident. It may be necessary to contact the upstream or downstream service teams so they can raise incidents in those services. This is the responsibility of the comms lead.
+
+### 7. Start the incident report (comms lead)
+
+Create the incident report using the template in Sharepoint:
+
+- Create a running [Incident Report using this template](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Incident%20report%20template.docx?d=w492d660483b642d3ba573293b133ff1c&csf=1&web=1&e=mW0xQJ)
+- Rename the created file to include today’s date and save as a new file in the [Incident reports folder](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP)
+- Link the incident report in the Teams incident thread
+
+### 8. Decide whether to contact users about an incident (all leads)
 
 Contact your users if:
 
@@ -58,41 +86,41 @@ Contact your users if:
 
 Informing users about incidents is generally considered best practice, but should be decided on a case by case basis with the product and service managers.
 
-## While the incident is in progress (all incident leads)
+The Schools Digital team maintains a publicly available [service status dashboard](https://teacher-services-status.education.gov.uk/), generated by our [Upptime](https://github.com/DFE-Digital/teacher-services-upptime) instance on GitHub.
 
-Keep all conversations and status updates about the incident on the dedicated Slack incident channel.
+The updates are managed via GitHub Actions and issues on the [teacher-services-upptime repository on GitHub](https://github.com/DFE-Digital/teacher-services-upptime). If a service’s automatic health check is failing continuously, an issue will be created within 5 minutes of the failure occurring and the dashboard will start reporting a service issue.
 
-Use these incident stages in your Slack updates:
+To update the dashboard:
 
-- Incident has occurred
-- Incident is being assessed
-- Incident is being fixed
-- Incident is resolved
+1. Navigate to the appropriate incident issue on the [GitHub issues page](https://github.com/DFE-Digital/teacher-services-upptime/issues)
+2. Add a comment to the issue
 
-Use the Slack IncidentBot `/incident update` command to update:
+### 9. If the incident requires invocation of Disaster Recovery procedures
 
-- Description
-- Priority
-- Leads
+For TS hosted services follow the [TS Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md) and any other specific documentation for the service.
 
-### Provide regular updates every 60 minutes (comms lead)
+For Google BigQuery follow the [TS Analytics Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-analytics-cloud/blob/main/documentation/disaster-recovery.md)
 
-Update stakeholders on the Slack incident channel every 60 minutes, until the incident has been resolved. Ensure they receive the alert even if their Slack alert notifications are turned off, and check in with them face-to-face (once back in the office).
+## Provide updates during the incident (usually comms lead)
 
-## Once the incident is resolved
+Keep all conversations and status updates about the incident on the dedicated Teams incident thread.
+
+Update stakeholders on the incident thread regularly, until the incident has been resolved. This might be every hour for high risk incidents, but at least every time something changes. Make sure your team is kept updated too by linking them to the incident thread.
+
+## Close and finish reporting on the incident
 
 1. Update the running incident report
-2. Close the incident on using `/incident close` command in Slack
+2. Update the Teams incident thread
 3. Confirm that the incident has been automatically resolved on the [service status dashboard](https://teacher-services-status.education.gov.uk/) (it may take 5 mins to update)
+4. If this was a P1 incident, then it needs to be reported as a Major Incident to the central DfE team. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
 
-## Incident review
+### Review the incident to try and prevent it reoccurring
 
 1. Hold an incident and lesson learned review following a [blameless post mortem culture](https://codeascraft.com/2012/05/22/blameless-postmortems/) so your service can improve.
   1. Write up an incident review with recommendations.
   2. The report introduction should be written in plain English, avoiding technical jargon whenever possible.
-2. Publish the incident review to the [incident reports folder in Google Drive](https://drive.google.com/drive/folders/12uWIF4beypUpEjejTRcKtV2PFadT5met).
-3. Report on the incident as part of the A3 report to the Teacher Services Board.
+2. Publish the incident review to the [incident reports folder in Sharepoint](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP).
+3. Report on the incident as part of the A3 report to the Schools Digital Board.
+4. If this was a P1, update the previously created Major incident report with any lessons learnt. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
 
-## Related links
-
-[GIT/BAT incident alerting and service support during holiday periods](https://docs.google.com/document/d/1Jo6lgN1_V3iCLE-sc950pgZ6RE1YuqU6uP3m7Smw15U/edit)
+You might want to consider doing a retro for any services involved in the incident as well, to ensure all lessons are learnt. You could also share your findings on the wider Schools Digital Teams channel or in Show and tell to help others better address or avoid incidents in future.

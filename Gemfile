@@ -25,3 +25,7 @@ gem "rspec"
 gem "webmock"
 
 gem "haml", "~> 5.0"
+
+# Framework
+
+gem "middleman"

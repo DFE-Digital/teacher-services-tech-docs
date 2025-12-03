@@ -22,7 +22,9 @@ spec:
       - name: teacher-services-tech-docs
         image: ghcr.io/dfe-digital/teacher-services-tech-docs:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
         resources:
           requests:
             memory: 64M

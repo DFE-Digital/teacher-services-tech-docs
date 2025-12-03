@@ -1,4 +1,4 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     class CsDependencies
       def initialize(csproj_contents)

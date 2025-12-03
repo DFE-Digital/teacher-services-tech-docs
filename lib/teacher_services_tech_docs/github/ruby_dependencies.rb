@@ -1,4 +1,4 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
       def initialize(lockfile:, tool_versions_file: nil, ruby_version_file: nil)
