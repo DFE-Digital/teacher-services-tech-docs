@@ -3,7 +3,10 @@ module SchoolsDigitalTechDocs
     class CsRepo
       include SchoolsDigitalTechDocs::GitHub::MarkdownDocs
 
-      Profile = Struct.new(:name,
+      attr_reader :service_name
+
+      Profile = Struct.new(:service_name,
+                           :name,
                            :target_framework,
                            :dfe_analytics_version,
                            :asdf,
@@ -31,6 +34,7 @@ module SchoolsDigitalTechDocs
         repo = @client.get_repo(@repo_name)
 
         Profile.new(
+          service_name: @service_name,
           name: @repo_name,
           target_framework: deps.target_framework,
           dfe_analytics_version: deps.dfe_analytics_version,

@@ -3,7 +3,10 @@ module SchoolsDigitalTechDocs
     class RubyRepo
       include MarkdownDocs
 
-      Profile = Struct.new(:name,
+      attr_reader :service_name
+
+      Profile = Struct.new(:service_name,
+                           :name,
                            :rails,
                            :ruby,
                            :asdf,
@@ -32,6 +35,7 @@ module SchoolsDigitalTechDocs
         repo = @client.get_repo(@repo_name)
 
         Profile.new(
+          service_name: @service_name,
           name: @repo_name,
           rails: deps.rails_version,
           dfe_analytics: deps.dfe_analytics_version,
