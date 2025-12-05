@@ -43,26 +43,22 @@ CS_SERVICE_REPOS = service_list.select { |s| s["language"] == "cs" }.map do |ser
   repo
 end
 
-RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort { |a, b| a.service_name <=> b.service_name }.map { |repo| repo.profile }
-CS_SERVICE_PROFILES = CS_SERVICE_REPOS.sort { |a, b| a.service_name <=> b.service_name }.map { |repo|  repo.profile }
+RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort { |a, b| a.service_name <=> b.service_name }.map(&:profile)
+CS_SERVICE_PROFILES = CS_SERVICE_REPOS.sort { |a, b| a.service_name <=> b.service_name }.map(&:profile)
 
 ALL_SERVICE_NAMES = service_list.map do |service|
   service["name"]
 end
 
-MAPPED_SERVICE_NAMES = (CS_SERVICE_REPOS + RUBY_SERVICE_REPOS).map do |repo|
-  repo.service_name
-end
+MAPPED_SERVICE_NAMES = (CS_SERVICE_REPOS + RUBY_SERVICE_REPOS).map(&:service_name)
 
-OTHER_SERVICE_NAMES = service_list.select {|r| r["language"] == 'other'}.map do |service|
+OTHER_SERVICE_NAMES = service_list.select { |r| r["language"] == "other" }.map do |service|
   service["name"]
 end
 
 missing_service_names = Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES + OTHER_SERVICE_NAMES)
 
-
-if missing_service_names.length > 0
-
+unless missing_service_names.empty?
   raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}; Other #{OTHER_SERVICE_NAMES.length}")
 end
 
