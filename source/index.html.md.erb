@@ -65,7 +65,7 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 - [How to categorise technical incidents](/operating-a-service/how-to-categorise-technical-incidents.html)
 - [Incident playbook](/operating-a-service/incident-playbook.html)
 
-<% pages_by_category.pages.each do |category, pages| %>
+<% pages_by_category.pages.sort_by {|category, page| category }.each do |category, pages| %>
 
 ### <%= category %>
 
