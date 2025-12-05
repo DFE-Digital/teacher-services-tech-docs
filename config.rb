@@ -10,7 +10,7 @@ services = service_list.reduce([]) do |list, service|
     service_name: service["name"],
   )
 
-  list + service["docsets"].map do |docset|
+  list + service.fetch("docsets", []).map do |docset|
     repo.load_docs(
       path_in_repo: docset["path"],
       ignore_files: docset.fetch("ignore_files", []),
