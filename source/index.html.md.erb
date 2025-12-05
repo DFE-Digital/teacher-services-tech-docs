@@ -1,10 +1,10 @@
 ---
-title: Teacher Services tech docs
+title: Schools Digital tech docs
 ---
 
-# Teacher Services technical documentation
+# Schools Digital technical documentation
 
-Welcome to the technical documentation for apps and libraries in Teacher Services. This site is used internally in the Department for Education.
+Welcome to the technical documentation for apps and libraries in Schools Digital. This site is used internally in the Department for Education.
 
 ## Repositories we own
 
@@ -21,18 +21,18 @@ Welcome to the technical documentation for apps and libraries in Teacher Service
 | Get Teacher Training Adviser | [DFE-Digital/get-teacher-training-adviser-service](https://github.com/DFE-Digital/get-teacher-training-adviser-service) | Get Into Teaching |
 | Get Into Teaching Asset Manager | [DFE-Digital/GITISContent](https://github.com/DFE-Digital/GITISContent) | Get Into Teaching |
 | Get School Experience | [DFE-Digital/schools-experience](https://github.com/DFE-Digital/schools-experience) | Get School Experience |
-| Monitoring | [DFE-Digital/cf-monitoring](https://github.com/DFE-Digital/cf-monitoring) | Teacher Services Infrastructure |
-| Github Actions | [DFE-Digital/github-actions](https://github.com/DFE-Digital/github-actions) | Teacher Services Infrastructure |
-| Infrastructure | [DFE-Digital/bat-infrastructure](https://github.com/DFE-Digital/bat-infrastructure) | Teacher Services Infrastructure |
-| Uptime | [DFE-Digital/teacher-services-upptime](https://github.com/DFE-Digital/teacher-services-upptime) | Teacher Services Infrastructure |
+| Monitoring | [DFE-Digital/cf-monitoring](https://github.com/DFE-Digital/cf-monitoring) | Schools Digital Infrastructure |
+| Github Actions | [DFE-Digital/github-actions](https://github.com/DFE-Digital/github-actions) | Schools Digital Infrastructure |
+| Infrastructure | [DFE-Digital/bat-infrastructure](https://github.com/DFE-Digital/bat-infrastructure) | Schools Digital Infrastructure |
+| Uptime | [DFE-Digital/teacher-services-upptime](https://github.com/DFE-Digital/teacher-services-upptime) | Schools Digital Infrastructure |
 | Apply for Qualified Teacher Status in England | [DFE-Digital/apply-for-qualified-teacher-status](https://github.com/DFE-Digital/apply-for-qualified-teacher-status) | Teaching Regulation Agency |
 | Database of Qualified Teachers | [DFE-Digital/database-of-qualified-teachers](https://github.com/DFE-Digital/database-of-qualified-teachers) | Teaching Regulation Agency |
 | Find a lost TRN | [DFE-Digital/find-a-lost-trn](https://github.com/DFE-Digital/find-a-lost-trn) | Teaching Regulation Agency |
 | Qualified Teachers API | [DFE-Digital/qualified-teachers-api](https://github.com/DFE-Digital/qualified-teachers-api) | Teaching Regulation Agency |
 | Teacher Misconduct System | [DFE-Digital/teacher-misconduct-system](https://github.com/DFE-Digital/teacher-misconduct-system) | Teaching Regulation Agency |
-| Teacher Services technical documentation | [DFE-Digital/teacher-services-tech.docs](https://github.com/DFE-Digital/teacher-services-tech-docs) | Teacher Services Infrastructure |
-| DfE Reference Data | [DFE-Digital/dfe-reference-data](https://github.com/DFE-Digital/dfe-reference-data) | Teacher Services Infrastructure |
-| BAT Data Maps | [DFE-Digital/bat-data-maps](https://github.com/DFE-Digital/bat-data-maps) | Teacher Services Infrastructure |
+| Schools Digital technical documentation | [DFE-Digital/teacher-services-tech.docs](https://github.com/DFE-Digital/teacher-services-tech-docs) | Schools Digital Infrastructure |
+| DfE Reference Data | [DFE-Digital/dfe-reference-data](https://github.com/DFE-Digital/dfe-reference-data) | Schools Digital Infrastructure |
+| BAT Data Maps | [DFE-Digital/bat-data-maps](https://github.com/DFE-Digital/bat-data-maps) | Schools Digital Infrastructure |
 | BAT Dataform | [DFE-Digital/bat-dataform](https://github.com/DFE-Digital/bat-dataform) | Data Insights |
 | DfE Analytics | [DFE-Digital/dfe-analytics](https://github.com/DFE-Digital/dfe-analytics) | Data Insights |
 | DfE Analytics Dataform | [DFE-Digital/dfe-analytics-dataform](https://github.com/DFE-Digital/dfe-analytics-dataform) | Data Insights |
@@ -43,18 +43,18 @@ Welcome to the technical documentation for apps and libraries in Teacher Service
 
 ## Rails apps and dependencies
 
-| repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
+| Service name | repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
 | --- | --- | --- | --- | --- | --- | --- |
 <% ruby_service_profiles.compact.each do |profile| %>
-| <%= [link_to(profile.name, "https://github.com/#{profile.name}") , profile.rails, profile.ruby, profile.dfe_analytics, profile.dfe_reference_data, profile.dfe_autocomplete].join(' | ') %> |
+|<%= [profile.service_name, link_to(profile.name, "https://github.com/#{profile.name}") , profile.rails, profile.ruby, profile.dfe_analytics, profile.dfe_reference_data, profile.dfe_autocomplete].join(' | ') %> |
 <% end %>
 
 ## C# apps and dependencies
 
-| repo | framework | dfe-analytics-net |
-| --- | --- | --- |
+| Service name | repo | framework | dfe-analytics-net |
+| ---| --- | --- | --- |
 <% cs_service_profiles.compact.each do |profile| %>
-| <%= [link_to(profile.name, "https://github.com/#{profile.name}") , profile.target_framework, profile.dfe_analytics_version].join(' | ') %> |
+| <%= [profile.service_name, link_to(profile.name, "https://github.com/#{profile.name}") , profile.target_framework, profile.dfe_analytics_version].join(' | ') %> |
 <% end %>
 
 

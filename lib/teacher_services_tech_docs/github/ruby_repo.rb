@@ -1,11 +1,12 @@
-module TeacherServicesTechDocs
+module SchoolsDigitalTechDocs
   module GitHub
     class RubyRepo
       include MarkdownDocs
 
       attr_reader :service_name
 
-      Profile = Struct.new(:name,
+      Profile = Struct.new(:service_name,
+                           :name,
                            :rails,
                            :ruby,
                            :asdf,
@@ -34,6 +35,7 @@ module TeacherServicesTechDocs
         repo = @client.get_repo(@repo_name)
 
         Profile.new(
+          service_name: @service_name,
           name: @repo_name,
           rails: deps.rails_version,
           dfe_analytics: deps.dfe_analytics_version,
