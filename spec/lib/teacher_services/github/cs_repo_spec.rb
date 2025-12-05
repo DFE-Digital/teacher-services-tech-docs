@@ -10,7 +10,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::CsRepo do
   end
 
   it "has the service name associated with it" do
-    expected_service_name =  "my service"
+    expected_service_name = "my service"
 
     client = FakeGithubClient.new
     client.stub_repo_file("my_test_repo", "example/file.csproj", File.read("spec/fixtures/qta.csproj"))
