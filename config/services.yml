@@ -43,7 +43,7 @@
     - path: "docs"
 - name: 'Get Into Teaching asset manager'
   repo_name: "DFE-Digital/GITISContent"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: "docs"
 - name: 'Get School Experience'
@@ -53,17 +53,17 @@
     - path: "docs"
 - name: 'Monitoring'
   repo_name: "DFE-Digital/cf-monitoring"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: ""
 - name: 'GitHub Actions'
   repo_name: "DFE-Digital/github-actions"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: ""
 - name: 'Infrastructure'
   repo_name: "DFE-Digital/bat-infrastructure"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: ""
 - name: 'Apply for QTS in England'
@@ -74,7 +74,7 @@
     - path: "docs"
 - name: 'Database of Qualified Teachers'
   repo_name: "DFE-Digital/database-of-qualified-teachers"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: "docs"
 - name: 'Find a lost TRN'
@@ -85,16 +85,11 @@
     - path: "adr"
 - name: 'Teacher Misconduct System'
   repo_name: "DFE-Digital/teacher-misconduct-system"
-  language: 'ruby'
+  language: 'other'
   docsets:
     - path: "docs"
 - name: "Claim additional payments for teaching"
   repo_name: "DFE-Digital/claim-additional-payments-for-teaching"
-  language: 'ruby'
-  docsets:
-    - path: "docs"
-- name: "Get an Identity"
-  repo_name: "DFE-Digital/get-an-identity"
   language: 'ruby'
   docsets:
     - path: "docs"
@@ -122,8 +117,7 @@
 - name: "Teaching record system"
   repo_name: "DFE-Digital/teaching-record-system"
   language: 'cs'
-  csproj_path: >-
-    TeachingRecordSystem/src/TeachingRecordSystem/TeachingRecordSystem.csproj
+  csproj_path: "TeachingRecordSystem/Directory.Build.props"
   docsets:
     - path: "docs"
 - name: "Get an identity"

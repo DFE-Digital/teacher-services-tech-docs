@@ -3,6 +3,8 @@ module TeacherServicesTechDocs
     class CsRepo
       include TeacherServicesTechDocs::GitHub::MarkdownDocs
 
+      attr_reader :service_name
+
       Profile = Struct.new(:name,
                            :target_framework,
                            :dfe_analytics_version,

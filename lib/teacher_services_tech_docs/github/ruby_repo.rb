@@ -3,6 +3,8 @@ module TeacherServicesTechDocs
     class RubyRepo
       include MarkdownDocs
 
+      attr_reader :service_name
+
       Profile = Struct.new(:name,
                            :rails,
                            :ruby,

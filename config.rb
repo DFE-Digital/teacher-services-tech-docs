@@ -20,7 +20,7 @@ end
 
 ignore "templates/*"
 
-RUBY_SERVICE_PROFILES = service_list.select { |s| s["language"] == "ruby" }.map do |service|
+RUBY_SERVICE_REPOS = service_list.select { |s| s["language"] == "ruby" }.map do |service|
   repo = TeacherServicesTechDocs::GitHub::RubyRepo.new(
     repo_name: service["repo_name"],
     service_name: service["name"],
@@ -28,33 +28,44 @@ RUBY_SERVICE_PROFILES = service_list.select { |s| s["language"] == "ruby" }.map 
 
   raise "No profile created for #{service}" unless repo.profile
 
-  repo.profile
+  repo
 end
 
-CS_SERVICE_PROFILES = service_list.select { |s| s["language"] == "cs" }.map do |service|
+RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.map { |repo| repo.profile }
+
+
+CS_SERVICE_REPOS = service_list.select { |s| s["language"] == "cs" }.map do |service|
   repo = TeacherServicesTechDocs::GitHub::CsRepo.new(
     repo_name: service["repo_name"],
     csproj_path: service["csproj_path"],
     service_name: service["name"],
   )
 
-  raise "No profile created for #{repo.service} " unless repo.profile
+  raise "No profile created for #{service} " unless repo.profile
 
-  repo.profile
+  repo
 end
 
-if RUBY_SERVICE_PROFILES.length + CS_SERVICE_PROFILES.length != services.length
-  ALL_SERVICE_NAMES = service_list.map do |service|
-    service["name"]
-  end
+CS_SERVICE_PROFILES = CS_SERVICE_REPOS.map { |repo|  repo.profile }
 
-  MAPPED_SERVICE_NAMES = (CS_SERVICE_PROFILES + RUBY_SERVICE_PROFILES).map do |repo|
-    repo.service_name
-  end
+ALL_SERVICE_NAMES = service_list.map do |service|
+  service["name"]
+end
 
-  puts Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES)
+MAPPED_SERVICE_NAMES = (CS_SERVICE_REPOS + RUBY_SERVICE_REPOS).map do |repo|
+  repo.service_name
+end
 
-  raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}")
+OTHER_SERVICE_NAMES = service_list.select {|r| r["language"] == 'other'}.map do |service|
+  service["name"]
+end
+
+missing_service_names = Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES + OTHER_SERVICE_NAMES)
+
+
+if missing_service_names.length > 0
+
+  raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}; Other #{OTHER_SERVICE_NAMES.length}")
 end
 
 helpers do
