@@ -14,7 +14,7 @@ services = service_list.reduce([]) do |list, service|
     repo.load_docs(
       path_in_repo: docset["path"],
       ignore_files: docset.fetch("ignore_files", []),
-    )
+    ) unless not docset.has_key?("path")
   end
 end
 
