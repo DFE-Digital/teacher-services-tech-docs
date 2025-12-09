@@ -80,19 +80,19 @@ helpers do
   end
 
   def ruby_service_profiles
-    RUBY_SERVICE_PROFILES.select { |s| !s.archived }.compact
+    RUBY_SERVICE_PROFILES.reject(&:archived).compact
   end
 
   def cs_service_profiles
-    CS_SERVICE_PROFILES.select { |s| !s.archived }.compact
+    CS_SERVICE_PROFILES.reject(&:archived).compact
   end
 
   def other_service_profiles
-    OTHER_SERVICE_PROFILES.select { |s| !s.archived }.compact
+    OTHER_SERVICE_PROFILES.reject(&:archived).compact
   end
 
   def archived_service_profiles
-    (OTHER_SERVICE_PROFILES + RUBY_SERVICE_PROFILES + CS_SERVICE_PROFILES).select { |s| s.archived }.compact
+    (OTHER_SERVICE_PROFILES + RUBY_SERVICE_PROFILES + CS_SERVICE_PROFILES).select(&:archived).compact
   end
 end
 
