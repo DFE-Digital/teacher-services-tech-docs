@@ -33,7 +33,10 @@ module SchoolsDigitalTechDocs
                   elsif @ruby_version_file.present?
                     @ruby_version_file.split.last
                   elsif @tool_versions_file.present?
-                    ruby_versions = @tool_versions_file.split("\n").select { /ruby/ }
+                    ruby_versions = @tool_versions_file.split("\n").select { |s| s[/ruby/] }
+
+                    raise "Tool versions file has multiple Ruby entries #{ruby_versions}" unless ruby_versions.length == 1
+
                     ruby_versions.first.split.last
                   end
 

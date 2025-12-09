@@ -20,7 +20,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
   let :ruby_version_file do
     <<~TOOL_VERSIONS
-    ruby 3.5.4
+      ruby 3.5.4
     TOOL_VERSIONS
   end
 
@@ -45,12 +45,41 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "falls back to the .ruby-version file if present" do
-    deps = described_class.new(lockfile: empty_gem_file, ruby_version_file: ruby_version_file)
+    deps = described_class.new(lockfile: empty_gem_file, ruby_version_file:)
     expect(deps.ruby_version).to eq("3.5.4")
   end
 
-    it "falls back to the .tool-versions file if present" do
+  it "falls back to the .tool-versions file if present" do
     deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: simple_tool_version_file)
     expect(deps.ruby_version).to eq("3.2.4")
+  end
+
+  let :complex_tool_version_file do
+    <<~TOOL_VERSIONS
+      ruby 3.4.4
+      node 27.6.1
+      python 3.13.4
+    TOOL_VERSIONS
+  end
+
+  it "handles multiple tools defined in the .tool-versions file" do
+    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: complex_tool_version_file)
+    expect(deps.ruby_version).to eq("3.4.4")
+  end
+
+  it "handles empty .tool-versions file" do
+    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: "")
+    expect(deps.ruby_version).to eq(nil)
+  end
+
+  let :malformed_tool_version_file do
+    <<~TOOL_VERSIONS
+      ruby 3.2.1
+      ruby 3.3.3
+    TOOL_VERSIONS
+  end
+  it "handles empty .tool-versions file" do
+    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: malformed_tool_version_file)
+    expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
 end
