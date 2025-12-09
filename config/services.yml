@@ -28,7 +28,7 @@
   repo_name: "DFE-Digital/find-teacher-training"
   language: 'ruby'
   docsets:
-    -  path: "docs"
+    - path: "docs"
 - name: 'Teaching vacancies'
   repo_name: "DFE-Digital/teaching-vacancies"
   language: 'ruby'
