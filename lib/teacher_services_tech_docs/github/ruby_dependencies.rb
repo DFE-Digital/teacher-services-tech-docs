@@ -1,32 +1,55 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(lockfile_contents)
-        @parsed_lockfile = Bundler::LockfileParser.new(lockfile_contents)
+      def initialize(lockfile:, tool_versions_file: nil, ruby_version_file: nil)
+        @lockfile = lockfile
+        @tool_versions_file = tool_versions_file
+        @ruby_version_file = ruby_version_file
       end
 
       def rails_version
-        @parsed_lockfile.specs.find { |s| s.name == "rails" }.version.to_s
+        get_dependency_version("rails")
       end
 
       def dfe_analytics_version
-        @parsed_lockfile.specs.find { |s| s.name == "dfe-analytics" }&.version&.to_s
+        get_dependency_version("dfe-analytics")
       end
 
       def dfe_autocomplete_version
-        @parsed_lockfile.specs.find { |s| s.name == "dfe-autocomplete" }&.version&.to_s
+        get_dependency_version("dfe-autocomplete")
       end
 
       def dfe_reference_data_version
-        @parsed_lockfile.specs.find { |s| s.name == "dfe-reference-data" }&.version&.to_s
+        get_dependency_version("dfe-reference-data")
+      end
+
+      def has_tool_versions
+        @tool_versions_file.present?
       end
 
       def ruby_version
-        if @parsed_lockfile.ruby_version
-          return Gem::Version.new(@parsed_lockfile.ruby_version.gsub("ruby ", "")).release.to_s
-        end
+        version = if parsed_lockfile && parsed_lockfile.ruby_version.present?
+                    parsed_lockfile.ruby_version.gsub("ruby ", "")
+                  elsif @ruby_version_file.present?
+                    @ruby_version_file.split.last
+                  elsif @tool_versions_file.present?
+                    ruby_versions = @tool_versions_file.split("\n").select { /ruby/ }
+                    ruby_versions.first.split.last
+                  end
 
-        ""
+        Gem::Version.new(version).release.to_s if version
+      end
+
+    private
+
+      def get_dependency_version(dep)
+        parsed_lockfile && parsed_lockfile.specs.find { |s| s.name == dep }&.version&.to_s
+      end
+
+      def parsed_lockfile
+        if @lockfile
+          @parsed_lockfile ||= Bundler::LockfileParser.new(@lockfile)
+        end
       end
     end
   end
