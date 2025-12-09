@@ -204,4 +204,8 @@
 - name: "BAT Data Maps"
   repo_name: "DFE-Digital/bat-data-maps"
   language: "other"
-
+- name: "Teacher Services Cloud"
+  repo_name: "DFE-Digital/teacher-services-cloud"
+  language: "other"
+  docsets:
+    - path: "documentation"
