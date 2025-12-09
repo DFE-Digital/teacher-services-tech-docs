@@ -20,23 +20,46 @@ end
 
 ignore "templates/*"
 
-RUBY_SERVICE_PROFILES = service_list.select { |s| s["language"] == "ruby" }.map do |service|
+RUBY_SERVICE_REPOS = service_list.select { |s| s["language"] == "ruby" }.map do |service|
   repo = SchoolsDigitalTechDocs::GitHub::RubyRepo.new(
     repo_name: service["repo_name"],
     service_name: service["name"],
   )
 
-  repo.profile
+  raise "No profile created for #{service}" unless repo.profile
+
+  repo
 end
 
-CS_SERVICE_PROFILES = service_list.select { |s| s["language"] == "cs" }.map do |service|
+CS_SERVICE_REPOS = service_list.select { |s| s["language"] == "cs" }.map do |service|
   repo = SchoolsDigitalTechDocs::GitHub::CsRepo.new(
     repo_name: service["repo_name"],
     csproj_path: service["csproj_path"],
     service_name: service["name"],
   )
 
-  repo.profile
+  raise "No profile created for #{service} " unless repo.profile
+
+  repo
+end
+
+RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
+CS_SERVICE_PROFILES = CS_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
+
+ALL_SERVICE_NAMES = service_list.map do |service|
+  service["name"]
+end
+
+MAPPED_SERVICE_NAMES = (CS_SERVICE_REPOS + RUBY_SERVICE_REPOS).map(&:service_name)
+
+OTHER_SERVICE_NAMES = service_list.select { |r| r["language"] == "other" }.map do |service|
+  service["name"]
+end
+
+missing_service_names = Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES + OTHER_SERVICE_NAMES)
+
+unless missing_service_names.empty?
+  raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}; Other #{OTHER_SERVICE_NAMES.length}")
 end
 
 helpers do
