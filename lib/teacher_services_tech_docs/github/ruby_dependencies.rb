@@ -1,7 +1,8 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(lockfile:, tool_versions_file: nil, ruby_version_file: nil)
+      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil)
+        @service_name = service_name
         @lockfile = lockfile
         @tool_versions_file = tool_versions_file
         @ruby_version_file = ruby_version_file
@@ -35,7 +36,9 @@ module SchoolsDigitalTechDocs
                   elsif @tool_versions_file.present?
                     ruby_versions = @tool_versions_file.split("\n").select { |s| s[/ruby/] }
 
-                    raise "Tool versions file has multiple Ruby entries #{ruby_versions}" unless ruby_versions.length == 1
+                    raise "Tool versions file in #{@service_name} has no Ruby entry #{@tool_versions_file}" if ruby_versions.empty?
+
+                    raise "Tool versions file in #{@service_name} has multiple Ruby entries #{ruby_versions}" unless ruby_versions.length == 1
 
                     ruby_versions.first.split.last
                   end

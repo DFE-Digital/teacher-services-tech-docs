@@ -1,6 +1,8 @@
 require "spec_helper"
 
 RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
+  service_name = "my_service"
+
   let :lockfile_contents do
     <<~GEMFILE_LOCK
       GEM
@@ -31,7 +33,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "correctly reports versions" do
-    deps = described_class.new(lockfile: lockfile_contents)
+    deps = described_class.new(service_name, lockfile: lockfile_contents)
     expect(deps.rails_version).to eq("7.0.8")
     expect(deps.dfe_analytics_version).to eq("1.2.0")
     expect(deps.dfe_autocomplete_version).to eq("1.3.0")
@@ -40,17 +42,17 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
   it "correctly returns null when a gem is not present" do
     lockfile_without_rails = lockfile_contents.split("\n").reject { |l| l =~ /rails/ }.join("\n")
-    deps = described_class.new(lockfile: lockfile_without_rails)
+    deps = described_class.new(service_name, lockfile: lockfile_without_rails)
     expect(deps.rails_version).to eq(nil)
   end
 
   it "falls back to the .ruby-version file if present" do
-    deps = described_class.new(lockfile: empty_gem_file, ruby_version_file:)
+    deps = described_class.new(service_name, lockfile: empty_gem_file, ruby_version_file:)
     expect(deps.ruby_version).to eq("3.5.4")
   end
 
   it "falls back to the .tool-versions file if present" do
-    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: simple_tool_version_file)
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: simple_tool_version_file)
     expect(deps.ruby_version).to eq("3.2.4")
   end
 
@@ -63,12 +65,12 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "handles multiple tools defined in the .tool-versions file" do
-    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: complex_tool_version_file)
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: complex_tool_version_file)
     expect(deps.ruby_version).to eq("3.4.4")
   end
 
   it "handles empty .tool-versions file" do
-    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: "")
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: "")
     expect(deps.ruby_version).to eq(nil)
   end
 
@@ -79,7 +81,18 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     TOOL_VERSIONS
   end
   it "handles empty .tool-versions file" do
-    deps = described_class.new(lockfile: empty_gem_file, tool_versions_file: malformed_tool_version_file)
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: malformed_tool_version_file)
+    expect { deps.ruby_version }.to raise_error(RuntimeError)
+  end
+
+  let :no_ruby_tool_version_file do
+    <<~TOOL_VERSIONS
+      terraform 1.4.6
+      dotnet    8.0
+    TOOL_VERSIONS
+  end
+  it "handles .tool-versions file without a Ruby definition" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: no_ruby_tool_version_file)
     expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
 end

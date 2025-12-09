@@ -25,7 +25,7 @@ module SchoolsDigitalTechDocs
         ruby_version_file = @client.get_file(@repo_name, ".ruby-version")&.contents
 
         deps = GitHub::RubyDependencies.new(
-          lockfile:, tool_versions_file:, ruby_version_file:,
+          @service_name, lockfile:, tool_versions_file:, ruby_version_file:
         )
 
         repo = @client.get_repo(@repo_name)
