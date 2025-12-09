@@ -173,3 +173,8 @@
   csproj_path: 'TeachingRecordSystem/Directory.Build.props'
   docsets:
     - path: "docs"
+- name: "Register of placement schools"
+  repo_name: "DFE-Digital/register-placement-schools"
+  language: "ruby"
+  docsets:
+    - path: "docs"

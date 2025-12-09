@@ -22,7 +22,11 @@ module SchoolsDigitalTechDocs
       end
 
       def ruby_version
-        Gem::Version.new(@parsed_lockfile.ruby_version.gsub("ruby ", "")).release.to_s
+        if @parsed_lockfile.ruby_version
+          return Gem::Version.new(@parsed_lockfile.ruby_version.gsub("ruby ", "")).release.to_s
+        end
+
+        ""
       end
     end
   end
