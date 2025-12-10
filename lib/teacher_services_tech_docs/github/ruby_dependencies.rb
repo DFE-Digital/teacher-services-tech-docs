@@ -24,7 +24,7 @@ module SchoolsDigitalTechDocs
         get_dependency_version("dfe-reference-data")
       end
 
-      def has_tool_versions
+      def has_tool_versions?
         @tool_versions_file.present?
       end
 

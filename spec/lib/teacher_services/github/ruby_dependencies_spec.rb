@@ -41,7 +41,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "correctly returns null when a gem is not present" do
-    lockfile_without_rails = lockfile_contents.split("\n").reject { |l| l =~ /rails/ }.join("\n")
+    lockfile_without_rails = lockfile_contents.split("\n").grep_v(/rails/).join("\n")
     deps = described_class.new(service_name, lockfile: lockfile_without_rails)
     expect(deps.rails_version).to eq(nil)
   end
@@ -91,6 +91,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       dotnet    8.0
     TOOL_VERSIONS
   end
+
   it "handles .tool-versions file without a Ruby definition" do
     deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: no_ruby_tool_version_file)
     expect { deps.ruby_version }.to raise_error(RuntimeError)

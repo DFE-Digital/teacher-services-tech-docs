@@ -41,7 +41,7 @@ module SchoolsDigitalTechDocs
           dfe_reference_data: deps.dfe_reference_data_version,
           dfe_autocomplete: deps.dfe_autocomplete_version,
           ruby: deps.ruby_version,
-          asdf: deps.has_tool_versions,
+          asdf: deps.has_tool_versions?,
           default_branch: repo.default_branch,
         )
       end
