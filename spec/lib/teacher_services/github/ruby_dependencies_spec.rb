@@ -80,6 +80,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       ruby 3.3.3
     TOOL_VERSIONS
   end
+
   it "handles empty .tool-versions file" do
     deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: malformed_tool_version_file)
     expect { deps.ruby_version }.to raise_error(RuntimeError)
