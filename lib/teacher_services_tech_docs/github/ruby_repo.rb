@@ -23,14 +23,13 @@ module SchoolsDigitalTechDocs
       end
 
       def profile
-        lockfile = @client.get_file(@repo_name, "Gemfile.lock")
-        if lockfile.present?
-          deps = GitHub::RubyDependencies.new(lockfile.contents)
-        else
-          return nil
-        end
+        lockfile = @client.get_file(@repo_name, "Gemfile.lock")&.contents
+        tool_versions_file = @client.get_file(@repo_name, ".tool-versions")&.contents
+        ruby_version_file = @client.get_file(@repo_name, ".ruby-version")&.contents
 
-        has_tool_versions = @client.get_file(@repo_name, ".tool-versions").present? ? true : false
+        deps = GitHub::RubyDependencies.new(
+          @service_name, lockfile:, tool_versions_file:, ruby_version_file:
+        )
 
         repo = @client.get_repo(@repo_name)
 
@@ -42,7 +41,7 @@ module SchoolsDigitalTechDocs
           dfe_reference_data: deps.dfe_reference_data_version,
           dfe_autocomplete: deps.dfe_autocomplete_version,
           ruby: deps.ruby_version,
-          asdf: has_tool_versions,
+          asdf: deps.has_tool_versions?,
           default_branch: repo.default_branch,
         )
       end
