@@ -24,6 +24,11 @@
   docsets:
     - path: "docs"
     - path: "adr"
+- name: 'Find teacher training'
+  repo_name: "DFE-Digital/find-teacher-training"
+  language: 'ruby'
+  docsets:
+    - path: "docs"
 - name: 'Teaching vacancies'
   repo_name: "DFE-Digital/teaching-vacancies"
   language: 'ruby'
@@ -66,7 +71,7 @@
   language: 'other'
   docsets:
     - path: ""
-- name: 'Apply for QTS in England'
+- name: 'Apply for Qualified Teacher Status in England'
   repo_name: "DFE-Digital/apply-for-qualified-teacher-status"
   language: 'ruby'
   docsets:
@@ -178,3 +183,29 @@
   language: "ruby"
   docsets:
     - path: "docs"
+- name: Uptime
+  repo_name: "DFE-Digital/teacher-services-upptime"
+  language: "other"
+- name: "DfE Analytics"
+  repo_name: "DFE-Digital/dfe-analytics"
+  language: "ruby"
+- name: "DfE Analytics Dataform"
+  repo_name: "DFE-Digital/dfe-analytics-dataform"
+  language: "other"
+- name: "GOV.UK Markdown"
+  repo_name: "DFE-Digital/govuk_markdown"
+  language: "other"
+- name: "Get Teacher Training Adviser"
+  repo_name: "DFE-Digital/get-teacher-training-adviser-service"
+  language: "other"
+- name: "DfE Reference Data"
+  repo_name: "DFE-Digital/dfe-reference-data"
+  language: "other"
+- name: "BAT Data Maps"
+  repo_name: "DFE-Digital/bat-data-maps"
+  language: "other"
+- name: "Teacher Services Cloud"
+  repo_name: "DFE-Digital/teacher-services-cloud"
+  language: "other"
+  docsets:
+    - path: "documentation"

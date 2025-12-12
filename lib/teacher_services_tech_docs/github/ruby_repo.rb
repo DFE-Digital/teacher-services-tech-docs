@@ -6,7 +6,7 @@ module SchoolsDigitalTechDocs
       attr_reader :service_name
 
       Profile = Struct.new(:service_name,
-                           :name,
+                           :repo_name,
                            :rails,
                            :ruby,
                            :asdf,
@@ -14,6 +14,7 @@ module SchoolsDigitalTechDocs
                            :dfe_reference_data,
                            :dfe_autocomplete,
                            :default_branch,
+                           :archived,
                            keyword_init: true)
 
       def initialize(repo_name:, service_name:, client: GitHub::Client.new)
@@ -35,7 +36,7 @@ module SchoolsDigitalTechDocs
 
         Profile.new(
           service_name: @service_name,
-          name: @repo_name,
+          repo_name: @repo_name,
           rails: deps.rails_version,
           dfe_analytics: deps.dfe_analytics_version,
           dfe_reference_data: deps.dfe_reference_data_version,
@@ -43,6 +44,7 @@ module SchoolsDigitalTechDocs
           ruby: deps.ruby_version,
           asdf: deps.has_tool_versions?,
           default_branch: repo.default_branch,
+          archived: repo.archived,
         )
       end
     end

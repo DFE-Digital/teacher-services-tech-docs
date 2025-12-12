@@ -43,8 +43,20 @@ CS_SERVICE_REPOS = service_list.select { |s| s["language"] == "cs" }.map do |ser
   repo
 end
 
-RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
+OTHER_SERVICE_REPOS = service_list.select { |s| s["language"] == "other" }.map do |service|
+  repo = SchoolsDigitalTechDocs::GitHub::OtherRepo.new(
+    repo_name: service["repo_name"],
+    service_name: service["name"],
+  )
+
+  raise "No profile created for #{service} " unless repo.profile
+
+  repo
+end
+
 CS_SERVICE_PROFILES = CS_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
+RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
+OTHER_SERVICE_PROFILES = OTHER_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
 
 ALL_SERVICE_NAMES = service_list.map do |service|
   service["name"]
@@ -68,11 +80,19 @@ helpers do
   end
 
   def ruby_service_profiles
-    RUBY_SERVICE_PROFILES.compact
+    RUBY_SERVICE_PROFILES.reject(&:archived).compact
   end
 
   def cs_service_profiles
-    CS_SERVICE_PROFILES.compact
+    CS_SERVICE_PROFILES.reject(&:archived).compact
+  end
+
+  def other_service_profiles
+    OTHER_SERVICE_PROFILES.reject(&:archived).compact
+  end
+
+  def archived_service_profiles
+    (OTHER_SERVICE_PROFILES + RUBY_SERVICE_PROFILES + CS_SERVICE_PROFILES).select(&:archived).compact
   end
 end
 

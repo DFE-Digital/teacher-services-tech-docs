@@ -1,6 +1,6 @@
 class FakeGithubClient
   File = Struct.new(:contents)
-  Repo = Struct.new(:default_branch)
+  Repo = Struct.new(:default_branch, :archived)
 
   def initialize
     @repo_stubs = {}
@@ -15,7 +15,7 @@ class FakeGithubClient
   end
 
   def get_repo(_reponame)
-    Repo.new("main")
+    Repo.new(default_branch: "main", archived: false)
   end
 
   def stub_repo_file(repo, file, contents)
