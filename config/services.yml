@@ -209,3 +209,8 @@
   language: "other"
   docsets:
     - path: "documentation"
+- name: "Register of training providers"
+  repo_name: "DFE-Digital/register-training-providers"
+  language: "ruby"
+  docsets:
+    - path: "docs"
