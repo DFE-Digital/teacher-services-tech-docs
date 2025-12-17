@@ -1,0 +1,14 @@
+# Setting up a subdomain
+
+Your subdomain will usually be `your-service-name.education.gov.uk`. This subdomain is controlled by the central infrastructure team and a [delegated namespace](https://www.ietf.org/archive/id/draft-wesplaap-deleg-01.html) is created for the Schools Digital infrastructure team to set up on your behalf.
+
+You should have decided your service name during the Alpha phase but you may find that this hasn't happened until the start of Beta. A lot of things depend on the name of your service some of them can be changed easily but the DNS delegation is one of the more difficult elements to manage, so it is worth spending the time to get this right.
+
+## Sub-domain length
+
+A domain name [has a maximum length](https://devblogs.microsoft.com/oldnewthing/20120412-00/?p=7873), as well as each segment of the domain name. Therefore the service name in the url will not to be less than or equal to 63 characters and the overall domain name has to include the `education.gov.uk` suffix.
+
+Your environment names also need to fit into the overall name.
+
+
+

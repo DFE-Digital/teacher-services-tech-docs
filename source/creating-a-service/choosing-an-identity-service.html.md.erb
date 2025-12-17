@@ -1,0 +1,11 @@
+# Choosing an identity service
+
+If your service will be accessed by people outside the education sector you should use the [Gov.UK One Login](https://www.sign-in.service.gov.uk/) service to minimise the number of government logins the citizen needs to have.
+
+If your service needs to take advantage of the additional data that is provided by [DfE Sign-in](https://educationgovuk.sharepoint.com/sites/lvewp00518) then you should use that instead. You should record the decision as an Architectural Decision Record.
+
+When using any external sign-in service you should decide what will happen if the external service is unavailable. As a default you should be able to enter a maintenance mode if a service you are dependent on is unavailable.
+
+You may want to invest in fallback mechanisms such as authentication by email or username and password.
+
+Whatever you choose you need to document how to handle the disruption in your service documentation. You may also want to provide design decisions via your design history or architectural decision records.
