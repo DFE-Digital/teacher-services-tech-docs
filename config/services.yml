@@ -209,6 +209,11 @@
   language: "other"
   docsets:
     - path: "documentation"
+- name: "Check the Children's Barred List"
+  repo_name: "DFE-Digital/check-childrens-barred-list"
+  language: 'ruby'
+  docsets:
+    - path: 'docs'
 - name: "Register of training providers"
   repo_name: "DFE-Digital/register-training-providers"
   language: "ruby"
