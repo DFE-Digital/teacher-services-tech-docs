@@ -219,3 +219,7 @@
   language: "ruby"
   docsets:
     - path: "docs"
+- name: "Get Information About Schools"
+  repo_name: "DFE-Digital/get-information-about-schools"
+  language: "cs"
+  csproj_path: "Web/EdubaseWeb.sln"
