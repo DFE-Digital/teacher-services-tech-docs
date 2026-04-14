@@ -13,10 +13,13 @@ Self-organise to appoint:
 3. the **Incident support lead**
     (responsible for monitoring Zendesk and alerting the team to any changes in the queues and severity of experience of users).
 
-Who will usually be in these lead roles
-- The comms lead will typically be the delivery manager of the main affected service. If that person is not available, the product manager could take on this role, or a DM from another service.
-- The tech lead will typically be the tech lead of the main affected service, or another developer from the team.
-- The support lead will typically be assigned by the support team.
+#### Who will usually be in these lead roles
+
+The comms lead will typically be the delivery manager of the main affected service. If that person is not available, the product manager could take on this role, or a DM from another service.
+
+The tech lead will typically be the tech lead of the main affected service, or another developer from the team.
+
+The support lead will typically be assigned by the support team.
 
 For an incident that is cross-service, try to appoint whoever is available. The comms lead would usually be the program delivery manager or an experienced delivery manager from one of the service teams. The tech lead would usually be the lead developer or a tech lead from one of the service teams. 
 
@@ -97,9 +100,9 @@ To update the dashboard:
 
 ### 9. If the incident requires invocation of Disaster Recovery procedures
 
-For TS hosted services follow the [TS Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md) and any other specific documentation for the service.
+For Schools Digital services follow the [Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-cloud/blob/main/documentation/disaster-recovery.md) and any other specific documentation for the service.
 
-For Google BigQuery follow the [TS Analytics Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-analytics-cloud/blob/main/documentation/disaster-recovery.md)
+For Google BigQuery follow the [Analytics Cloud Disaster Recovery procedure](https://github.com/DFE-Digital/teacher-services-analytics-cloud/blob/main/documentation/disaster-recovery.md)
 
 ## Provide updates during the incident (usually comms lead)
 
@@ -120,7 +123,6 @@ Update stakeholders on the incident thread regularly, until the incident has bee
   1. Write up an incident review with recommendations.
   2. The report introduction should be written in plain English, avoiding technical jargon whenever possible.
 2. Publish the incident review to the [incident reports folder in Sharepoint](https://educationgovuk.sharepoint.com/:f:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reports?csf=1&web=1&e=IgTclP).
-3. Report on the incident as part of the A3 report to the Schools Digital Board.
-4. If this was a P1, update the previously created Major incident report with any lessons learnt. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
+3. If this was a P1, update the previously created Major incident report with any lessons learnt. See [Reporting a Major incident](https://educationgovuk.sharepoint.com/:w:/r/sites/TeacherServices/Shared%20Documents/Incidents/Reporting%20an%20Incident%20as%20a%20Major%20Incident.docx?d=w20b0829dd7884ecf8db8ea587d416fb6&csf=1&web=1&e=nyb9tL)
 
 You might want to consider doing a retro for any services involved in the incident as well, to ensure all lessons are learnt. You could also share your findings on the wider Schools Digital Teams channel or in Show and tell to help others better address or avoid incidents in future.
