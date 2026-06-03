@@ -45,6 +45,8 @@ In the [Incidents channel](https://teams.microsoft.com/l/channel/19%3Ab099c54f6e
 - Incident support lead
 - Short description of the incident
 
+Share a link to the incident thread to the [#SD Security Support](https://teams.microsoft.com/l/channel/19%3A67de4084b417402badc96ae644011a77%40thread.tacv2/SD%20Security%20Support?groupId=5e035efe-5b2b-491b-9e3e-d832445e4ad1&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9) channel in the Schools Digital Team space.
+
 Tag vital people as soon as you can to the Teams thread. The comms lead can focus on adding any others later.
 
 ### 4. Focus on fixing the incident (usually tech lead)
