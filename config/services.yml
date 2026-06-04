@@ -175,7 +175,7 @@
 - name: "Teaching record system"
   repo_name: "DFE-Digital/teaching-record-system"
   language: 'cs'
-  csproj_path: 'TeachingRecordSystem/Directory.Build.props'
+  csproj_path: 'Directory.Build.props'
   docsets:
     - path: "docs"
 - name: "Register of placement schools"

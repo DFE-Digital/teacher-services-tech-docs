@@ -22,7 +22,7 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
@@ -48,7 +48,7 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - uses: azure/login@v2
       with:
