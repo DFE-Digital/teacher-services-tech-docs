@@ -16,6 +16,8 @@ Use the answers to:
 
 The categories are fluid and incidents can increase / decrease in priority following further diagnosis or incident resolution work.
 
+Note that these priority categories are specific to Schools Digital and do not map onto the department incident ranking scheme.
+
 ## Priority 1 (P1) - High (H)
 
 ### Description
