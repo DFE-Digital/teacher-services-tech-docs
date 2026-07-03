@@ -45,7 +45,7 @@ In the [Incidents channel](https://teams.microsoft.com/l/channel/19%3Ab099c54f6e
 - Incident support lead
 - Short description of the incident
 
-Share a link to the incident thread to the [#SD Security Support](https://teams.microsoft.com/l/channel/19%3A67de4084b417402badc96ae644011a77%40thread.tacv2/SD%20Security%20Support?groupId=5e035efe-5b2b-491b-9e3e-d832445e4ad1&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9) channel in the Schools Digital Team space.
+Share a link to the incident thread to the [#SD Security Support](https://teams.microsoft.com/l/channel/19%3A67de4084b417402badc96ae644011a77%40thread.tacv2/SD%20Security%20Support?groupId=5e035efe-5b2b-491b-9e3e-d832445e4ad1&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9) channel in the Schools Digital Team space. This is so the security team can have visibility of ongoing incidents and make an assessment as to whether a cybersecurity ticket needs to be raised via ServiceNow.
 
 Tag vital people as soon as you can to the Teams thread. The comms lead can focus on adding any others later.
 
@@ -110,7 +110,15 @@ For Google BigQuery follow the [Analytics Cloud Disaster Recovery procedure](htt
 
 Keep all conversations and status updates about the incident on the dedicated Teams incident thread.
 
-Update stakeholders on the incident thread regularly, until the incident has been resolved. This might be every hour for high risk incidents, but at least every time something changes. Make sure your team is kept updated too by linking them to the incident thread.
+Update stakeholders on the incident thread regularly, until the incident has been resolved. This might be every thirty minutes for high risk incidents or once an hour for regular incidents but as a minimum every time something changes or new information is discovered. Make sure your team is kept updated too by linking them to the incident thread.
+
+It is important to provide regular updates even if there is no progress or additional information to share. It can be helpful to set expectations and include the time of the next expected update. This can be very helpful for observers outside the team who are following the incident.
+
+## Upgrading to a security incident
+
+As you investigate the incident you may discover that there are security elements to the incident that were not obvious previously. For example, potential data exposure or suspicious behaviour by users.
+
+Update the incident as normal and flag the new information to the [#SD Security Support](https://teams.microsoft.com/l/channel/19%3A67de4084b417402badc96ae644011a77%40thread.tacv2/SD%20Security%20Support?groupId=5e035efe-5b2b-491b-9e3e-d832445e4ad1&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9) channel. The security team will then investigate, potentially asking for more information. They will raise the relevant ticket on your behalf.
 
 ## Close and finish reporting on the incident
 
