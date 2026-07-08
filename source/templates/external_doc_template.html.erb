@@ -1,6 +1,6 @@
 ---
 ---
 
-<h1 id='lasjd'><%= service_name %> - <%= title %></h1>
+<h1 id='lasjd'><%= service_name.to_s.force_encoding("UTF-8") %> - <%= title.to_s.force_encoding("UTF-8") %></h1>
 
-<%= external_doc_contents %>
+<%= external_doc_contents.to_s.force_encoding("UTF-8") %>
