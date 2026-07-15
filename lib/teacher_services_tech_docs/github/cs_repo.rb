@@ -30,7 +30,7 @@ module SchoolsDigitalTechDocs
           return nil
         end
 
-        has_tool_versions = @client.get_file(@repo_name, ".tool-versions").present? ? true : false
+        has_tool_versions = @client.get_file(@repo_name, ".tool-versions").present? || false
 
         repo = @client.get_repo(@repo_name)
 
