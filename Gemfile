@@ -28,3 +28,9 @@ gem "haml", "~> 5.0"
 # Framework
 
 gem "middleman"
+
+gem "bigdecimal", "~> 4.1"
+
+gem "mutex_m", "~> 0.3.0"
+
+gem "base64", "~> 0.3.0"

@@ -193,6 +193,7 @@ GEM
       prism (~> 1.5)
     multi_json (1.21.1)
     multipart-post (2.3.0)
+    mutex_m (0.3.0)
     nokogiri (1.19.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
@@ -311,6 +312,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base64 (~> 0.3.0)
+  bigdecimal (~> 4.1)
   capybara
   dotenv
   faraday-http-cache
@@ -319,6 +322,7 @@ DEPENDENCIES
   haml (~> 5.0)
   html-pipeline
   middleman
+  mutex_m (~> 0.3.0)
   nokogiri
   octokit
   pry
