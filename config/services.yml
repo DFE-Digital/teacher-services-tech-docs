@@ -40,10 +40,10 @@
   language: 'ruby'
   docsets:
     - path: "docs"
-- name: 'Get Into Teaching API'
-  repo_name: "DFE-Digital/get-into-teaching-api"
+- name: 'Check Performance Data'
+  repo_name: "DFE-Digital/check-performance-data"
   language: 'cs'
-  csproj_path: 'GetIntoTeachingApi/GetIntoTeachingApi.csproj'
+  csproj_path: 'src/DfE.CheckPerformanceData.Application/DfE.CheckPerformanceData.Application.csproj'
   docsets:
     - path: "docs"
 - name: 'Get Into Teaching asset manager'
