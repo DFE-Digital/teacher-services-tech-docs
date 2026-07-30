@@ -4,4 +4,7 @@ serve:
 rubocop:
     bundle exec rubocop .
 
-lint: rubocop
+lint-yaml:
+	uv tool run yamllint config
+
+lint: rubocop lint-yaml
