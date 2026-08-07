@@ -2,10 +2,30 @@
 
 If your service will be accessed by people outside the education sector you should use the [Gov.UK One Login](https://www.sign-in.service.gov.uk/) service to minimise the number of government logins the citizen needs to have.
 
-If your service needs to take advantage of the additional data that is provided by [DfE Sign-in](https://educationgovuk.sharepoint.com/sites/lvewp00518) then you should use that instead. You should record the decision as an Architectural Decision Record.
+If your service needs to take advantage of the additional data that is provided by [DfE Sign-in](https://educationgovuk.sharepoint.com/sites/lvewp00518) then you should use that instead. DfE Sign-in is also mandated for autorisation of users who are representing organisations that are recognised by the department (also referred to a B2B authorisation).
+
+For DfE staff you will need to authorise via EntraID so that access so your service can be linked to the on and offboarding process for staff members.
+
+You should record the decisions as to which authorisation methods you are using as an Architectural Decision Record.
+
+## Resilience
 
 When using any external sign-in service you should decide what will happen if the external service is unavailable. As a default you should be able to enter a maintenance mode if a service you are dependent on is unavailable.
 
 You may want to invest in fallback mechanisms such as authentication by email or username and password.
 
 Whatever you choose you need to document how to handle the disruption in your service documentation. You may also want to provide design decisions via your design history or architectural decision records.
+
+## Multi-factor authentication (MFA)
+
+MFA is recommended for all authentication paths and *must* be used for users who have access to high-risk or privileged functionality or data.
+
+MFA may be provided by your chosen authentication provider in which case it is your responsibiity to ensure that the configuration is correct to enforce MFA.
+
+You also may want to create an MFA path within your service to help confirm high-risk actions such as deletions or service configuration alterations.
+
+See also <%= link_to('Authentication guidance', '/creating-a-service/authentication-guidance.html') %>
+
+## Related standards
+
+* [CISD standards page](https://educationgovuk.sharepoint.com/sites/security/SitePages/security-policies.aspx)
