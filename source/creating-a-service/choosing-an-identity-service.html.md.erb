@@ -1,12 +1,18 @@
 # Choosing an identity service
 
-If your service will be accessed by people outside the education sector you should use the [Gov.UK One Login](https://www.sign-in.service.gov.uk/) service to minimise the number of government logins the citizen needs to have.
+If your service will be accessed by UK citizens and residents outside the education sector you should use the [Gov.UK One Login](https://www.sign-in.service.gov.uk/) service to minimise the number of government logins the citizen needs to have.
 
-If your service needs to take advantage of the additional data that is provided by [DfE Sign-in](https://educationgovuk.sharepoint.com/sites/lvewp00518) then you should use that instead. DfE Sign-in is also mandated for autorisation of users who are representing organisations that are recognised by the department (also referred to a B2B authorisation).
+If your service needs to take advantage of the additional data that is provided by [DfE Sign-in](https://educationgovuk.sharepoint.com/sites/lvewp00518) then you should use that instead.
+
+DfE Sign-in is also mandated for authorisation of users who are representing organisations that are recognised by the department (also referred to a B2B authorisation).
 
 For DfE staff you will need to authorise via EntraID so that access so your service can be linked to the on and offboarding process for staff members.
 
 You should record the decisions as to which authorisation methods you are using as an Architectural Decision Record.
+
+## Other user types
+
+If the users you need to authenticate are not covered by the options above you are going to need to create an authentication path suitable for your use case. Please consult with the portfolio SIRAs and technical architecture to help review options and see if your use case has been encountered previously.
 
 ## Resilience
 
