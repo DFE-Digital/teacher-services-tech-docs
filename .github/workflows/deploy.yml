@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-        id-token: write
+        packages: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
 
@@ -47,7 +47,7 @@ jobs:
     needs: build
     environment: production
     permissions:
-      packages: write
+      id-token: write
 
     steps:
     - uses: actions/checkout@v6
