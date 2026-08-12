@@ -47,7 +47,7 @@ jobs:
     needs: build
     environment: production
     permissions:
-      id-token: write
+      packages: write
 
     steps:
     - uses: actions/checkout@v6
