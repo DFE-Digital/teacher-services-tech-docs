@@ -18,6 +18,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+        packages: write
+        id-token: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
 

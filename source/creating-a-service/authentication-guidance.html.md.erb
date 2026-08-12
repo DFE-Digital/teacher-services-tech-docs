@@ -1,0 +1,29 @@
+# Authentication advice
+
+## Rate limitation
+
+Endpoints associated with authentication, such as token or code validation, should have very strict rate limits to avoid automated brute-force attacks.
+
+## Account disabling
+
+As rate-limiting can be avoided through [traffic spoofing](https://en.wikipedia.org/wiki/Spoofing_attack) you also need to consider where you need to enforce account locking or disabling if there are too many failed attempts to login in to a given account.
+
+This might be a temporary automated block to discourage brute force attacks in which case the legitimate user needs to be informed that they are temporararily blocked from signing in.
+
+However it might mean locking the account until the access attempts are reviewed and the lock removed. If particular types of accounts or people are being subjected to repeated attacks or attempts to compromise their account then it might be necessary to conduct further service design, user research and threat modelling to understand why these users are being targeted and what effective safeguards are to ensure their access is secure and available.
+
+Automated actions to lock, suspend or reactivate accounts all need to part of the audit trail for authentication.
+
+## MFA advice
+
+### Code length
+
+When generating MFA codes consider how easy they would be to brute force. Four digits are easy to iterate over very quickly within a browser hosted Javascript file.
+
+You may need to consult with service designers to find the right balance of security and usability.
+
+### MFA Recovery
+
+You should consider allowing a user to have multiple MFA devices so that they have a backup mechanism in case they should lose access to their main MFA device, such as their phone
+
+Even if this is possible there needs to be a way that a user can register a replacement device for their account, for example via the use of recovery codes.
