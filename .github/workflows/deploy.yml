@@ -18,6 +18,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+        id-token: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
 
@@ -31,9 +33,7 @@ jobs:
 
     - name: Build and push docker image
       id: build-image
-      uses: DFE-Digital/github-actions/build-docker-image@master
-      permissions:
-        id-token: write
+      uses: DFE-Digital/github-actions/build-docker-image@masters
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         context: .
