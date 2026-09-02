@@ -308,16 +308,16 @@ The Register service provides an example of an automated FaUAPI integration.
 
 The current implementation uses scheduled background jobs rather than deployment-pipeline automation. 
 
-Exemplary Ruby implementation 
+Exemplary Ruby implementation:
 
-https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/jobs/find_and_use_an_api 
+[https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/jobs/find_and_use_an_api](https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/jobs/find_and_use_an_api)
 
-https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api 
+[https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api](https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api)
 
-https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/lib/find_and_use_an_api 
+[https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/lib/find_and_use_an_api](https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/lib/find_and_use_an_api)
 
-Manifest Generation 
+Manifest Generation:
 
-https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api/build_manifests.rb 
+[https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api/build_manifests.rb](https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api/build_manifests.rb)
 
 The Register implementation should be viewed as an example service implementation rather than a prescribed approach.
