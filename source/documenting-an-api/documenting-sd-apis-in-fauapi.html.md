@@ -48,7 +48,8 @@ This document focuses on API documentation and publication within FaUAPI. 
 
 It is not intended to provide guidance on hosted APIs, API products, subscriptions, application registrations, client onboarding or external client management. 
 
-For these topics, refer to the [FaUAPI Sharepoint](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Feducationgovuk.sharepoint.com.mcas.ms%2Fsites%2Flvewp00121%3Fxsdata%3DMDV8MDJ8fDJkNjcwYjJkZGY1NjRiZjc1YmVmMDhkZWUwZTQ2MDg4fGZhZDI3N2M5YzYwYTRkYTFiNWYzYjNiOGIzNGE4MmY5fDB8MHw2MzkxOTU0Njg2MDk5MDM1OTl8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T20xbFpYUnBibWRmVFRKUmVsbDZSVEZOZW1kMFdWUkZOVTFUTURCT2JVcG9URlJvYVU5VVVYUk9SMHBvVGtSU2JFMVVVWGxaVkZrMVFIUm9jbVZoWkM1Mk1pOXRaWE56WVdkbGN5OHhOemd6T1RVd01EVTVNREF6fDY3ODkxYmQxYWE1MzQ5NDE1YmVmMDhkZWUwZTQ2MDg4fDRhMDJkMTU4MDNlMzQ2YjQ5OTYzMmU5OWE3ZGRmZmIz%26sdata%3DemR2UmZEdGg4N2ZtR3paVWtHNEFDR2pXRnJLU1VkcG5DSGN6ZVBiMU5uQT0%253D%26ovuser%3Dfad277c9-c60a-4da1-b5f3-b3b8b34a82f9%252CAmarjit.SINGH-ATWAL%2540EDUCATION.GOV.UK%26TeamsCID%3Deb798cd6-e413-44ef-962b-b1d90484a037%26OR%3DTeams-HL%26CT%3D1784030443916%26clickparams%3DeyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIxNDE1LzI2MDYxMTE4MjE2IiwiSGFzRmVkZXJhdGVkVXNlciI6ZmFsc2V9%26McasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) site and associated service documentation. 
+For these topics, refer to the [FaUAPI Sharepoint](https://educationgovuk.sharepoint.com.mcas.ms/sites/lvewp00121?xsdata=MDV8MDJ8fDJkNjcwYjJkZGY1NjRiZjc1YmVmMDhkZWUwZTQ2MDg4fGZhZDI3N2M5YzYwYTRkYTFiNWYzYjNiOGIzNGE4MmY5fDB8MHw2MzkxOTU0Njg2MDk5MDM1OTl8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T20xbFpYUnBibWRmVFRKUmVsbDZSVEZOZW1kMFdWUkZOVTFUTURCT2JVcG9URlJvYVU5VVVYUk9SMHBvVGtSU2JFMVVVWGxaVkZrMVFIUm9jbVZoWkM1Mk1pOXRaWE56WVdkbGN5OHhOemd6T1RVd01EVTVNREF6fDY3ODkxYmQxYWE1MzQ5NDE1YmVmMDhkZWUwZTQ2MDg4fDRhMDJkMTU4MDNlMzQ2YjQ5OTYzMmU5OWE3ZGRmZmIz&sdata=emR2UmZEdGg4N2ZtR3paVWtHNEFDR2pXRnJLU1VkcG5DSGN6ZVBiMU5uQT0%3D&TeamsCID=eb798cd6-e413-44ef-962b-b1d90484a037&OR=Teams-HL&CT=1784030443916&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIxNDE1LzI2MDYxMTE4MjE2IiwiSGFzRmVkZXJhdGVkVXNlciI6ZmFsc2V9) site and associated service documentation. 
+
 
 ## When Should FaUAPI Be Used? 
 
@@ -76,41 +77,41 @@ If anyone other than your own application needs to discover, access or subscribe
 ### Pre-Production 
 
 #### Manage an API Portal 
-[https://pp-apimanagement.education.gov.uk/](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fpp-apimanagement.education.gov.uk.mcas.ms%2F%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://pp-apimanagement.education.gov.uk](https://pp-apimanagement.education.gov.uk)
 
 Used to create, maintain and publish API documentation. 
 
 #### API Catalogue 
-[https://pp-find-and-use-an-api.education.gov.uk/](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fpp-find-and-use-an-api.education.gov.uk.mcas.ms%2F%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://pp-find-and-use-an-api.education.gov.uk](https://pp-find-and-use-an-api.education.gov.uk) 
 
 Used to verify API publication and consumer experience in a non-production environment. 
 
 #### Automation API Schema 
-[https://pp-apimanagement.education.gov.uk/api/schema/index.html](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fapimanagement.education.gov.uk.mcas.ms%2Fapi%2Fschema%2Findex.html%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://pp-apimanagement.education.gov.uk/api/schema/index.html](https://pp-apimanagement.education.gov.uk/api/schema/index.html) 
 
 ### Production 
 
 #### Manage an API Portal 
-[https://apimanagement.education.gov.uk/](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fapimanagement.education.gov.uk.mcas.ms%2F%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://apimanagement.education.gov.uk](https://apimanagement.education.gov.uk) 
 
 Used to manage production API documentation and metadata. 
 
 #### API Catalogue 
-[https://beta-find-and-use-an-api.education.gov.uk/](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fbeta-find-and-use-an-api.education.gov.uk.mcas.ms%2F%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://beta-find-and-use-an-api.education.gov.uk](https://beta-find-and-use-an-api.education.gov.uk) 
 
 Used by API consumers to discover and access published APIs. 
 
 #### Automation API Schema 
-[https://apimanagement.education.gov.uk/api/schema/index.html](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fapimanagement.education.gov.uk.mcas.ms%2Fapi%2Fschema%2Findex.html%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://apimanagement.education.gov.uk/api/schema/index.html](https://apimanagement.education.gov.uk/api/schema/index.html) 
 
 ### Documentation and Support 
 
 #### FaUAPI SharePoint 
 
-The  [FaUAPI Sharepoint](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Feducationgovuk.sharepoint.com.mcas.ms%2Fsites%2Flvewp00121%3Fxsdata%3DMDV8MDJ8fDJkNjcwYjJkZGY1NjRiZjc1YmVmMDhkZWUwZTQ2MDg4fGZhZDI3N2M5YzYwYTRkYTFiNWYzYjNiOGIzNGE4MmY5fDB8MHw2MzkxOTU0Njg2MDk5MDM1OTl8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T20xbFpYUnBibWRmVFRKUmVsbDZSVEZOZW1kMFdWUkZOVTFUTURCT2JVcG9URlJvYVU5VVVYUk9SMHBvVGtSU2JFMVVVWGxaVkZrMVFIUm9jbVZoWkM1Mk1pOXRaWE56WVdkbGN5OHhOemd6T1RVd01EVTVNREF6fDY3ODkxYmQxYWE1MzQ5NDE1YmVmMDhkZWUwZTQ2MDg4fDRhMDJkMTU4MDNlMzQ2YjQ5OTYzMmU5OWE3ZGRmZmIz%26sdata%3DemR2UmZEdGg4N2ZtR3paVWtHNEFDR2pXRnJLU1VkcG5DSGN6ZVBiMU5uQT0%253D%26ovuser%3Dfad277c9-c60a-4da1-b5f3-b3b8b34a82f9%252CAmarjit.SINGH-ATWAL%2540EDUCATION.GOV.UK%26TeamsCID%3Deb798cd6-e413-44ef-962b-b1d90484a037%26OR%3DTeams-HL%26CT%3D1784030443916%26clickparams%3DeyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIxNDE1LzI2MDYxMTE4MjE2IiwiSGFzRmVkZXJhdGVkVXNlciI6ZmFsc2V9%26McasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) site should be considered the authoritative source for service information, standards, support processes and onboarding guidance. 
+The [FaUAPI Sharepoint](https://educationgovuk.sharepoint.com.mcas.ms/sites/lvewp00121?xsdata=MDV8MDJ8fDJkNjcwYjJkZGY1NjRiZjc1YmVmMDhkZWUwZTQ2MDg4fGZhZDI3N2M5YzYwYTRkYTFiNWYzYjNiOGIzNGE4MmY5fDB8MHw2MzkxOTU0Njg2MDk5MDM1OTl8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T20xbFpYUnBibWRmVFRKUmVsbDZSVEZOZW1kMFdWUkZOVTFUTURCT2JVcG9URlJvYVU5VVVYUk9SMHBvVGtSU2JFMVVVWGxaVkZrMVFIUm9jbVZoWkM1Mk1pOXRaWE56WVdkbGN5OHhOemd6T1RVd01EVTVNREF6fDY3ODkxYmQxYWE1MzQ5NDE1YmVmMDhkZWUwZTQ2MDg4fDRhMDJkMTU4MDNlMzQ2YjQ5OTYzMmU5OWE3ZGRmZmIz&sdata=emR2UmZEdGg4N2ZtR3paVWtHNEFDR2pXRnJLU1VkcG5DSGN6ZVBiMU5uQT0%3D&TeamsCID=eb798cd6-e413-44ef-962b-b1d90484a037&OR=Teams-HL&CT=1784030443916&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIxNDE1LzI2MDYxMTE4MjE2IiwiSGFzRmVkZXJhdGVkVXNlciI6ZmFsc2V9) site should be considered the authoritative source for service information, standards, support processes and onboarding guidance. 
 
 #### Getting Started Guide 
-[https://beta-find-and-use-an-api.education.gov.uk/docs/getting-started](https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fbeta-find-and-use-an-api.education.gov.uk.mcas.ms%2Fdocs%2Fgetting-started%3FMcasTsid%3D15600&McasCSRF=3f5859f882e25d09644037b84c5866798854c134811893e5e58315430200c5b1) 
+[https://beta-find-and-use-an-api.education.gov.uk/docs/getting-started](https://beta-find-and-use-an-api.education.gov.uk/docs/getting-started) 
 
 ## Permissions and Access to FaUAPI 
 
@@ -286,19 +287,19 @@ Regardless of the implementation technology, the overall process is typically: 
 
 Generate OpenAPI Specification  
 	 │  
-	▼  
+	 V  
 Generate FaUAPI Manifest  
 	 │  
-	▼  
+	 V  
 Validate Manifest  
 	 │  
-	▼  
+	 V  
 Call FaUAPI Automation APIs  
 	 │  
-	▼  
+	 V  
 Update FaUAPI  
 	 │  
-	▼  
+	 V  
 Publish Updated Documentation 
 
 ### Reference Implementation 
@@ -317,6 +318,6 @@ https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/lib/find_
 
 Manifest Generation 
 
-https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api/ build_manifests.rb 
+https://github.com/DFE-Digital/register-trainee-teachers/tree/main/app/services/find_and_use_an_api/build_manifests.rb 
 
 The Register implementation should be viewed as an example service implementation rather than a prescribed approach.
