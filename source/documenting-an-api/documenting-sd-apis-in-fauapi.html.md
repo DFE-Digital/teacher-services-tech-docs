@@ -37,6 +37,7 @@
 Find and Use an API (FaUAPI) is the Department for Education's API catalogue and API management platform. 
 
 There is a departmental requirement to use FaUAPI for: 
+
 - Public-facing APIs. 
 - Internal APIs that are consumed by other DfE teams, services or applications. 
 
@@ -56,13 +57,15 @@ For these topics, refer to the [FaUAPI Sharepoint](https://educationgovuk.shar
 FaUAPI is the Department for Education standard for API discovery and management. 
 
 FaUAPI should be used when: 
+
 - An API is consumed by another DfE service or team. 
 - An API is consumed by another government department.
 - An API is consumed by an external organisation or partner. 
 - API consumers need to discover, subscribe to or access the API. 
 - API ownership and support information needs to be visible to consumers. 
     
-FaUAPI is generally not required when: 
+FaUAPI is generally not required when:
+
 - An API is only consumed by its own front-end application. 
 - There are no consumers outside of the service boundary. 
 - The API is purely an internal implementation detail. 
@@ -119,7 +122,8 @@ Different levels of access may be required depending on your role. 
 
 ### API Catalogue 
 
-The API Catalogue provides read-only access to: 
+The API Catalogue provides read-only access to:
+
 - API documentation 
 - API metadata 
 - Contact information 
@@ -129,6 +133,7 @@ The API Catalogue provides read-only access to: 
 Access requires a GOV.UK One Login account. Existing GOV.UK One Login credentials can be used, or a new account can be created as required. Note that a @education email will be able to see APIs with the visibility level "DfE Internal". Other domains only see APIs with the visibility level "Public". 
 
 #### Typical Users 
+
 - Developers 
 - Technical Leads 
 - Delivery Managers 
@@ -147,11 +152,13 @@ The Manage an API portal is used to: 
 - Configure visibility settings 
 
 Access requires: 
+
 - A DfE Azure Active Directory account (@education.gov.uk) 
 - Appropriate workspace permissions (Admin or API Developer) 
 - Membership of the relevant FaUAPI workspace 
 
 #### Typical Users 
+
 - Technical Leads 
 - Senior Developers 
 - Service Owners 
@@ -180,6 +187,7 @@ Once published, the API will become visible within the FaUAPI catalogue accord
 Rather than entering API metadata manually, FaUAPI supports importing a manifest file containing API metadata and configuration. 
 
 This is the preferred approach because it: 
+
 - Reduces manual effort.
 - Improves consistency. 
 - Supports automation. 
@@ -273,6 +281,7 @@ Automation helps ensure that API documentation remains aligned with the deploy
 FaUAPI does not require a specific automation approach. Teams should select the mechanism that best fits their service architecture and delivery processes. 
 
 Possible approaches include: 
+
 - CI/CD deployment pipelines 
 - Scheduled jobs or cron jobs 
 - Service background jobs 
