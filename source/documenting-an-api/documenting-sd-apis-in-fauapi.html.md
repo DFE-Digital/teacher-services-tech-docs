@@ -285,20 +285,23 @@ The key requirement is that the API metadata and OpenAPI specification publish
 
 Regardless of the implementation technology, the overall process is typically: 
 
-```mermaid
-flowchart TD
-    A[Generate OpenAPI Specification]
-    B[Generate FaUAPI Manifest]
-    C[Validate Manifest]
-    D[Call FaUAPI Automation APIs]
-    E[Update FaUAPI]
-    F[Publish Updated Documentation]
-
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F
+```text
+Generate OpenAPI Specification
+			|
+			▼
+	Generate FaUAPI Manifest
+			|
+			▼
+	Validate Manifest
+			|
+			▼
+Call FaUAPI Automation APIs
+			|
+			▼
+		Update FaUAPI
+			|
+			▼
+Publish Updated Documentation
 ```
 
 ### Reference Implementation 
