@@ -4,18 +4,29 @@ GovukTechDocs.configure(self)
 
 service_list = YAML.load_file("config/services.yml")
 
+service_page_slug = lambda do |service_name|
+  service_name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/^-|-$/, "")
+end
+
+service_docs = Hash.new { |hash, key| hash[key] = [] }
+
 services = service_list.reduce([]) do |list, service|
   repo = SchoolsDigitalTechDocs::GitHub::RubyRepo.new(
     repo_name: service["repo_name"],
     service_name: service["name"],
   )
 
-  list + service.fetch("docsets", []).map do |docset|
-    repo.load_docs(
+  docset_pages = service.fetch("docsets", []).map do |docset|
+    pages = repo.load_docs(
       path_in_repo: docset["path"],
       ignore_files: docset.fetch("ignore_files", []),
     )
+
+    service_docs[service["name"]].concat(pages)
+    pages
   end
+
+  list + docset_pages
 end
 
 ignore "templates/*"
@@ -57,6 +68,8 @@ end
 CS_SERVICE_PROFILES = CS_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
 RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
 OTHER_SERVICE_PROFILES = OTHER_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
+SERVICE_DOCS = service_docs.freeze
+SERVICE_PAGE_PATHS = service_list.to_h { |service| [service["name"], "/service/#{service_page_slug.call(service["name"])}.html"] }.freeze
 
 ALL_SERVICE_NAMES = service_list.map do |service|
   service["name"]
@@ -77,6 +90,14 @@ end
 helpers do
   def pages_by_category
     SchoolsDigitalTechDocs::PagesByCategory.new(sitemap)
+  end
+
+  def service_page_path(service_name)
+    SERVICE_PAGE_PATHS.fetch(service_name)
+  end
+
+  def service_docs(service_name)
+    SERVICE_DOCS.fetch(service_name, [])
   end
 
   def ruby_service_profiles
@@ -100,4 +121,14 @@ services.each do |docset|
   docset.each do |page|
     proxy page.fetch(:path), "templates/external_doc_template.html", page.fetch(:proxy_args)
   end
+end
+
+service_list.each do |service|
+  proxy SERVICE_PAGE_PATHS.fetch(service["name"]), "templates/service_template.html", locals: {
+    service_name: service["name"],
+    repo_name: service["repo_name"],
+    pages: SERVICE_DOCS.fetch(service["name"], []),
+  }, data: {
+    title: service["name"],
+  }
 end
