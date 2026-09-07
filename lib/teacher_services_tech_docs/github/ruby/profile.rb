@@ -8,6 +8,8 @@ module SchoolsDigitalTechDocs
         def_delegators :dependencies,
           :rails_version,
           :ruby_version,
+          :node_version,
+          :yarn_version,
           :dfe_analytics_version,
           :dfe_reference_data_version,
           :dfe_autocomplete_version,
@@ -26,6 +28,8 @@ module SchoolsDigitalTechDocs
           {
             "rails" => rails_version,
             "ruby" => ruby_version,
+            "node" => node_version,
+            "yarn" => yarn_version,
             "dfe-analytics" => dfe_analytics_version,
             "dfe-reference-data" => dfe_reference_data_version,
             "dfe-autocomplete" => dfe_autocomplete_version,

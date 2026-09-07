@@ -17,6 +17,9 @@ module SchoolsDigitalTechDocs
         lockfile = @client.get_file(@repo_name, "Gemfile.lock")&.contents
         tool_versions_file = @client.get_file(@repo_name, ".tool-versions")&.contents
         ruby_version_file = @client.get_file(@repo_name, ".ruby-version")&.contents
+        node_version_file = @client.get_file(@repo_name, ".node-version")&.contents
+        nvmrc_file = @client.get_file(@repo_name, ".nvmrc")&.contents
+        yarnrc_file = @client.get_file(@repo_name, ".yarnrc.yml")&.contents
         package_json_file = @client.get_file(@repo_name, "package.json")&.contents
         yarn_lock_file = @client.get_file(@repo_name, "yarn.lock")&.contents
         production_environment_file = @client.get_file(@repo_name, "config/environments/production.rb")&.contents
@@ -27,6 +30,9 @@ module SchoolsDigitalTechDocs
           lockfile:,
           tool_versions_file:,
           ruby_version_file:,
+          node_version_file:,
+          nvmrc_file:,
+          yarnrc_file:,
           package_json_file:,
           yarn_lock_file:,
           production_environment_file:,

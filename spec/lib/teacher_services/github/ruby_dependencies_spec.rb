@@ -154,6 +154,62 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
 
+  it "reports yarn version from package.json packageManager" do
+    package_json = <<~PACKAGE_JSON
+      {
+        "packageManager": "yarn@4.9.3"
+      }
+    PACKAGE_JSON
+    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json)
+
+    expect(deps.yarn_version).to eq("4.9.3")
+  end
+
+  it "falls back to tool-versions for yarn version" do
+    tool_versions_file = <<~TOOL_VERSIONS
+      ruby 3.4.4
+      yarn 4.6.0
+    TOOL_VERSIONS
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file:)
+
+    expect(deps.yarn_version).to eq("4.6.0")
+  end
+
+  it "falls back to yarnrc presence for yarn version" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, yarnrc_file: "nodeLinker: node-modules")
+
+    expect(deps.yarn_version).to eq("4.x (yarnrc.yml present)")
+  end
+
+  it "reports node version from .node-version" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, node_version_file: "v22.17.0")
+
+    expect(deps.node_version).to eq("22.17.0")
+  end
+
+  it "falls back to .tool-versions for node version" do
+    tool_versions_file = <<~TOOL_VERSIONS
+      ruby 3.4.4
+      nodejs 22.17.0
+    TOOL_VERSIONS
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file:)
+
+    expect(deps.node_version).to eq("22.17.0")
+  end
+
+  it "falls back to package.json for node version" do
+    package_json = <<~PACKAGE_JSON
+      {
+        "engines": {
+          "node": ">=22.0.0"
+        }
+      }
+    PACKAGE_JSON
+    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json)
+
+    expect(deps.node_version).to eq(">=22.0.0")
+  end
+
   it "reports cssbundling and Sass versions from Gemfile.lock" do
     lockfile = <<~GEMFILE_LOCK
       GEM

@@ -12,10 +12,14 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
   it "exposes tech stack as a generic profile shape" do
     client = FakeGithubClient.new
     client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))
+    client.stub_repo_file("my_test_repo", ".node-version", "22.17.0")
+    client.stub_repo_file("my_test_repo", "package.json", '{"packageManager":"yarn@4.9.3"}')
     repo = described_class.new(repo_name: "my_test_repo", service_name: "my service", client:)
 
     expect(repo.profile.tech_stack).to include(
       "rails" => "7.0.4.3",
+      "node" => "22.17.0",
+      "yarn" => "4.9.3",
       "dfe-analytics" => "1.8.1",
       "job-queues" => "Sidekiq 6.5.8",
       "caching" => "Redis",
