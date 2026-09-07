@@ -10,21 +10,17 @@
   <table>
     <thead>
       <tr>
-        <th>Service name</th>
-        <th>repo</th>
-        <% profile.tech_stack.keys.each do |heading| %>
-          <th><%= heading %></th>
-        <% end %>
+        <th>Technology</th>
+        <th>Version</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><%= profile.service_name %></td>
-        <td><%= link_to(profile.repo_name, profile.repository_url) %></td>
-        <% profile.tech_stack.values.each do |value| %>
-          <td><%= value %></td>
-        <% end %>
-      </tr>
+      <% profile.tech_stack.each do |technology, version| %>
+        <tr>
+          <th><%= technology %></th>
+          <td><%= version %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

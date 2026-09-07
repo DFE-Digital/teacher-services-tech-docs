@@ -227,4 +227,25 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
     expect(deps.js_compilation).to eq("None detected")
   end
+
+  it "reports all supported asset management pipelines from Gemfile.lock" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          propshaft (1.2.0)
+          shakapacker (8.2.1)
+          sprockets-rails (3.5.2)
+    GEMFILE_LOCK
+
+    deps = described_class.new(service_name, lockfile:)
+
+    expect(deps.asset_management).to eq("Shakapacker 8.2.1, Propshaft 1.2.0, Sprockets 3.5.2")
+  end
+
+  it "returns unknown when no supported asset management gem is present" do
+    deps = described_class.new(service_name, lockfile: lockfile_contents)
+
+    expect(deps.asset_management).to eq("Unknown")
+  end
 end

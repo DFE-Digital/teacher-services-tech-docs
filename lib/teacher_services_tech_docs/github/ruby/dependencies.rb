@@ -38,6 +38,10 @@ module SchoolsDigitalTechDocs
         js_compilation_detector.value
       end
 
+      def asset_management
+        asset_management_detector.value
+      end
+
       def ruby_version
         version = if parsed_lockfile && parsed_lockfile.ruby_version.present?
                     parsed_lockfile.ruby_version.gsub("ruby ", "")
@@ -73,6 +77,15 @@ module SchoolsDigitalTechDocs
 
       def js_compilation_detector
         @js_compilation_detector ||= Ruby::Dependencies::JsCompilation.new(
+          service_name: @service_name,
+          lockfile: @lockfile,
+          package_json_file: @package_json_file,
+          yarn_lock_file: @yarn_lock_file
+        )
+      end
+
+      def asset_management_detector
+        @asset_management_detector ||= Ruby::Dependencies::AssetManagement.new(
           service_name: @service_name,
           lockfile: @lockfile,
           package_json_file: @package_json_file,

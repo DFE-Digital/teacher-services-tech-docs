@@ -17,6 +17,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
     expect(repo.profile.tech_stack).to include(
       "rails" => "7.0.4.3",
       "dfe-analytics" => "1.8.1",
+      "asset-management" => "Sprockets 4.2.0",
       "css-compilation" => "Webpack 5.4.4",
       "js-compilation" => "Webpack 5.4.4",
     )
