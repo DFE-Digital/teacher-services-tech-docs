@@ -2,7 +2,7 @@ module SchoolsDigitalTechDocs
   module GitHub
     module Ruby
       module Dependencies
-        class AssetManagement < CompilationBase
+        class AssetManagement < DependencyDetectorBase
           def value
             assets = []
 

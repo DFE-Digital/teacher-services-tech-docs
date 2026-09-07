@@ -2,7 +2,7 @@ module SchoolsDigitalTechDocs
   module GitHub
     module Ruby
       module Dependencies
-        class CssCompilation < CompilationBase
+        class CssCompilation < DependencyDetectorBase
           def value
             if cssbundling_rails_version.present?
               return format_css_compilation("cssbundling-rails", cssbundling_rails_version)

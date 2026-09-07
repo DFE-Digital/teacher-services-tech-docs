@@ -2,7 +2,7 @@ module SchoolsDigitalTechDocs
   module GitHub
     module Ruby
       module Dependencies
-        class JobQueues < CompilationBase
+        class JobQueues < DependencyDetectorBase
           def value
             queues = []
 

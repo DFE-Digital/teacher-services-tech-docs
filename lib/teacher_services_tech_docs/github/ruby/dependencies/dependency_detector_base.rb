@@ -4,14 +4,31 @@ module SchoolsDigitalTechDocs
   module GitHub
     module Ruby
       module Dependencies
-        class CompilationBase
-          def initialize(service_name:, lockfile:, package_json_file:, yarn_lock_file:, production_environment_file: nil, dfe_analytics_initializer_file: nil)
+        class DependencyDetectorBase
+          def initialize(
+            service_name:,
+            lockfile: nil,
+            package_json_file: nil,
+            yarn_lock_file: nil,
+            production_environment_file: nil,
+            dfe_analytics_initializer_file: nil,
+            tool_versions_file: nil,
+            ruby_version_file: nil,
+            node_version_file: nil,
+            nvmrc_file: nil,
+            yarnrc_file: nil
+          )
             @service_name = service_name
             @lockfile = lockfile
             @package_json_file = package_json_file
             @yarn_lock_file = yarn_lock_file
             @production_environment_file = production_environment_file
             @dfe_analytics_initializer_file = dfe_analytics_initializer_file
+            @tool_versions_file = tool_versions_file
+            @ruby_version_file = ruby_version_file
+            @node_version_file = node_version_file
+            @nvmrc_file = nvmrc_file
+            @yarnrc_file = yarnrc_file
           end
 
         private
@@ -118,6 +135,29 @@ module SchoolsDigitalTechDocs
 
           def dfe_analytics_initializer_file_content
             @dfe_analytics_initializer_file
+          end
+
+          def version_from_file(file_contents)
+            return unless file_contents.present?
+
+            file_contents.split.last
+          end
+
+          def tool_version(tool_names, required: false, label: tool_names.join("/"))
+            return unless @tool_versions_file.present?
+
+            pattern = /\A(?:#{tool_names.join("|")})\s+\S+/
+            matches = @tool_versions_file.split("\n").select { |line| line.match?(pattern) }
+
+            if required && matches.empty?
+              raise "Tool versions file in #{@service_name} has no #{label} entry #{@tool_versions_file}"
+            end
+
+            return if matches.empty?
+
+            raise "Tool versions file in #{@service_name} has multiple #{label} entries #{matches}" unless matches.length == 1
+
+            matches.first.split.last
           end
         end
       end

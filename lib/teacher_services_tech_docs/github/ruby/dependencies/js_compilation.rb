@@ -2,7 +2,7 @@ module SchoolsDigitalTechDocs
   module GitHub
     module Ruby
       module Dependencies
-        class JsCompilation < CompilationBase
+        class JsCompilation < DependencyDetectorBase
           def value
             if webpack_detected?
               return format_js_compilation("Webpack", webpack_compiler_version)

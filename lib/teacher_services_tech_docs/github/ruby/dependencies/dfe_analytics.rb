@@ -2,7 +2,7 @@ module SchoolsDigitalTechDocs
   module GitHub
     module Ruby
       module Dependencies
-        class DfeAnalytics < CompilationBase
+        class DfeAnalytics < DependencyDetectorBase
           def value
             dfe_analytics_gem_version = get_dependency_version("dfe-analytics")
             has_dfe_analytics_gem = dfe_analytics_gem_version.present?
