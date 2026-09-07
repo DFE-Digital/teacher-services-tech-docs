@@ -21,7 +21,7 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 | Service name | repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
 | --- | --- | --- | --- | --- | --- | --- |
 <% ruby_service_profiles.compact.each do |profile| %>
-|<%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}") , profile.rails, profile.ruby, profile.dfe_analytics, profile.dfe_reference_data, profile.dfe_autocomplete].join(' | ') %> |
+|<%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}") , profile.rails_version, profile.ruby_version, profile.dfe_analytics_version, profile.dfe_reference_data_version, profile.dfe_autocomplete_version].join(' | ') %> |
 <% end %>
 
 ### Other repositories

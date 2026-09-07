@@ -5,17 +5,7 @@ module SchoolsDigitalTechDocs
 
       attr_reader :service_name
 
-      Profile = Struct.new(:service_name,
-                           :repo_name,
-                           :rails,
-                           :ruby,
-                           :asdf,
-                           :dfe_analytics,
-                           :dfe_reference_data,
-                           :dfe_autocomplete,
-                           :default_branch,
-                           :archived,
-                           keyword_init: true)
+      Profile = RepoProfiles::RubyRepoProfile
 
       def initialize(repo_name:, service_name:, client: GitHub::Client.new)
         @repo_name = repo_name
@@ -37,14 +27,8 @@ module SchoolsDigitalTechDocs
         Profile.new(
           service_name: @service_name,
           repo_name: @repo_name,
-          rails: deps.rails_version,
-          dfe_analytics: deps.dfe_analytics_version,
-          dfe_reference_data: deps.dfe_reference_data_version,
-          dfe_autocomplete: deps.dfe_autocomplete_version,
-          ruby: deps.ruby_version,
-          asdf: deps.has_tool_versions?,
-          default_branch: repo.default_branch,
-          archived: repo.archived,
+          repo: repo,
+          dependencies: deps,
         )
       end
     end

@@ -1,13 +1,8 @@
 ---
 ---
+<h1 id="service"><%= profile.service_name %></h1>
 
-<% utf8 = ->(value) { value.to_s.dup.force_encoding("UTF-8") } %>
-
-<h1 id="service"><%= utf8.call(service_name) %></h1>
-
-<p>Repository: <%= link_to(utf8.call(repo_name), "https://github.com/#{utf8.call(repo_name)}") %></p>
-
-<% if ruby_service_profile %>
+<p>Repository: <%= link_to(profile.repo_name, profile.repository_url) %></p>
 
 <h2 id="tech-stack">Tech stack</h2>
 
@@ -17,81 +12,30 @@
       <tr>
         <th>Service name</th>
         <th>repo</th>
-        <th>rails</th>
-        <th>ruby</th>
-        <th>dfe-analytics</th>
-        <th>dfe-reference-data</th>
-        <th>dfe-autocomplete</th>
+        <% profile.tech_stack.keys.each do |heading| %>
+          <th><%= heading %></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><%= ruby_service_profile.service_name %></td>
-        <td><%= link_to(ruby_service_profile.repo_name, "https://github.com/#{ruby_service_profile.repo_name}") %></td>
-        <td><%= ruby_service_profile.rails %></td>
-        <td><%= ruby_service_profile.ruby %></td>
-        <td><%= ruby_service_profile.dfe_analytics %></td>
-        <td><%= ruby_service_profile.dfe_reference_data %></td>
-        <td><%= ruby_service_profile.dfe_autocomplete %></td>
+        <td><%= profile.service_name %></td>
+        <td><%= link_to(profile.repo_name, profile.repository_url) %></td>
+        <% profile.tech_stack.values.each do |value| %>
+          <td><%= value %></td>
+        <% end %>
       </tr>
     </tbody>
   </table>
 </div>
-<% elsif cs_service_profile %>
-
-<h2 id="tech-stack">Tech stack</h2>
-
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Service name</th>
-        <th>repo</th>
-        <th>framework</th>
-        <th>dfe-analytics-net</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= cs_service_profile.service_name %></td>
-        <td><%= link_to(cs_service_profile.repo_name, "https://github.com/#{cs_service_profile.repo_name}") %></td>
-        <td><%= cs_service_profile.target_framework %></td>
-        <td><%= cs_service_profile.dfe_analytics_version %></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<% elsif other_service_profile %>
-
-<h2 id="tech-stack">Tech stack</h2>
-
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Service name</th>
-        <th>repo</th>
-        <th>language</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= other_service_profile.service_name %></td>
-        <td><%= link_to(other_service_profile.repo_name, "https://github.com/#{other_service_profile.repo_name}") %></td>
-        <td><%= service_language %></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<% end %>
 
 <% if pages.any? %>
 
 <h2 id="documentation-pages">Documentation pages</h2>
 
 <ul class="govuk-list">
-<% pages.sort_by { |page| utf8.call(page.fetch(:title)) }.each do |page| %>
-  <li><%= link_to(utf8.call(page.fetch(:title)), "/#{page.fetch(:path)}") %></li>
+<% pages.sort_by { |page| page.fetch(:title) }.each do |page| %>
+  <li><%= link_to(page.fetch(:title), "/#{page.fetch(:path)}") %></li>
 <% end %>
 </ul>
 <% else %>

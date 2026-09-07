@@ -8,13 +8,24 @@ service_page_slug = lambda do |service_name|
   service_name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/^-|-$/, "")
 end
 
+service_repos_with_profiles = service_list.map do |service|
+  repo = SchoolsDigitalTechDocs::GitHub::RepoFactory.build(service:)
+  profile = repo.profile
+
+  raise "No profile created for #{service}" unless profile
+
+  {
+    service:,
+    repo:,
+    profile:,
+  }
+end
+
 service_docs = Hash.new { |hash, key| hash[key] = [] }
 
-services = service_list.reduce([]) do |list, service|
-  repo = SchoolsDigitalTechDocs::GitHub::RubyRepo.new(
-    repo_name: service["repo_name"],
-    service_name: service["name"],
-  )
+services = service_repos_with_profiles.reduce([]) do |list, entry|
+  service = entry.fetch(:service)
+  repo = entry.fetch(:repo)
 
   docset_pages = service.fetch("docsets", []).map do |docset|
     pages = repo.load_docs(
@@ -31,64 +42,21 @@ end
 
 ignore "templates/*"
 
-RUBY_SERVICE_REPOS = service_list.select { |s| s["language"] == "ruby" }.map do |service|
-  repo = SchoolsDigitalTechDocs::GitHub::RubyRepo.new(
-    repo_name: service["repo_name"],
-    service_name: service["name"],
-  )
-
-  raise "No profile created for #{service}" unless repo.profile
-
-  repo
-end
-
-CS_SERVICE_REPOS = service_list.select { |s| s["language"] == "cs" }.map do |service|
-  repo = SchoolsDigitalTechDocs::GitHub::CsRepo.new(
-    repo_name: service["repo_name"],
-    csproj_path: service["csproj_path"],
-    service_name: service["name"],
-  )
-
-  raise "No profile created for #{service} " unless repo.profile
-
-  repo
-end
-
-OTHER_SERVICE_REPOS = service_list.select { |s| s["language"] == "other" }.map do |service|
-  repo = SchoolsDigitalTechDocs::GitHub::OtherRepo.new(
-    repo_name: service["repo_name"],
-    service_name: service["name"],
-  )
-
-  raise "No profile created for #{service} " unless repo.profile
-
-  repo
-end
-
-CS_SERVICE_PROFILES = CS_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
-RUBY_SERVICE_PROFILES = RUBY_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
-OTHER_SERVICE_PROFILES = OTHER_SERVICE_REPOS.sort_by(&:service_name).map(&:profile)
-RUBY_SERVICE_PROFILES_BY_NAME = RUBY_SERVICE_PROFILES.to_h { |profile| [profile.service_name, profile] }.freeze
-CS_SERVICE_PROFILES_BY_NAME = CS_SERVICE_PROFILES.to_h { |profile| [profile.service_name, profile] }.freeze
-OTHER_SERVICE_PROFILES_BY_NAME = OTHER_SERVICE_PROFILES.to_h { |profile| [profile.service_name, profile] }.freeze
-SERVICE_LANGUAGES_BY_NAME = service_list.to_h { |service| [service["name"], service["language"]] }.freeze
+SERVICE_REPOS = service_repos_with_profiles.map { |entry| entry.fetch(:repo) }.freeze
+SERVICE_PROFILES = service_repos_with_profiles.map { |entry| entry.fetch(:profile) }.freeze
+CS_SERVICE_PROFILES = SERVICE_PROFILES.select(&:cs?).sort_by(&:service_name).freeze
+RUBY_SERVICE_PROFILES = SERVICE_PROFILES.select(&:ruby?).sort_by(&:service_name).freeze
+OTHER_SERVICE_PROFILES = SERVICE_PROFILES.select(&:other?).sort_by(&:service_name).freeze
+SERVICE_PROFILES_BY_NAME = (RUBY_SERVICE_PROFILES + CS_SERVICE_PROFILES + OTHER_SERVICE_PROFILES).to_h { |profile| [profile.service_name, profile] }.freeze
 SERVICE_DOCS = service_docs.freeze
 SERVICE_PAGE_PATHS = service_list.to_h { |service| [service["name"], "/service/#{service_page_slug.call(service["name"])}.html"] }.freeze
 
-ALL_SERVICE_NAMES = service_list.map do |service|
-  service["name"]
-end
-
-MAPPED_SERVICE_NAMES = (CS_SERVICE_REPOS + RUBY_SERVICE_REPOS).map(&:service_name)
-
-OTHER_SERVICE_NAMES = service_list.select { |r| r["language"] == "other" }.map do |service|
-  service["name"]
-end
-
-missing_service_names = Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES + OTHER_SERVICE_NAMES)
+ALL_SERVICE_NAMES = service_list.map { |service| service["name"] }
+MAPPED_SERVICE_NAMES = SERVICE_REPOS.map(&:service_name)
+missing_service_names = Set.new(ALL_SERVICE_NAMES) - Set.new(MAPPED_SERVICE_NAMES)
 
 unless missing_service_names.empty?
-  raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}; Other #{OTHER_SERVICE_NAMES.length}")
+  raise("Missing service profiles: total #{services.length}; Ruby #{RUBY_SERVICE_PROFILES.length}; C# #{CS_SERVICE_PROFILES.length}; Other #{OTHER_SERVICE_PROFILES.length}")
 end
 
 helpers do
@@ -129,13 +97,8 @@ end
 
 service_list.each do |service|
   proxy SERVICE_PAGE_PATHS.fetch(service["name"]), "templates/service_template.html", locals: {
-    service_name: service["name"],
-    repo_name: service["repo_name"],
+    profile: SERVICE_PROFILES_BY_NAME.fetch(service["name"]),
     pages: SERVICE_DOCS.fetch(service["name"], []),
-    service_language: SERVICE_LANGUAGES_BY_NAME.fetch(service["name"]),
-    ruby_service_profile: RUBY_SERVICE_PROFILES_BY_NAME[service["name"]],
-    cs_service_profile: CS_SERVICE_PROFILES_BY_NAME[service["name"]],
-    other_service_profile: OTHER_SERVICE_PROFILES_BY_NAME[service["name"]],
   }, data: {
     title: service["name"],
   }
