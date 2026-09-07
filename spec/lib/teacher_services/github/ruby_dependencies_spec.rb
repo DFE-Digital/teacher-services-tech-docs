@@ -97,4 +97,134 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: no_ruby_tool_version_file)
     expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
+
+  it "reports cssbundling and Sass versions from Gemfile.lock" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          cssbundling-rails (1.4.1)
+          sassc-rails (2.1.2)
+
+      RUBY VERSION
+        ruby 3.2.2p53
+    GEMFILE_LOCK
+
+    deps = described_class.new(service_name, lockfile:)
+
+    expect(deps.css_compilation).to eq("cssbundling-rails 1.4.1 + Sass 2.1.2")
+  end
+
+  it "reports Shakapacker and Sass versions from yarn.lock" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          shakapacker (8.2.1)
+    GEMFILE_LOCK
+    package_json = <<~PACKAGE_JSON
+      {
+        "dependencies": {
+          "shakapacker": "^8.2.1",
+          "sass": "^1.89.0"
+        }
+      }
+    PACKAGE_JSON
+    yarn_lock = <<~YARN_LOCK
+      "sass@^1.89.0":
+        version "1.89.2"
+        resolved "https://registry.yarnpkg.com/sass/-/sass-1.89.2.tgz"
+
+      "shakapacker@^8.2.1":
+        version "8.2.3"
+        resolved "https://registry.yarnpkg.com/shakapacker/-/shakapacker-8.2.3.tgz"
+    YARN_LOCK
+
+    deps = described_class.new(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
+
+    expect(deps.css_compilation).to eq("Shakapacker 8.2.3 + Sass 1.89.2")
+  end
+
+  it "reports Webpack and Sass loader when Sass package is not present" do
+    package_json = <<~PACKAGE_JSON
+      {
+        "devDependencies": {
+          "webpack": "~5.99.0",
+          "sass-loader": "^14.2.1"
+        }
+      }
+    PACKAGE_JSON
+    yarn_lock = <<~YARN_LOCK
+      "sass-loader@^14.2.1":
+        version "14.2.2"
+        resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-14.2.2.tgz"
+
+      "webpack@~5.99.0":
+        version "5.99.1"
+        resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.99.1.tgz"
+    YARN_LOCK
+
+    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json, yarn_lock_file: yarn_lock)
+
+    expect(deps.css_compilation).to eq("Webpack 5.99.1 + Sass (sass-loader 14.2.2)")
+  end
+
+  it "reports Webpack JS compilation from shakapacker in yarn.lock" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          shakapacker (8.2.1)
+    GEMFILE_LOCK
+    package_json = <<~PACKAGE_JSON
+      {
+        "dependencies": {
+          "shakapacker": "^8.2.1"
+        }
+      }
+    PACKAGE_JSON
+    yarn_lock = <<~YARN_LOCK
+      "shakapacker@^8.2.1":
+        version "8.2.3"
+        resolved "https://registry.yarnpkg.com/shakapacker/-/shakapacker-8.2.3.tgz"
+    YARN_LOCK
+
+    deps = described_class.new(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
+
+    expect(deps.js_compilation).to eq("Webpack 8.2.3")
+  end
+
+  it "reports esbuild JS compilation from jsbundling-rails and yarn.lock" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          jsbundling-rails (1.3.1)
+    GEMFILE_LOCK
+    package_json = <<~PACKAGE_JSON
+      {
+        "scripts": {
+          "build:js": "esbuild app/javascript/* --bundle"
+        },
+        "devDependencies": {
+          "esbuild": "^0.23.1"
+        }
+      }
+    PACKAGE_JSON
+    yarn_lock = <<~YARN_LOCK
+      "esbuild@^0.23.1":
+        version "0.23.2"
+        resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.23.2.tgz"
+    YARN_LOCK
+
+    deps = described_class.new(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
+
+    expect(deps.js_compilation).to eq("esbuild 0.23.2")
+  end
+
+  it "returns none detected when no JS compiler signal is present" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: "{}")
+
+    expect(deps.js_compilation).to eq("None detected")
+  end
 end

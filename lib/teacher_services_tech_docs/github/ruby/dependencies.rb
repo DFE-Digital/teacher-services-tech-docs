@@ -1,11 +1,13 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil)
+      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, package_json_file: nil, yarn_lock_file: nil)
         @service_name = service_name
         @lockfile = lockfile
         @tool_versions_file = tool_versions_file
         @ruby_version_file = ruby_version_file
+        @package_json_file = package_json_file
+        @yarn_lock_file = yarn_lock_file
       end
 
       def rails_version
@@ -26,6 +28,14 @@ module SchoolsDigitalTechDocs
 
       def has_tool_versions?
         @tool_versions_file.present?
+      end
+
+      def css_compilation
+        css_compilation_detector.value
+      end
+
+      def js_compilation
+        js_compilation_detector.value
       end
 
       def ruby_version
@@ -50,6 +60,24 @@ module SchoolsDigitalTechDocs
 
       def get_dependency_version(dep)
         parsed_lockfile && parsed_lockfile.specs.find { |s| s.name == dep }&.version&.to_s
+      end
+
+      def css_compilation_detector
+        @css_compilation_detector ||= Ruby::Dependencies::CssCompilation.new(
+          service_name: @service_name,
+          lockfile: @lockfile,
+          package_json_file: @package_json_file,
+          yarn_lock_file: @yarn_lock_file
+        )
+      end
+
+      def js_compilation_detector
+        @js_compilation_detector ||= Ruby::Dependencies::JsCompilation.new(
+          service_name: @service_name,
+          lockfile: @lockfile,
+          package_json_file: @package_json_file,
+          yarn_lock_file: @yarn_lock_file
+        )
       end
 
       def parsed_lockfile
