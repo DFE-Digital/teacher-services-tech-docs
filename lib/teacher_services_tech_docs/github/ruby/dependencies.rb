@@ -1,15 +1,15 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, package_json_file: nil, yarn_lock_file: nil, gemfile_file: nil, production_environment_file: nil)
+      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, package_json_file: nil, yarn_lock_file: nil, production_environment_file: nil, dfe_analytics_initializer_file: nil)
         @service_name = service_name
         @lockfile = lockfile
         @tool_versions_file = tool_versions_file
         @ruby_version_file = ruby_version_file
         @package_json_file = package_json_file
         @yarn_lock_file = yarn_lock_file
-        @gemfile_file = gemfile_file
         @production_environment_file = production_environment_file
+        @dfe_analytics_initializer_file = dfe_analytics_initializer_file
       end
 
       def rails_version
@@ -17,7 +17,7 @@ module SchoolsDigitalTechDocs
       end
 
       def dfe_analytics_version
-        get_dependency_version("dfe-analytics")
+        dfe_analytics_detector.value
       end
 
       def dfe_autocomplete_version
@@ -100,7 +100,6 @@ module SchoolsDigitalTechDocs
           lockfile: @lockfile,
           package_json_file: @package_json_file,
           yarn_lock_file: @yarn_lock_file,
-          gemfile_file: @gemfile_file,
           production_environment_file: @production_environment_file
         )
       end
@@ -111,7 +110,6 @@ module SchoolsDigitalTechDocs
           lockfile: @lockfile,
           package_json_file: @package_json_file,
           yarn_lock_file: @yarn_lock_file,
-          gemfile_file: @gemfile_file,
           production_environment_file: @production_environment_file
         )
       end
@@ -122,8 +120,17 @@ module SchoolsDigitalTechDocs
           lockfile: @lockfile,
           package_json_file: @package_json_file,
           yarn_lock_file: @yarn_lock_file,
-          gemfile_file: @gemfile_file,
           production_environment_file: @production_environment_file
+        )
+      end
+
+      def dfe_analytics_detector
+        @dfe_analytics_detector ||= Ruby::Dependencies::DfeAnalytics.new(
+          service_name: @service_name,
+          lockfile: @lockfile,
+          package_json_file: @package_json_file,
+          yarn_lock_file: @yarn_lock_file,
+          dfe_analytics_initializer_file: @dfe_analytics_initializer_file
         )
       end
 

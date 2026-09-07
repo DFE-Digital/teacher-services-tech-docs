@@ -40,6 +40,62 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.dfe_reference_data_version).to eq("1.4.0")
   end
 
+  it "reports Airbyte only when the gem is absent but airbyte is enabled" do
+    lockfile_without_dfe_analytics = lockfile_contents.split("\n").grep_v(/dfe-analytics/).join("\n")
+    dfe_analytics_initializer_file = <<~RUBY
+      DfE::Analytics.configure do |config|
+        config.airbyte_enabled = true
+      end
+    RUBY
+
+    deps = described_class.new(
+      service_name,
+      lockfile: lockfile_without_dfe_analytics,
+      dfe_analytics_initializer_file:
+    )
+
+    expect(deps.dfe_analytics_version).to eq("Airbyte")
+  end
+
+  it "reports gem and Airbyte when both are present" do
+    dfe_analytics_initializer_file = <<~RUBY
+      DfE::Analytics.configure do |config|
+        config.airbyte_enabled = true
+      end
+    RUBY
+
+    deps = described_class.new(
+      service_name,
+      lockfile: lockfile_contents,
+      dfe_analytics_initializer_file:
+    )
+
+    expect(deps.dfe_analytics_version).to eq("1.2.0 + Airbyte")
+  end
+
+  it "does not report Airbyte when disabled in the initializer" do
+    dfe_analytics_initializer_file = <<~RUBY
+      DfE::Analytics.configure do |config|
+        config.airbyte_enabled = false
+      end
+    RUBY
+
+    deps = described_class.new(
+      service_name,
+      lockfile: lockfile_contents,
+      dfe_analytics_initializer_file:
+    )
+
+    expect(deps.dfe_analytics_version).to eq("1.2.0")
+  end
+
+  it "returns nil when dfe-analytics is absent from Gemfile.lock" do
+    lockfile_without_dfe_analytics = lockfile_contents.split("\n").grep_v(/dfe-analytics/).join("\n")
+    deps = described_class.new(service_name, lockfile: lockfile_without_dfe_analytics)
+
+    expect(deps.dfe_analytics_version).to eq(nil)
+  end
+
   it "correctly returns null when a gem is not present" do
     lockfile_without_rails = lockfile_contents.split("\n").grep_v(/rails/).join("\n")
     deps = described_class.new(service_name, lockfile: lockfile_without_rails)
@@ -270,7 +326,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.job_queues).to eq("None")
   end
 
-  it "reports caching signals from lockfile, Gemfile and production environment config" do
+  it "reports caching signals from lockfile and production environment config" do
     lockfile = <<~GEMFILE_LOCK
       GEM
         remote: https://rubygems.org/
@@ -278,18 +334,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
           solid_cache (1.1.0)
           redis (5.4.0)
     GEMFILE_LOCK
-    gemfile = <<~GEMFILE
-      source "https://rubygems.org"
-      gem "solid_cache"
-      gem "redis"
-    GEMFILE
     production_environment_file = <<~RUBY
       config.cache_store = :redis_cache_store
       config.cache_store = :mem_cache_store
       config.cache_store = :solid_cache_store
     RUBY
 
-    deps = described_class.new(service_name, lockfile:, gemfile_file: gemfile, production_environment_file:)
+    deps = described_class.new(service_name, lockfile:, production_environment_file:)
 
     expect(deps.caching).to eq("SolidCache 1.1.0, Redis, Memcache")
   end
