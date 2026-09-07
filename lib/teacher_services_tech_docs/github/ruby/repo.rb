@@ -19,9 +19,18 @@ module SchoolsDigitalTechDocs
         ruby_version_file = @client.get_file(@repo_name, ".ruby-version")&.contents
         package_json_file = @client.get_file(@repo_name, "package.json")&.contents
         yarn_lock_file = @client.get_file(@repo_name, "yarn.lock")&.contents
+        gemfile_file = @client.get_file(@repo_name, "Gemfile")&.contents
+        production_environment_file = @client.get_file(@repo_name, "config/environments/production.rb")&.contents
 
         deps = GitHub::RubyDependencies.new(
-          @service_name, lockfile:, tool_versions_file:, ruby_version_file:, package_json_file:, yarn_lock_file:
+          @service_name,
+          lockfile:,
+          tool_versions_file:,
+          ruby_version_file:,
+          package_json_file:,
+          yarn_lock_file:,
+          gemfile_file:,
+          production_environment_file:
         )
 
         repo = @client.get_repo(@repo_name)

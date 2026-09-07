@@ -5,11 +5,13 @@ module SchoolsDigitalTechDocs
     module Ruby
       module Dependencies
         class CompilationBase
-          def initialize(service_name:, lockfile:, package_json_file:, yarn_lock_file:)
+          def initialize(service_name:, lockfile:, package_json_file:, yarn_lock_file:, gemfile_file: nil, production_environment_file: nil)
             @service_name = service_name
             @lockfile = lockfile
             @package_json_file = package_json_file
             @yarn_lock_file = yarn_lock_file
+            @gemfile_file = gemfile_file
+            @production_environment_file = production_environment_file
           end
 
         private
@@ -104,6 +106,18 @@ module SchoolsDigitalTechDocs
             return unless @lockfile
 
             @parsed_lockfile ||= Bundler::LockfileParser.new(@lockfile)
+          end
+
+          def gem_declared?(gem_name)
+            gemfile_file_content&.match?(/gem\s+["']#{Regexp.escape(gem_name)}["']/)
+          end
+
+          def gemfile_file_content
+            @gemfile_file
+          end
+
+          def production_environment_file_content
+            @production_environment_file
           end
         end
       end

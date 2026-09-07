@@ -248,4 +248,55 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
     expect(deps.asset_management).to eq("Unknown")
   end
+
+  it "reports all supported job queues from Gemfile.lock" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          sidekiq (7.3.0)
+          solid_queue (1.2.0)
+          good_job (4.6.1)
+    GEMFILE_LOCK
+
+    deps = described_class.new(service_name, lockfile:)
+
+    expect(deps.job_queues).to eq("Sidekiq 7.3.0, SolidQueue 1.2.0, GoodJob 4.6.1")
+  end
+
+  it "returns none for job queues when no supported gems are present" do
+    deps = described_class.new(service_name, lockfile: lockfile_contents)
+
+    expect(deps.job_queues).to eq("None")
+  end
+
+  it "reports caching signals from lockfile, Gemfile and production environment config" do
+    lockfile = <<~GEMFILE_LOCK
+      GEM
+        remote: https://rubygems.org/
+        specs:
+          solid_cache (1.1.0)
+          redis (5.4.0)
+    GEMFILE_LOCK
+    gemfile = <<~GEMFILE
+      source "https://rubygems.org"
+      gem "solid_cache"
+      gem "redis"
+    GEMFILE
+    production_environment_file = <<~RUBY
+      config.cache_store = :redis_cache_store
+      config.cache_store = :mem_cache_store
+      config.cache_store = :solid_cache_store
+    RUBY
+
+    deps = described_class.new(service_name, lockfile:, gemfile_file: gemfile, production_environment_file:)
+
+    expect(deps.caching).to eq("SolidCache 1.1.0, Redis, Memcache")
+  end
+
+  it "returns unknown for caching when no cache signal is present" do
+    deps = described_class.new(service_name, lockfile: lockfile_contents)
+
+    expect(deps.caching).to eq("Unknown")
+  end
 end

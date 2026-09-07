@@ -1,13 +1,15 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, package_json_file: nil, yarn_lock_file: nil)
+      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, package_json_file: nil, yarn_lock_file: nil, gemfile_file: nil, production_environment_file: nil)
         @service_name = service_name
         @lockfile = lockfile
         @tool_versions_file = tool_versions_file
         @ruby_version_file = ruby_version_file
         @package_json_file = package_json_file
         @yarn_lock_file = yarn_lock_file
+        @gemfile_file = gemfile_file
+        @production_environment_file = production_environment_file
       end
 
       def rails_version
@@ -40,6 +42,14 @@ module SchoolsDigitalTechDocs
 
       def asset_management
         asset_management_detector.value
+      end
+
+      def job_queues
+        job_queues_detector.value
+      end
+
+      def caching
+        caching_detector.value
       end
 
       def ruby_version
@@ -89,7 +99,31 @@ module SchoolsDigitalTechDocs
           service_name: @service_name,
           lockfile: @lockfile,
           package_json_file: @package_json_file,
-          yarn_lock_file: @yarn_lock_file
+          yarn_lock_file: @yarn_lock_file,
+          gemfile_file: @gemfile_file,
+          production_environment_file: @production_environment_file
+        )
+      end
+
+      def job_queues_detector
+        @job_queues_detector ||= Ruby::Dependencies::JobQueues.new(
+          service_name: @service_name,
+          lockfile: @lockfile,
+          package_json_file: @package_json_file,
+          yarn_lock_file: @yarn_lock_file,
+          gemfile_file: @gemfile_file,
+          production_environment_file: @production_environment_file
+        )
+      end
+
+      def caching_detector
+        @caching_detector ||= Ruby::Dependencies::Caching.new(
+          service_name: @service_name,
+          lockfile: @lockfile,
+          package_json_file: @package_json_file,
+          yarn_lock_file: @yarn_lock_file,
+          gemfile_file: @gemfile_file,
+          production_environment_file: @production_environment_file
         )
       end
 
