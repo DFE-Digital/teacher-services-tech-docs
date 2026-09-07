@@ -26,13 +26,59 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= utf8.call(ruby_service_profile.service_name) %></td>
-        <td><%= link_to(utf8.call(ruby_service_profile.repo_name), "https://github.com/#{utf8.call(ruby_service_profile.repo_name)}") %></td>
-        <td><%= utf8.call(ruby_service_profile.rails) %></td>
-        <td><%= utf8.call(ruby_service_profile.ruby) %></td>
-        <td><%= utf8.call(ruby_service_profile.dfe_analytics) %></td>
-        <td><%= utf8.call(ruby_service_profile.dfe_reference_data) %></td>
-        <td><%= utf8.call(ruby_service_profile.dfe_autocomplete) %></td>
+        <td><%= ruby_service_profile.service_name %></td>
+        <td><%= link_to(ruby_service_profile.repo_name, "https://github.com/#{ruby_service_profile.repo_name}") %></td>
+        <td><%= ruby_service_profile.rails %></td>
+        <td><%= ruby_service_profile.ruby %></td>
+        <td><%= ruby_service_profile.dfe_analytics %></td>
+        <td><%= ruby_service_profile.dfe_reference_data %></td>
+        <td><%= ruby_service_profile.dfe_autocomplete %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<% elsif cs_service_profile %>
+
+<h2 id="tech-stack">Tech stack</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Service name</th>
+        <th>repo</th>
+        <th>framework</th>
+        <th>dfe-analytics-net</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= cs_service_profile.service_name %></td>
+        <td><%= link_to(cs_service_profile.repo_name, "https://github.com/#{cs_service_profile.repo_name}") %></td>
+        <td><%= cs_service_profile.target_framework %></td>
+        <td><%= cs_service_profile.dfe_analytics_version %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<% elsif other_service_profile %>
+
+<h2 id="tech-stack">Tech stack</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Service name</th>
+        <th>repo</th>
+        <th>language</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= other_service_profile.service_name %></td>
+        <td><%= link_to(other_service_profile.repo_name, "https://github.com/#{other_service_profile.repo_name}") %></td>
+        <td><%= service_language %></td>
       </tr>
     </tbody>
   </table>
