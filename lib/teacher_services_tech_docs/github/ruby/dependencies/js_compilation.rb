@@ -20,14 +20,6 @@ module SchoolsDigitalTechDocs
               return format_js_compilation("jsbundling-rails", jsbundling_rails_version)
             end
 
-            if build_script.include?("esbuild")
-              return format_js_compilation("esbuild", esbuild_version)
-            end
-
-            if build_script.include?("webpack")
-              return format_js_compilation("Webpack", webpack_compiler_version)
-            end
-
             "None detected"
           end
 

@@ -4,8 +4,8 @@ module SchoolsDigitalTechDocs
       module Dependencies
         class RubyVersion < DependencyDetectorBase
           def value
-            version = if parsed_lockfile && parsed_lockfile.ruby_version.present?
-                        parsed_lockfile.ruby_version.gsub("ruby ", "")
+            version = if @lockfile_lookup.ruby_version_pin.present?
+                        @lockfile_lookup.ruby_version_pin.gsub("ruby ", "")
                       elsif @ruby_version_file.present?
                         @ruby_version_file.split.last
                       elsif @tool_versions_file.present?

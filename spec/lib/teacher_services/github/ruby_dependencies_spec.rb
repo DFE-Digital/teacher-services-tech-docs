@@ -142,6 +142,18 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
 
+  it "degrades to nil instead of raising when an optional tool has ambiguous entries" do
+    tool_versions_file = <<~TOOL_VERSIONS
+      ruby 3.2.4
+      yarn 4.6.0
+      yarn 4.9.3
+    TOOL_VERSIONS
+    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file:)
+
+    expect { deps.yarn_version }.not_to raise_error
+    expect(deps.yarn_version).to eq(nil)
+  end
+
   let :no_ruby_tool_version_file do
     <<~TOOL_VERSIONS
       terraform 1.4.6

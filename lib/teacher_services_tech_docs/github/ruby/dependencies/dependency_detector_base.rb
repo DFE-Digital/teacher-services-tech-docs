@@ -19,7 +19,7 @@ module SchoolsDigitalTechDocs
             yarnrc_file: nil
           )
             @service_name = service_name
-            @lockfile = lockfile
+            @lockfile_lookup = LockfileLookup.new(lockfile)
             @package_json_file = package_json_file
             @yarn_lock_file = yarn_lock_file
             @production_environment_file = production_environment_file
@@ -34,7 +34,7 @@ module SchoolsDigitalTechDocs
         private
 
           def get_dependency_version(dep)
-            parsed_lockfile&.specs&.find { |s| s.name == dep }&.version&.to_s
+            @lockfile_lookup.version_of(dep)
           end
 
           def dependency_present?(gem_name)
@@ -131,14 +131,8 @@ module SchoolsDigitalTechDocs
             raise "Invalid package.json in #{@service_name}: #{e.message}"
           end
 
-          def parsed_lockfile
-            return unless @lockfile
-
-            @parsed_lockfile ||= Bundler::LockfileParser.new(@lockfile)
-          end
-
           def gem_declared?(gem_name)
-            parsed_lockfile&.dependencies&.key?(gem_name)
+            @lockfile_lookup.declared?(gem_name)
           end
 
           def production_environment_file_content
@@ -167,7 +161,11 @@ module SchoolsDigitalTechDocs
 
             return if matches.empty?
 
-            raise "Tool versions file in #{@service_name} has multiple #{label} entries #{matches}" unless matches.length == 1
+            if matches.length > 1
+              raise "Tool versions file in #{@service_name} has multiple #{label} entries #{matches}" if required
+
+              return
+            end
 
             matches.first.split.last
           end

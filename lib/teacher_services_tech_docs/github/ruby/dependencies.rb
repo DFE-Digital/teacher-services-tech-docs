@@ -4,6 +4,7 @@ module SchoolsDigitalTechDocs
       def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, node_version_file: nil, nvmrc_file: nil, yarnrc_file: nil, package_json_file: nil, yarn_lock_file: nil, production_environment_file: nil, dfe_analytics_initializer_file: nil, terraform_files: {}, dockerfile: nil)
         @service_name = service_name
         @lockfile = lockfile
+        @lockfile_lookup = Ruby::Dependencies::LockfileLookup.new(lockfile)
         @tool_versions_file = tool_versions_file
         @ruby_version_file = ruby_version_file
         @node_version_file = node_version_file
@@ -84,7 +85,7 @@ module SchoolsDigitalTechDocs
     private
 
       def get_dependency_version(dep)
-        parsed_lockfile && parsed_lockfile.specs.find { |s| s.name == dep }&.version&.to_s
+        @lockfile_lookup.version_of(dep)
       end
 
       def css_compilation_detector
@@ -173,12 +174,6 @@ module SchoolsDigitalTechDocs
 
       def alpine_version_detector
         @alpine_version_detector ||= Ruby::Dependencies::AlpineVersion.new(dockerfile: @dockerfile)
-      end
-
-      def parsed_lockfile
-        if @lockfile
-          @parsed_lockfile ||= Bundler::LockfileParser.new(@lockfile)
-        end
       end
     end
   end
