@@ -30,36 +30,33 @@ module SchoolsDigitalTechDocs
         end
 
         def tech_stack
-          primary = full_tech_stack.slice(*PRIMARY_TECH_STACK_KEYS)
-          rest = full_tech_stack.except(*PRIMARY_TECH_STACK_KEYS).sort.to_h
-
-          primary.merge(rest)
+          {
+            "ruby" => ruby_version,
+            "rails" => rails_version,
+            "postgres" => postgres_version,
+            "alpine" => alpine_version,
+            "node" => node_version,
+            "yarn" => yarn_version,
+            "redis" => redis_version,
+            "asset-management" => asset_management,
+            "caching" => caching,
+            "css-compilation" => css_compilation,
+            "dfe-analytics" => dfe_analytics_version,
+            "dfe-autocomplete" => dfe_autocomplete_version,
+            "dfe-reference-data" => dfe_reference_data_version,
+            "job-queues" => job_queues,
+            "js-compilation" => js_compilation,
+          }
         end
 
         def primary_tech_stack
-          full_tech_stack.slice(*PRIMARY_TECH_STACK_KEYS)
+          split_tech_stack.first
         end
 
       private
 
-        def full_tech_stack
-          {
-            "rails" => rails_version,
-            "ruby" => ruby_version,
-            "node" => node_version,
-            "yarn" => yarn_version,
-            "dfe-analytics" => dfe_analytics_version,
-            "dfe-reference-data" => dfe_reference_data_version,
-            "dfe-autocomplete" => dfe_autocomplete_version,
-            "job-queues" => job_queues,
-            "caching" => caching,
-            "postgres" => postgres_version,
-            "redis" => redis_version,
-            "alpine" => alpine_version,
-            "asset-management" => asset_management,
-            "css-compilation" => css_compilation,
-            "js-compilation" => js_compilation,
-          }
+        def split_tech_stack
+          [tech_stack.slice(*PRIMARY_TECH_STACK_KEYS), tech_stack.except(*PRIMARY_TECH_STACK_KEYS)]
         end
       end
     end
