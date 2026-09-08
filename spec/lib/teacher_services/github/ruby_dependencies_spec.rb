@@ -3,6 +3,10 @@ require "spec_helper"
 RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   service_name = "my_service"
 
+  def build_deps(service_name, **file_contents)
+    described_class.new(FakeRubyRepo.new(service_name:, **file_contents))
+  end
+
   let :lockfile_contents do
     <<~GEMFILE_LOCK
       GEM
@@ -33,7 +37,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "correctly reports versions" do
-    deps = described_class.new(service_name, lockfile: lockfile_contents)
+    deps = build_deps(service_name, lockfile: lockfile_contents)
     expect(deps.rails_version).to eq("7.0.8")
     expect(deps.dfe_analytics_version).to eq("1.2.0")
     expect(deps.dfe_autocomplete_version).to eq("1.3.0")
@@ -48,7 +52,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       end
     RUBY
 
-    deps = described_class.new(
+    deps = build_deps(
       service_name,
       lockfile: lockfile_without_dfe_analytics,
       dfe_analytics_initializer_file:,
@@ -64,7 +68,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       end
     RUBY
 
-    deps = described_class.new(
+    deps = build_deps(
       service_name,
       lockfile: lockfile_contents,
       dfe_analytics_initializer_file:,
@@ -80,7 +84,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       end
     RUBY
 
-    deps = described_class.new(
+    deps = build_deps(
       service_name,
       lockfile: lockfile_contents,
       dfe_analytics_initializer_file:,
@@ -91,24 +95,24 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
   it "returns nil when dfe-analytics is absent from Gemfile.lock" do
     lockfile_without_dfe_analytics = lockfile_contents.split("\n").grep_v(/dfe-analytics/).join("\n")
-    deps = described_class.new(service_name, lockfile: lockfile_without_dfe_analytics)
+    deps = build_deps(service_name, lockfile: lockfile_without_dfe_analytics)
 
     expect(deps.dfe_analytics_version).to eq(nil)
   end
 
   it "correctly returns null when a gem is not present" do
     lockfile_without_rails = lockfile_contents.split("\n").grep_v(/rails/).join("\n")
-    deps = described_class.new(service_name, lockfile: lockfile_without_rails)
+    deps = build_deps(service_name, lockfile: lockfile_without_rails)
     expect(deps.rails_version).to eq(nil)
   end
 
   it "falls back to the .ruby-version file if present" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, ruby_version_file:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, ruby_version_file:)
     expect(deps.ruby_version).to eq("3.5.4")
   end
 
   it "falls back to the .tool-versions file if present" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: simple_tool_version_file)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file: simple_tool_version_file)
     expect(deps.ruby_version).to eq("3.2.4")
   end
 
@@ -121,12 +125,12 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "handles multiple tools defined in the .tool-versions file" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: complex_tool_version_file)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file: complex_tool_version_file)
     expect(deps.ruby_version).to eq("3.4.4")
   end
 
   it "handles empty .tool-versions file" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: "")
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file: "")
     expect(deps.ruby_version).to eq(nil)
   end
 
@@ -138,7 +142,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "handles empty .tool-versions file" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: malformed_tool_version_file)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file: malformed_tool_version_file)
     expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
 
@@ -148,7 +152,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       yarn 4.6.0
       yarn 4.9.3
     TOOL_VERSIONS
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file:)
 
     expect { deps.yarn_version }.not_to raise_error
     expect(deps.yarn_version).to eq(nil)
@@ -162,7 +166,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
   end
 
   it "handles .tool-versions file without a Ruby definition" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file: no_ruby_tool_version_file)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file: no_ruby_tool_version_file)
     expect { deps.ruby_version }.to raise_error(RuntimeError)
   end
 
@@ -172,7 +176,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         "packageManager": "yarn@4.9.3"
       }
     PACKAGE_JSON
-    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json)
+    deps = build_deps(service_name, lockfile: empty_gem_file, package_json_file: package_json)
 
     expect(deps.yarn_version).to eq("4.9.3")
   end
@@ -183,7 +187,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
       }
     PACKAGE_JSON
-    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json)
+    deps = build_deps(service_name, lockfile: empty_gem_file, package_json_file: package_json)
 
     expect(deps.yarn_version).to eq("4.12.0")
   end
@@ -193,19 +197,19 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       ruby 3.4.4
       yarn 4.6.0
     TOOL_VERSIONS
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file:)
 
     expect(deps.yarn_version).to eq("4.6.0")
   end
 
   it "falls back to yarnrc presence for yarn version" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, yarnrc_file: "nodeLinker: node-modules")
+    deps = build_deps(service_name, lockfile: empty_gem_file, yarnrc_file: "nodeLinker: node-modules")
 
     expect(deps.yarn_version).to eq("4.x (yarnrc.yml present)")
   end
 
   it "reports node version from .node-version" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, node_version_file: "v22.17.0")
+    deps = build_deps(service_name, lockfile: empty_gem_file, node_version_file: "v22.17.0")
 
     expect(deps.node_version).to eq("22.17.0")
   end
@@ -215,7 +219,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       ruby 3.4.4
       nodejs 22.17.0
     TOOL_VERSIONS
-    deps = described_class.new(service_name, lockfile: empty_gem_file, tool_versions_file:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, tool_versions_file:)
 
     expect(deps.node_version).to eq("22.17.0")
   end
@@ -228,7 +232,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       }
     PACKAGE_JSON
-    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json)
+    deps = build_deps(service_name, lockfile: empty_gem_file, package_json_file: package_json)
 
     expect(deps.node_version).to eq(">=22.0.0")
   end
@@ -245,7 +249,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         ruby 3.2.2p53
     GEMFILE_LOCK
 
-    deps = described_class.new(service_name, lockfile:)
+    deps = build_deps(service_name, lockfile:)
 
     expect(deps.css_compilation).to eq("cssbundling-rails 1.4.1 + Sass 2.1.2")
   end
@@ -275,7 +279,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         resolved "https://registry.yarnpkg.com/shakapacker/-/shakapacker-8.2.3.tgz"
     YARN_LOCK
 
-    deps = described_class.new(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
+    deps = build_deps(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
 
     expect(deps.css_compilation).to eq("Shakapacker 8.2.3 + Sass 1.89.2")
   end
@@ -299,7 +303,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.99.1.tgz"
     YARN_LOCK
 
-    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json, yarn_lock_file: yarn_lock)
+    deps = build_deps(service_name, lockfile: empty_gem_file, package_json_file: package_json, yarn_lock_file: yarn_lock)
 
     expect(deps.css_compilation).to eq("Webpack 5.99.1 + Sass (sass-loader 14.2.2)")
   end
@@ -324,7 +328,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         resolved "https://registry.yarnpkg.com/shakapacker/-/shakapacker-8.2.3.tgz"
     YARN_LOCK
 
-    deps = described_class.new(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
+    deps = build_deps(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
 
     expect(deps.js_compilation).to eq("Webpack 8.2.3")
   end
@@ -352,13 +356,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.23.2.tgz"
     YARN_LOCK
 
-    deps = described_class.new(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
+    deps = build_deps(service_name, lockfile:, package_json_file: package_json, yarn_lock_file: yarn_lock)
 
     expect(deps.js_compilation).to eq("esbuild 0.23.2")
   end
 
   it "returns none detected when no JS compiler signal is present" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: "{}")
+    deps = build_deps(service_name, lockfile: empty_gem_file, package_json_file: "{}")
 
     expect(deps.js_compilation).to eq("None detected")
   end
@@ -373,13 +377,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
           sprockets-rails (3.5.2)
     GEMFILE_LOCK
 
-    deps = described_class.new(service_name, lockfile:)
+    deps = build_deps(service_name, lockfile:)
 
     expect(deps.asset_management).to eq("Shakapacker 8.2.1, Propshaft 1.2.0, Sprockets 3.5.2")
   end
 
   it "returns unknown when no supported asset management gem is present" do
-    deps = described_class.new(service_name, lockfile: lockfile_contents)
+    deps = build_deps(service_name, lockfile: lockfile_contents)
 
     expect(deps.asset_management).to eq("Unknown")
   end
@@ -394,13 +398,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
           good_job (4.6.1)
     GEMFILE_LOCK
 
-    deps = described_class.new(service_name, lockfile:)
+    deps = build_deps(service_name, lockfile:)
 
     expect(deps.job_queues).to eq("Sidekiq 7.3.0, SolidQueue 1.2.0, GoodJob 4.6.1")
   end
 
   it "returns none for job queues when no supported gems are present" do
-    deps = described_class.new(service_name, lockfile: lockfile_contents)
+    deps = build_deps(service_name, lockfile: lockfile_contents)
 
     expect(deps.job_queues).to eq("None")
   end
@@ -419,13 +423,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       config.cache_store = :solid_cache_store
     RUBY
 
-    deps = described_class.new(service_name, lockfile:, production_environment_file:)
+    deps = build_deps(service_name, lockfile:, production_environment_file:)
 
     expect(deps.caching).to eq("SolidCache 1.1.0, Redis, Memcache")
   end
 
   it "returns unknown for caching when no cache signal is present" do
-    deps = described_class.new(service_name, lockfile: lockfile_contents)
+    deps = build_deps(service_name, lockfile: lockfile_contents)
 
     expect(deps.caching).to eq("Unknown")
   end
@@ -436,7 +440,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       config.cache_store = :null_store
     RUBY
 
-    deps = described_class.new(service_name, lockfile: empty_gem_file, production_environment_file:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, production_environment_file:)
 
     expect(deps.caching).to eq("Memory, None (null store)")
   end
@@ -446,7 +450,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       "terraform/aks/environments/production.tfvars" => 'postgres_server_version = "16"',
       "terraform/aks/database.tf" => 'extensions = ["postgis"]',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.postgres_version).to eq("16 + PostGIS")
   end
@@ -459,7 +463,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       TF
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.postgres_version).to eq("14")
   end
@@ -468,13 +472,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     terraform_files = {
       "terraform/database.tf" => 'server_version = "15"',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.postgres_version).to eq("15")
   end
 
   it "returns unknown when no postgres version signal is present" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files: {})
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files: {})
 
     expect(deps.postgres_version).to eq("Unknown")
   end
@@ -488,7 +492,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       TF
       "terraform/application/environments/production.tfvars" => 'postgres_server_version = "16"',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.postgres_version).to eq("16")
   end
@@ -498,7 +502,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       "terraform/database.tf" => 'server_version = "15"',
       "terraform/aks/environments/production.tfvars" => 'postgres_server_version = "16"',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.postgres_version).to eq("15")
   end
@@ -516,7 +520,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       TF
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.postgres_version).to eq("15")
   end
@@ -530,7 +534,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       TF
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("6.2")
   end
@@ -548,7 +552,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       TF
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("6.5")
   end
@@ -557,7 +561,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     terraform_files = {
       "terraform/redis.tf" => 'server_version = "7.0"',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("7.0")
   end
@@ -571,7 +575,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       TF
       "terraform/aks/environments/production.tfvars" => 'redis_version = "6.0"',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("6.0")
   end
@@ -589,7 +593,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       TF
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("5.0")
   end
@@ -602,13 +606,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
         }
       TF
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("Not pinned")
   end
 
   it "reports none when no redis signal is present" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files: {})
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files: {})
 
     expect(deps.redis_version).to eq("None")
   end
@@ -622,7 +626,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       TF
       "terraform/application/environments/production.tfvars" => 'redis_version = "6.4"',
     }
-    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("6.4")
   end
@@ -632,7 +636,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       FROM ruby:3.2.2-alpine3.19 AS builder
       RUN bundle install
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("3.19")
   end
@@ -643,7 +647,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       FROM ruby:${RUBY_VERSION} AS builder
       RUN bundle install
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("3.19")
   end
@@ -652,7 +656,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     dockerfile = <<~DOCKERFILE
       FROM ruby:3.2.2-alpine
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("unspecified")
   end
@@ -663,7 +667,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       FROM ruby:3.2.2-alpine3.19 AS builder
       FROM ruby:3.2.2-alpine3.18 AS runtime
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("3.18")
   end
@@ -673,7 +677,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       FROM ruby:3.2.2-alpine3.19 AS builder
       FROM ubuntu:22.04 AS runtime
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("Unknown")
   end
@@ -684,7 +688,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
       ARG RUBY_VERSION=${BASE_TAG}
       FROM ruby:${RUBY_VERSION} AS builder
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("3.19")
   end
@@ -693,13 +697,13 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     dockerfile = <<~DOCKERFILE
       FROM ruby:3.2.2-slim-bullseye
     DOCKERFILE
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile:)
 
     expect(deps.alpine_version).to eq("Unknown")
   end
 
   it "returns unknown when there is no Dockerfile" do
-    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile: nil)
+    deps = build_deps(service_name, lockfile: empty_gem_file, dockerfile: nil)
 
     expect(deps.alpine_version).to eq("Unknown")
   end
