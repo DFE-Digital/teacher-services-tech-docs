@@ -406,4 +406,42 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
     expect(deps.caching).to eq("Unknown")
   end
+
+  it "reports postgres version from terraform production.tfvars and postgis from database.tf" do
+    terraform_files = {
+      "terraform/aks/environments/production.tfvars" => 'postgres_server_version = "16"',
+      "terraform/aks/database.tf" => 'extensions = ["postgis"]',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.postgres_version).to eq("16 + PostGIS")
+  end
+
+  it "falls back to variables.tf default when tfvars is not present" do
+    terraform_files = {
+      "terraform/application/variables.tf" => <<~TF,
+        variable "postgres_version" {
+          default = "14"
+        }
+      TF
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.postgres_version).to eq("14")
+  end
+
+  it "uses hardcoded database server_version when not referencing var" do
+    terraform_files = {
+      "terraform/database.tf" => 'server_version = "15"',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.postgres_version).to eq("15")
+  end
+
+  it "returns unknown when no postgres version signal is present" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files: {})
+
+    expect(deps.postgres_version).to eq("Unknown")
+  end
 end

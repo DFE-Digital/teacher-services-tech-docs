@@ -17,7 +17,8 @@ module SchoolsDigitalTechDocs
           :js_compilation,
           :asset_management,
           :job_queues,
-          :caching
+          :caching,
+          :postgres_version
         def_delegator :dependencies, :has_tool_versions?, :asdf?
 
         def language
@@ -35,6 +36,7 @@ module SchoolsDigitalTechDocs
             "dfe-autocomplete" => dfe_autocomplete_version,
             "job-queues" => job_queues,
             "caching" => caching,
+            "postgres" => postgres_version,
             "asset-management" => asset_management,
             "css-compilation" => css_compilation,
             "js-compilation" => js_compilation,

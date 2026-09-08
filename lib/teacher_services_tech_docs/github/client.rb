@@ -18,6 +18,14 @@ module SchoolsDigitalTechDocs
         client.repo(repo)
       end
 
+      def get_tree_paths(repo)
+        default_branch = get_repo(repo).default_branch
+        tree = client.tree(repo, default_branch, recursive: true)
+        tree.tree.select { |entry| entry.type == "blob" }.map(&:path)
+      rescue Octokit::NotFound
+        []
+      end
+
     private
 
       def client

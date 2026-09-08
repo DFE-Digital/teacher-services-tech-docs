@@ -1,7 +1,7 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, node_version_file: nil, nvmrc_file: nil, yarnrc_file: nil, package_json_file: nil, yarn_lock_file: nil, production_environment_file: nil, dfe_analytics_initializer_file: nil)
+      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, node_version_file: nil, nvmrc_file: nil, yarnrc_file: nil, package_json_file: nil, yarn_lock_file: nil, production_environment_file: nil, dfe_analytics_initializer_file: nil, terraform_files: {})
         @service_name = service_name
         @lockfile = lockfile
         @tool_versions_file = tool_versions_file
@@ -13,6 +13,7 @@ module SchoolsDigitalTechDocs
         @yarn_lock_file = yarn_lock_file
         @production_environment_file = production_environment_file
         @dfe_analytics_initializer_file = dfe_analytics_initializer_file
+        @terraform_files = terraform_files
       end
 
       def rails_version
@@ -65,6 +66,10 @@ module SchoolsDigitalTechDocs
 
       def yarn_version
         yarn_version_detector.value
+      end
+
+      def postgres_version
+        postgres_version_detector.value
       end
 
     private
@@ -147,6 +152,10 @@ module SchoolsDigitalTechDocs
           yarnrc_file: @yarnrc_file,
           package_json_file: @package_json_file
         )
+      end
+
+      def postgres_version_detector
+        @postgres_version_detector ||= Ruby::Dependencies::PostgresVersion.new(terraform_files: @terraform_files)
       end
 
       def parsed_lockfile

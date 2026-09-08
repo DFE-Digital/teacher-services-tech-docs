@@ -45,6 +45,7 @@ require "teacher_services_tech_docs/github/ruby/dependencies/job_queues"
 require "teacher_services_tech_docs/github/ruby/dependencies/ruby_version"
 require "teacher_services_tech_docs/github/ruby/dependencies/node_version"
 require "teacher_services_tech_docs/github/ruby/dependencies/yarn_version"
+require "teacher_services_tech_docs/github/ruby/dependencies/postgres_version"
 require "teacher_services_tech_docs/github/ruby/dependencies"
 require "teacher_services_tech_docs/github/cs/dependencies"
 

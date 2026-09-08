@@ -14,6 +14,8 @@ module SchoolsDigitalTechDocs
       end
 
       def profile
+        terraform_files = load_terraform_files
+
         lockfile = @client.get_file(@repo_name, "Gemfile.lock")&.contents
         tool_versions_file = @client.get_file(@repo_name, ".tool-versions")&.contents
         ruby_version_file = @client.get_file(@repo_name, ".ruby-version")&.contents
@@ -36,7 +38,8 @@ module SchoolsDigitalTechDocs
           package_json_file:,
           yarn_lock_file:,
           production_environment_file:,
-          dfe_analytics_initializer_file:
+          dfe_analytics_initializer_file:,
+          terraform_files:
         )
 
         repo = @client.get_repo(@repo_name)
@@ -47,6 +50,21 @@ module SchoolsDigitalTechDocs
           repo: repo,
           dependencies: deps,
         )
+      end
+
+    private
+
+      def load_terraform_files
+        terraform_file_paths = @client.get_tree_paths(@repo_name).select do |path|
+          path.start_with?("terraform/") &&
+            !path.include?("/vendor/") &&
+            path.match?(%r{(?:^|/)(?:production\.tfvars(?:\.json)?|variables\.tf|database\.tf)$})
+        end
+
+        terraform_file_paths.each_with_object({}) do |path, files|
+          contents = @client.get_file(@repo_name, path)&.contents
+          files[path] = contents if contents.present?
+        end
       end
     end
   end
