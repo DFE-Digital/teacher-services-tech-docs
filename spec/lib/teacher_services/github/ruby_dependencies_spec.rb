@@ -418,6 +418,17 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.caching).to eq("Unknown")
   end
 
+  it "reports memory and null store caching signals" do
+    production_environment_file = <<~RUBY
+      config.cache_store = :memory_store
+      config.cache_store = :null_store
+    RUBY
+
+    deps = described_class.new(service_name, lockfile: empty_gem_file, production_environment_file:)
+
+    expect(deps.caching).to eq("Memory, None (null store)")
+  end
+
   it "reports postgres version from terraform production.tfvars and postgis from database.tf" do
     terraform_files = {
       "terraform/aks/environments/production.tfvars" => 'postgres_server_version = "16"',

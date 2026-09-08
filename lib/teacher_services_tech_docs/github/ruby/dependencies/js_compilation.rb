@@ -43,14 +43,6 @@ module SchoolsDigitalTechDocs
             get_dependency_version("jsbundling-rails")
           end
 
-          def shakapacker_version
-            js_dependency_version("shakapacker") || get_dependency_version("shakapacker")
-          end
-
-          def webpack_version
-            js_dependency_version("webpack") || get_dependency_version("webpacker")
-          end
-
           def webpack_cli_version
             js_dependency_version("webpack-cli")
           end

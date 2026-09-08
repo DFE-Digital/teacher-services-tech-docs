@@ -37,6 +37,18 @@ module SchoolsDigitalTechDocs
             parsed_lockfile&.specs&.find { |s| s.name == dep }&.version&.to_s
           end
 
+          def dependency_present?(gem_name)
+            get_dependency_version(gem_name).present? || gem_declared?(gem_name)
+          end
+
+          def shakapacker_version
+            js_dependency_version("shakapacker") || get_dependency_version("shakapacker")
+          end
+
+          def webpack_version
+            js_dependency_version("webpack") || get_dependency_version("webpacker")
+          end
+
           def package_dependency_version(dep)
             parsed_package_json&.dig("dependencies", dep) || parsed_package_json&.dig("devDependencies", dep)
           end

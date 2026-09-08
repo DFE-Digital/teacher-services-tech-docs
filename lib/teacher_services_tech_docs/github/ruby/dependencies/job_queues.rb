@@ -23,10 +23,6 @@ module SchoolsDigitalTechDocs
 
             "#{name} #{version}"
           end
-
-          def dependency_present?(gem_name)
-            get_dependency_version(gem_name).present? || gem_declared?(gem_name)
-          end
         end
       end
     end

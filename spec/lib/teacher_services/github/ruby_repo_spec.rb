@@ -61,6 +61,18 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
     )
   end
 
+  it "discovers terraform files from the repo tree via get_tree_paths and excludes vendor paths" do
+    client = FakeGithubClient.new
+    client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))
+    client.stub_repo_file("my_test_repo", "terraform/aks/environments/production.tfvars", 'postgres_server_version = "16"')
+    client.stub_repo_file("my_test_repo", "terraform/aks/redis.tf", 'server_version = "6.2"')
+    client.stub_repo_file("my_test_repo", "terraform/aks/vendor/legacy/database.tf", 'server_version = "99"')
+    repo = described_class.new(repo_name: "my_test_repo", service_name: "my service", client:)
+
+    expect(repo.profile.postgres_version).to eq("16")
+    expect(repo.profile.redis_version).to eq("6.2")
+  end
+
   it "identifies itself by profile type predicates" do
     client = FakeGithubClient.new
     client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))

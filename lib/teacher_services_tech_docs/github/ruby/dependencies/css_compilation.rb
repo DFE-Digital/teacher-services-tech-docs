@@ -33,14 +33,6 @@ module SchoolsDigitalTechDocs
             get_dependency_version("cssbundling-rails")
           end
 
-          def shakapacker_version
-            js_dependency_version("shakapacker") || get_dependency_version("shakapacker")
-          end
-
-          def webpack_version
-            js_dependency_version("webpack") || get_dependency_version("webpacker")
-          end
-
           def sass_version_label
             if js_dependency_version("sass").present?
               return "Sass #{js_dependency_version("sass")}"

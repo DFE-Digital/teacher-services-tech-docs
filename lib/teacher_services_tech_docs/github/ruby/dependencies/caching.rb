@@ -34,10 +34,6 @@ module SchoolsDigitalTechDocs
             redis_cache_store_configured? || dependency_present?("redis")
           end
 
-          def dependency_present?(gem_name)
-            get_dependency_version(gem_name).present? || gem_declared?(gem_name)
-          end
-
           def redis_cache_store_configured?
             production_environment_file_content&.include?(":redis_cache_store")
           end
