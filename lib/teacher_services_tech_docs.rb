@@ -47,6 +47,7 @@ require "teacher_services_tech_docs/github/ruby/dependencies/node_version"
 require "teacher_services_tech_docs/github/ruby/dependencies/yarn_version"
 require "teacher_services_tech_docs/github/ruby/dependencies/postgres_version"
 require "teacher_services_tech_docs/github/ruby/dependencies/redis_version"
+require "teacher_services_tech_docs/github/ruby/dependencies/alpine_version"
 require "teacher_services_tech_docs/github/ruby/dependencies"
 require "teacher_services_tech_docs/github/cs/dependencies"
 

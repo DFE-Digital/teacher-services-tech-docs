@@ -14,6 +14,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
     client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))
     client.stub_repo_file("my_test_repo", ".node-version", "22.17.0")
     client.stub_repo_file("my_test_repo", "package.json", '{"packageManager":"yarn@4.9.3"}')
+    client.stub_repo_file("my_test_repo", "Dockerfile", "FROM ruby:3.2.2-alpine3.19\n")
     repo = described_class.new(repo_name: "my_test_repo", service_name: "my service", client:)
 
     expect(repo.profile.tech_stack).to include(
@@ -25,6 +26,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
       "caching" => "Redis",
       "postgres" => "Unknown",
       "redis" => "None",
+      "alpine" => "3.19",
       "asset-management" => "Sprockets 4.2.0",
       "css-compilation" => "Webpack 5.4.4",
       "js-compilation" => "Webpack 5.4.4",

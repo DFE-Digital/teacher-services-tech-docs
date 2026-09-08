@@ -1,7 +1,7 @@
 module SchoolsDigitalTechDocs
   module GitHub
     class RubyDependencies
-      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, node_version_file: nil, nvmrc_file: nil, yarnrc_file: nil, package_json_file: nil, yarn_lock_file: nil, production_environment_file: nil, dfe_analytics_initializer_file: nil, terraform_files: {})
+      def initialize(service_name, lockfile:, tool_versions_file: nil, ruby_version_file: nil, node_version_file: nil, nvmrc_file: nil, yarnrc_file: nil, package_json_file: nil, yarn_lock_file: nil, production_environment_file: nil, dfe_analytics_initializer_file: nil, terraform_files: {}, dockerfile: nil)
         @service_name = service_name
         @lockfile = lockfile
         @tool_versions_file = tool_versions_file
@@ -14,6 +14,7 @@ module SchoolsDigitalTechDocs
         @production_environment_file = production_environment_file
         @dfe_analytics_initializer_file = dfe_analytics_initializer_file
         @terraform_files = terraform_files
+        @dockerfile = dockerfile
       end
 
       def rails_version
@@ -74,6 +75,10 @@ module SchoolsDigitalTechDocs
 
       def redis_version
         redis_version_detector.value
+      end
+
+      def alpine_version
+        alpine_version_detector.value
       end
 
     private
@@ -164,6 +169,10 @@ module SchoolsDigitalTechDocs
 
       def redis_version_detector
         @redis_version_detector ||= Ruby::Dependencies::RedisVersion.new(terraform_files: @terraform_files)
+      end
+
+      def alpine_version_detector
+        @alpine_version_detector ||= Ruby::Dependencies::AlpineVersion.new(dockerfile: @dockerfile)
       end
 
       def parsed_lockfile

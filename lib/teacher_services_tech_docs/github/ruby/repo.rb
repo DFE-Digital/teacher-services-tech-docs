@@ -26,6 +26,7 @@ module SchoolsDigitalTechDocs
         yarn_lock_file = @client.get_file(@repo_name, "yarn.lock")&.contents
         production_environment_file = @client.get_file(@repo_name, "config/environments/production.rb")&.contents
         dfe_analytics_initializer_file = @client.get_file(@repo_name, "config/initializers/dfe_analytics.rb")&.contents
+        dockerfile = @client.get_file(@repo_name, "Dockerfile")&.contents
 
         deps = GitHub::RubyDependencies.new(
           @service_name,
@@ -39,7 +40,8 @@ module SchoolsDigitalTechDocs
           yarn_lock_file:,
           production_environment_file:,
           dfe_analytics_initializer_file:,
-          terraform_files:
+          terraform_files:,
+          dockerfile:
         )
 
         repo = @client.get_repo(@repo_name)

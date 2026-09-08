@@ -518,4 +518,60 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
     expect(deps.redis_version).to eq("None")
   end
+
+  it "reports the alpine version from a literal FROM tag" do
+    dockerfile = <<~DOCKERFILE
+      FROM ruby:3.2.2-alpine3.19 AS builder
+      RUN bundle install
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("3.19")
+  end
+
+  it "resolves the alpine version through an ARG default" do
+    dockerfile = <<~DOCKERFILE
+      ARG RUBY_VERSION=3.2.2-alpine3.19
+      FROM ruby:${RUBY_VERSION} AS builder
+      RUN bundle install
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("3.19")
+  end
+
+  it "reports unspecified when the tag ends in alpine with no version" do
+    dockerfile = <<~DOCKERFILE
+      FROM ruby:3.2.2-alpine
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("unspecified")
+  end
+
+  it "stops at the first stage that resolves to an alpine image" do
+    dockerfile = <<~DOCKERFILE
+      FROM golang:1.21 AS assets
+      FROM ruby:3.2.2-alpine3.19 AS builder
+      FROM ruby:3.2.2-alpine3.18 AS runtime
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("3.19")
+  end
+
+  it "returns unknown when no FROM line references alpine" do
+    dockerfile = <<~DOCKERFILE
+      FROM ruby:3.2.2-slim-bullseye
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("Unknown")
+  end
+
+  it "returns unknown when there is no Dockerfile" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile: nil)
+
+    expect(deps.alpine_version).to eq("Unknown")
+  end
 end
