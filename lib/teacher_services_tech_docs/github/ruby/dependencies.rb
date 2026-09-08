@@ -72,6 +72,10 @@ module SchoolsDigitalTechDocs
         postgres_version_detector.value
       end
 
+      def redis_version
+        redis_version_detector.value
+      end
+
     private
 
       def get_dependency_version(dep)
@@ -156,6 +160,10 @@ module SchoolsDigitalTechDocs
 
       def postgres_version_detector
         @postgres_version_detector ||= Ruby::Dependencies::PostgresVersion.new(terraform_files: @terraform_files)
+      end
+
+      def redis_version_detector
+        @redis_version_detector ||= Ruby::Dependencies::RedisVersion.new(terraform_files: @terraform_files)
       end
 
       def parsed_lockfile

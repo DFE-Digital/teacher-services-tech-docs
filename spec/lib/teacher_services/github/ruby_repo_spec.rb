@@ -24,6 +24,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
       "job-queues" => "Sidekiq 6.5.8",
       "caching" => "Redis",
       "postgres" => "Unknown",
+      "redis" => "None",
       "asset-management" => "Sprockets 4.2.0",
       "css-compilation" => "Webpack 5.4.4",
       "js-compilation" => "Webpack 5.4.4",

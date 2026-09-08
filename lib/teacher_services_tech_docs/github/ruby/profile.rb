@@ -18,7 +18,8 @@ module SchoolsDigitalTechDocs
           :asset_management,
           :job_queues,
           :caching,
-          :postgres_version
+          :postgres_version,
+          :redis_version
         def_delegator :dependencies, :has_tool_versions?, :asdf?
 
         def language
@@ -37,6 +38,7 @@ module SchoolsDigitalTechDocs
             "job-queues" => job_queues,
             "caching" => caching,
             "postgres" => postgres_version,
+            "redis" => redis_version,
             "asset-management" => asset_management,
             "css-compilation" => css_compilation,
             "js-compilation" => js_compilation,

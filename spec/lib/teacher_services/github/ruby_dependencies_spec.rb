@@ -444,4 +444,78 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
 
     expect(deps.postgres_version).to eq("Unknown")
   end
+
+  it "reports a hardcoded redis version from a redis module block" do
+    terraform_files = {
+      "terraform/application/main.tf" => <<~TF,
+        module "redis" {
+          source         = "..."
+          server_version = "6.2"
+        }
+      TF
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("6.2")
+  end
+
+  it "reports a hardcoded redis version from a redis.tf file when there is no redis module" do
+    terraform_files = {
+      "terraform/redis.tf" => 'server_version = "7.0"',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("7.0")
+  end
+
+  it "resolves a redis module's version variable from production.tfvars" do
+    terraform_files = {
+      "terraform/aks/main.tf" => <<~TF,
+        module "redis_cache" {
+          server_version = var.redis_version
+        }
+      TF
+      "terraform/aks/environments/production.tfvars" => 'redis_version = "6.0"',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("6.0")
+  end
+
+  it "falls back to the variables.tf default when tfvars is not present" do
+    terraform_files = {
+      "terraform/application/main.tf" => <<~TF,
+        module "redis" {
+          server_version = var.redis_version
+        }
+      TF
+      "terraform/application/variables.tf" => <<~TF,
+        variable "redis_version" {
+          default = "5.0"
+        }
+      TF
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("5.0")
+  end
+
+  it "reports not pinned when redis is present but no version can be resolved" do
+    terraform_files = {
+      "terraform/application/main.tf" => <<~TF,
+        module "redis" {
+          source = "..."
+        }
+      TF
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("Not pinned")
+  end
+
+  it "reports none when no redis signal is present" do
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files: {})
+
+    expect(deps.redis_version).to eq("None")
+  end
 end

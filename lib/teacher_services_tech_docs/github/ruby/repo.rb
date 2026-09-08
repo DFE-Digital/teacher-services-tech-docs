@@ -58,7 +58,7 @@ module SchoolsDigitalTechDocs
         terraform_file_paths = @client.get_tree_paths(@repo_name).select do |path|
           path.start_with?("terraform/") &&
             !path.include?("/vendor/") &&
-            path.match?(%r{(?:^|/)(?:production\.tfvars(?:\.json)?|variables\.tf|database\.tf)$})
+            path.match?(%r{(?:^|/)(?:production\.tfvars(?:\.json)?|.*\.tf)$})
         end
 
         terraform_file_paths.each_with_object({}) do |path, files|
