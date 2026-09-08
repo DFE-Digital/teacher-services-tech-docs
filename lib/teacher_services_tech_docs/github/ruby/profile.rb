@@ -5,6 +5,8 @@ module SchoolsDigitalTechDocs
         include BaseProfile
         extend Forwardable
 
+        PRIMARY_TECH_STACK_KEYS = %w[ruby rails postgres alpine node yarn redis].freeze
+
         def_delegators :dependencies,
           :rails_version,
           :ruby_version,
@@ -28,6 +30,19 @@ module SchoolsDigitalTechDocs
         end
 
         def tech_stack
+          primary = full_tech_stack.slice(*PRIMARY_TECH_STACK_KEYS)
+          rest = full_tech_stack.except(*PRIMARY_TECH_STACK_KEYS).sort.to_h
+
+          primary.merge(rest)
+        end
+
+        def primary_tech_stack
+          full_tech_stack.slice(*PRIMARY_TECH_STACK_KEYS)
+        end
+
+      private
+
+        def full_tech_stack
           {
             "rails" => rails_version,
             "ruby" => ruby_version,

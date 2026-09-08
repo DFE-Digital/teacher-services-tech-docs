@@ -19,11 +19,11 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 ### Rails apps and dependencies
 
 <% ruby_profiles = ruby_service_profiles.compact %>
-<% ruby_tech_stack_headings = ruby_profiles.first&.tech_stack&.keys || [] %>
+<% ruby_tech_stack_headings = ruby_profiles.first&.primary_tech_stack&.keys || [] %>
 | Service name | repo | <%= ruby_tech_stack_headings.join(" | ") %> |
 | --- | --- | <%= Array.new(ruby_tech_stack_headings.length, "---").join(" | ") %> |
 <% ruby_service_profiles.compact.each do |profile| %>
-|<%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}"), *ruby_tech_stack_headings.map { |heading| profile.tech_stack[heading] }].join(" | ") %> |
+|<%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}"), *ruby_tech_stack_headings.map { |heading| profile.primary_tech_stack[heading] }].join(" | ") %> |
 <% end %>
 
 ### Other repositories

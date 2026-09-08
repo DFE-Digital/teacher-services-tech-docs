@@ -33,6 +33,34 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyRepo do
     )
   end
 
+  it "orders tech stack with primary technologies first, then the rest alphabetically" do
+    client = FakeGithubClient.new
+    client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))
+    repo = described_class.new(repo_name: "my_test_repo", service_name: "my service", client:)
+
+    primary = %w[ruby rails postgres alpine node yarn redis]
+    rest = %w[asset-management caching css-compilation dfe-analytics dfe-autocomplete dfe-reference-data job-queues js-compilation]
+
+    expect(repo.profile.tech_stack.keys).to eq(primary + rest)
+  end
+
+  it "exposes only the primary technologies via primary_tech_stack" do
+    client = FakeGithubClient.new
+    client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))
+    client.stub_repo_file("my_test_repo", "Dockerfile", "FROM ruby:3.2.2-alpine3.19\n")
+    repo = described_class.new(repo_name: "my_test_repo", service_name: "my service", client:)
+
+    expect(repo.profile.primary_tech_stack).to eq(
+      "ruby" => "3.1.2",
+      "rails" => "7.0.4.3",
+      "postgres" => "Unknown",
+      "alpine" => "3.19",
+      "node" => nil,
+      "yarn" => nil,
+      "redis" => "None",
+    )
+  end
+
   it "identifies itself by profile type predicates" do
     client = FakeGithubClient.new
     client.stub_repo_file("my_test_repo", "Gemfile.lock", File.read("spec/fixtures/Gemfile.lock"))
