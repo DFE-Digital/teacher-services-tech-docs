@@ -10,24 +10,27 @@ module SchoolsDigitalTechDocs
           def value
             return "Unknown" unless @dockerfile.present?
 
-            arg_values = parse_arg_defaults
+            final_stage_image = from_images.last
+            return "Unknown" unless final_stage_image
 
-            @dockerfile.each_line do |line|
-              from_match = line.chomp.match(/\AFROM\s+(.+?)(?:\s+AS\s+.+)?\z/i)
-              next unless from_match
+            resolved_image = resolve_image(final_stage_image, parse_arg_defaults)
 
-              resolved_image = resolve_image(from_match[1].strip, arg_values)
+            version_match = resolved_image.match(/alpine(\d+\.\d+)/)
+            return version_match[1] if version_match
 
-              version_match = resolved_image.match(/alpine(\d+\.\d+)/)
-              return version_match[1] if version_match
-
-              return "unspecified" if resolved_image.match?(/-alpine\s*\z/)
-            end
+            return "unspecified" if resolved_image.match?(/-alpine\s*\z/)
 
             "Unknown"
           end
 
         private
+
+          def from_images
+            @dockerfile.each_line.filter_map do |line|
+              from_match = line.chomp.match(/\AFROM\s+(.+?)(?:\s+AS\s+.+)?\z/i)
+              from_match && from_match[1].strip
+            end
+          end
 
           def parse_arg_defaults
             @dockerfile.scan(/^\s*ARG\s+(\w+)=(.+)/).each_with_object({}) do |(name, value), args|
@@ -35,11 +38,14 @@ module SchoolsDigitalTechDocs
             end
           end
 
-          def resolve_image(image, arg_values)
+          def resolve_image(image, arg_values, seen = [])
             var_ref = image.match(/\$\{(\w+)\}/)
-            return arg_values[var_ref[1]] if var_ref && arg_values[var_ref[1]]
+            return image unless var_ref
 
-            image
+            var_name = var_ref[1]
+            return image if seen.include?(var_name) || !arg_values[var_name]
+
+            resolve_image(arg_values[var_name], arg_values, seen + [var_name])
           end
         end
       end

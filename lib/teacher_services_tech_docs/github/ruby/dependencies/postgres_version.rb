@@ -43,8 +43,10 @@ module SchoolsDigitalTechDocs
 
           def variables_default_version
             @files.variable_files.each_value do |content|
-              version_match = content.match(/variable\s+"postgres(?:_server)?_version"\s*\{[^}]*default\s*=\s*"?(\d+)"?/mi)
-              return version_match[1] if version_match
+              TerraformBlockScanner.bodies(content, /variable\s+"postgres(?:_server)?_version"\s*\{/i).each do |variable_body|
+                version_match = variable_body.match(/default\s*=\s*"?(\d+)"?/)
+                return version_match[1] if version_match
+              end
             end
 
             nil

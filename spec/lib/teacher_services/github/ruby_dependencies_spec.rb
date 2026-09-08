@@ -503,6 +503,24 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.postgres_version).to eq("15")
   end
 
+  it "finds the default value past a nested validation block in a variable declaration" do
+    terraform_files = {
+      "terraform/variables.tf" => <<~TF,
+        variable "postgres_version" {
+          type = string
+          validation {
+            condition     = can(regex("^[0-9]+$", var.postgres_version))
+            error_message = "Must be numeric"
+          }
+          default = "15"
+        }
+      TF
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.postgres_version).to eq("15")
+  end
+
   it "reports a hardcoded redis version from a redis module block" do
     terraform_files = {
       "terraform/application/main.tf" => <<~TF,
@@ -515,6 +533,24 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
 
     expect(deps.redis_version).to eq("6.2")
+  end
+
+  it "finds the version past an unindented heredoc fragment inside a redis module" do
+    terraform_files = {
+      "terraform/application/main.tf" => <<~TF,
+        module "redis" {
+          metadata = <<EOT
+        {
+          "team": "platform"
+        }
+        EOT
+          server_version = "6.5"
+        }
+      TF
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("6.5")
   end
 
   it "reports a hardcoded redis version from a redis.tf file when there is no redis module" do
@@ -621,11 +657,32 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.alpine_version).to eq("unspecified")
   end
 
-  it "stops at the first stage that resolves to an alpine image" do
+  it "reports the final stage's alpine version in a multi-stage build" do
     dockerfile = <<~DOCKERFILE
       FROM golang:1.21 AS assets
       FROM ruby:3.2.2-alpine3.19 AS builder
       FROM ruby:3.2.2-alpine3.18 AS runtime
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("3.18")
+  end
+
+  it "returns unknown when the final stage is not alpine even if an earlier build stage was" do
+    dockerfile = <<~DOCKERFILE
+      FROM ruby:3.2.2-alpine3.19 AS builder
+      FROM ubuntu:22.04 AS runtime
+    DOCKERFILE
+    deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
+
+    expect(deps.alpine_version).to eq("Unknown")
+  end
+
+  it "resolves a chained ARG reference to another ARG" do
+    dockerfile = <<~DOCKERFILE
+      ARG BASE_TAG=3.2.2-alpine3.19
+      ARG RUBY_VERSION=${BASE_TAG}
+      FROM ruby:${RUBY_VERSION} AS builder
     DOCKERFILE
     deps = described_class.new(service_name, lockfile: empty_gem_file, dockerfile:)
 

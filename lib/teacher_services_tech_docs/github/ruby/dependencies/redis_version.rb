@@ -25,7 +25,7 @@ module SchoolsDigitalTechDocs
             var_name = nil
 
             @files.each_content do |content|
-              content.scan(/module\s+"[^"]*redis[^"]*"\s*\{(.*?)^\}/m).each do |(module_body)|
+              TerraformBlockScanner.bodies(content, /module\s+"[^"]*redis[^"]*"\s*\{/).each do |module_body|
                 has_redis = true
 
                 version_match = module_body.match(/server_version\s*=\s*"(\d+[.\d]*)"/)
@@ -72,8 +72,10 @@ module SchoolsDigitalTechDocs
             end
 
             @files.variable_files.each_value do |content|
-              default_match = content.match(/variable\s+"#{Regexp.escape(var_name)}"\s*\{[^}]*default\s*=\s*"?([\d.]+)"?/m)
-              return default_match[1] if default_match
+              TerraformBlockScanner.bodies(content, /variable\s+"#{Regexp.escape(var_name)}"\s*\{/).each do |variable_body|
+                default_match = variable_body.match(/default\s*=\s*"?([\d.]+)"?/)
+                return default_match[1] if default_match
+              end
             end
 
             nil
