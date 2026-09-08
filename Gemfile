@@ -15,6 +15,7 @@ gem "faraday_middleware"
 gem "html-pipeline"
 gem "nokogiri"
 gem "octokit"
+gem "parallel"
 gem "rubocop-govuk"
 
 # Testing

@@ -13,15 +13,17 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 | Service name | repo | framework | dfe-analytics-net |
 | ---| --- | --- | --- |
 <% cs_service_profiles.compact.each do |profile| %>
-| <%= [profile.service_name, link_to(profile.repo_name, "https://github.com/#{profile.repo_name}") , profile.target_framework, profile.dfe_analytics_version].join(' | ') %> |
+| <%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}") , profile.target_framework, profile.dfe_analytics_version].join(' | ') %> |
 <% end %>
 
 ### Rails apps and dependencies
 
-| Service name | repo | rails | ruby | dfe-analytics | dfe-reference-data | dfe-autocomplete |
-| --- | --- | --- | --- | --- | --- | --- |
+<% ruby_profiles = ruby_service_profiles.compact %>
+<% ruby_tech_stack_headings = ruby_profiles.first&.primary_tech_stack&.keys || [] %>
+| Service name | repo | <%= ruby_tech_stack_headings.join(" | ") %> |
+| --- | --- | <%= Array.new(ruby_tech_stack_headings.length, "---").join(" | ") %> |
 <% ruby_service_profiles.compact.each do |profile| %>
-|<%= [profile.service_name, link_to(profile.repo_name, "https://github.com/#{profile.repo_name}") , profile.rails, profile.ruby, profile.dfe_analytics, profile.dfe_reference_data, profile.dfe_autocomplete].join(' | ') %> |
+|<%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}"), *ruby_tech_stack_headings.map { |heading| profile.primary_tech_stack[heading] }].join(" | ") %> |
 <% end %>
 
 ### Other repositories
@@ -29,7 +31,7 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 | Service name | repo |
 | ---| --- |
 <% other_service_profiles.compact.each do |profile| %>
-| <%= [profile.service_name, link_to(profile.repo_name, "https://github.com/#{profile.repo_name}")].join(' | ') %> |
+| <%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}")].join(' | ') %> |
 <% end %>
 
 ### Historic services repositories
@@ -37,7 +39,7 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 | Service name | repo |
 | ---| --- |
 <% archived_service_profiles.each do |profile| %>
-| <%= [profile.service_name, link_to(profile.repo_name, "https://github.com/#{profile.repo_name}")].join(' | ') %> |
+| <%= [link_to(profile.service_name, service_page_path(profile.service_name)), link_to(profile.repo_name, "https://github.com/#{profile.repo_name}")].join(' | ') %> |
 <% end %>
 
 ## Table of contents
@@ -54,18 +56,6 @@ Welcome to the technical documentation for apps and libraries in Schools Digital
 ### Documenting an API
 
 - <%= link_to('Documenting Schools Digital APIs in FaUAPI', '/documenting-an-api/documenting-sd-apis-in-fauapi.html') %>
-
-<% pages_by_category.pages.sort_by {|category, page| category }.each do |category, pages| %>
-
-### <%= category %>
-
-<ul class='govuk-list'>
-<% pages.each do |page| %>
-  <li><%= link_to page.data.original_title || page.data.title, page.path %></li>
-<% end %>
-</ul>
-
-<% end %>
 
 ## External contributions
 

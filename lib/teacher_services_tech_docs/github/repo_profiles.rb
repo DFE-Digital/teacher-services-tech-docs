@@ -1,7 +1,35 @@
 module SchoolsDigitalTechDocs
   module GitHub
     module RepoProfiles
-      BasicRepoProfile = Struct.new(:service_name, :repo_name, :archived, :default_branch, keyword_init: true)
+      module BaseProfile
+        def repository_url
+          "https://github.com/#{repo_name}"
+        end
+
+        def ruby?
+          language == "ruby"
+        end
+
+        def cs?
+          language == "cs"
+        end
+
+        def other?
+          language == "other"
+        end
+
+        def default_branch
+          repo.default_branch
+        end
+
+        def archived
+          repo.archived
+        end
+
+        def tech_stack
+          {}
+        end
+      end
     end
   end
 end
