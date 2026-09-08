@@ -22,6 +22,7 @@ require "forwardable"
 
 # utilities
 require "teacher_services_tech_docs/pages_by_category"
+require "teacher_services_tech_docs/title_sort"
 
 # business
 require "teacher_services_tech_docs/github/client"

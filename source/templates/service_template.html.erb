@@ -30,7 +30,7 @@
 <h2 id="documentation-pages">Documentation pages</h2>
 
 <ul class="govuk-list">
-<% pages.sort_by { |page| page.fetch(:title) }.each do |page| %>
+<% pages.sort_by { |page| SchoolsDigitalTechDocs::TitleSort.key(page.fetch(:title)) }.each do |page| %>
   <li><%= link_to(page.fetch(:title), "/#{page.fetch(:path)}") %></li>
 <% end %>
 </ul>
