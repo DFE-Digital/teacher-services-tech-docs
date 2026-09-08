@@ -165,6 +165,17 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.yarn_version).to eq("4.9.3")
   end
 
+  it "strips the corepack integrity hash from packageManager" do
+    package_json = <<~PACKAGE_JSON
+      {
+        "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
+      }
+    PACKAGE_JSON
+    deps = described_class.new(service_name, lockfile: empty_gem_file, package_json_file: package_json)
+
+    expect(deps.yarn_version).to eq("4.12.0")
+  end
+
   it "falls back to tool-versions for yarn version" do
     tool_versions_file = <<~TOOL_VERSIONS
       ruby 3.4.4

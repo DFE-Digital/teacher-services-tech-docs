@@ -5,7 +5,7 @@ module SchoolsDigitalTechDocs
         class YarnVersion < DependencyDetectorBase
           def value
             package_manager = parsed_package_json&.dig("packageManager")
-            package_manager_match = package_manager&.match(/\Ayarn@(\S+)\z/)
+            package_manager_match = package_manager&.match(/\Ayarn@([^+\s]+)/)
             return package_manager_match[1] if package_manager_match
 
             tool_version_value = tool_version(["yarn"], label: "yarn")
