@@ -8,16 +8,31 @@ service_page_slug = lambda do |service_name|
   service_name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/^-|-$/, "")
 end
 
-service_repos_with_profiles = service_list.map do |service|
-  repo = SchoolsDigitalTechDocs::GitHub::RepoFactory.build(service:)
-  profile = repo.profile
+BUILD_THREAD_COUNT = 8
 
-  raise "No profile created for #{service}" unless profile
+service_build_results = Parallel.map(service_list, in_threads: BUILD_THREAD_COUNT) do |service|
+  client = Thread.current[:github_client] ||= SchoolsDigitalTechDocs::GitHub::Client.new
+  repo = SchoolsDigitalTechDocs::GitHub::RepoFactory.build(service:, client:)
+
+  { service:, repo:, profile: repo.profile, error: nil }
+rescue StandardError => e
+  { service:, repo: nil, profile: nil, error: e }
+end
+
+failed_builds = service_build_results.select { |result| result[:error] }
+
+unless failed_builds.empty?
+  failure_summary = failed_builds.map { |result| "#{result[:service].fetch('name')} (#{result[:error].class}: #{result[:error].message})" }.join("; ")
+  raise "Failed to build #{failed_builds.length} service profile(s): #{failure_summary}"
+end
+
+service_repos_with_profiles = service_build_results.map do |result|
+  raise "No profile created for #{result[:service]}" unless result[:profile]
 
   {
-    service:,
-    repo:,
-    profile:,
+    service: result[:service],
+    repo: result[:repo],
+    profile: result[:profile],
   }
 end
 
