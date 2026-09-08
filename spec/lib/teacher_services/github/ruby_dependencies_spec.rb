@@ -467,6 +467,30 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     expect(deps.postgres_version).to eq("Unknown")
   end
 
+  it "prefers a production tfvars value over a variables.tf default in a different terraform directory" do
+    terraform_files = {
+      "terraform/aks/variables.tf" => <<~TF,
+        variable "postgres_version" {
+          default = "12"
+        }
+      TF
+      "terraform/application/environments/production.tfvars" => 'postgres_server_version = "16"',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.postgres_version).to eq("16")
+  end
+
+  it "prefers a hardcoded database.tf value over a production tfvars value" do
+    terraform_files = {
+      "terraform/database.tf" => 'server_version = "15"',
+      "terraform/aks/environments/production.tfvars" => 'postgres_server_version = "16"',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.postgres_version).to eq("15")
+  end
+
   it "reports a hardcoded redis version from a redis module block" do
     terraform_files = {
       "terraform/application/main.tf" => <<~TF,
@@ -539,6 +563,20 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files: {})
 
     expect(deps.redis_version).to eq("None")
+  end
+
+  it "resolves a redis module's version variable from production.tfvars in a different terraform directory" do
+    terraform_files = {
+      "terraform/aks/main.tf" => <<~TF,
+        module "redis" {
+          server_version = var.redis_version
+        }
+      TF
+      "terraform/application/environments/production.tfvars" => 'redis_version = "6.4"',
+    }
+    deps = described_class.new(service_name, lockfile: empty_gem_file, terraform_files:)
+
+    expect(deps.redis_version).to eq("6.4")
   end
 
   it "reports the alpine version from a literal FROM tag" do
