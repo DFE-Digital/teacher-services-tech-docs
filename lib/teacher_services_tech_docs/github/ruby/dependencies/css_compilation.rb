@@ -35,14 +35,14 @@ module SchoolsDigitalTechDocs
 
           def sass_version_label
             if js_dependency_version("sass").present?
-              return "Sass #{js_dependency_version("sass")}"
+              return "Sass #{js_dependency_version('sass')}"
             end
 
             gem_sass_version = sass_gem_version
             return "Sass #{gem_sass_version}" if gem_sass_version.present?
 
             if js_dependency_version("sass-loader").present?
-              return "Sass (sass-loader #{js_dependency_version("sass-loader")})"
+              "Sass (sass-loader #{js_dependency_version('sass-loader')})"
             end
           end
 

@@ -18,6 +18,7 @@ module SchoolsDigitalTechDocs
           end
 
         private
+
           def airbyte_enabled?
             return false unless dfe_analytics_initializer_file_content.present?
 

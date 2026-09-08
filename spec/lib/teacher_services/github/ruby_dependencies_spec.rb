@@ -51,7 +51,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     deps = described_class.new(
       service_name,
       lockfile: lockfile_without_dfe_analytics,
-      dfe_analytics_initializer_file:
+      dfe_analytics_initializer_file:,
     )
 
     expect(deps.dfe_analytics_version).to eq("Airbyte")
@@ -67,7 +67,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     deps = described_class.new(
       service_name,
       lockfile: lockfile_contents,
-      dfe_analytics_initializer_file:
+      dfe_analytics_initializer_file:,
     )
 
     expect(deps.dfe_analytics_version).to eq("1.2.0 + Airbyte")
@@ -83,7 +83,7 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::RubyDependencies do
     deps = described_class.new(
       service_name,
       lockfile: lockfile_contents,
-      dfe_analytics_initializer_file:
+      dfe_analytics_initializer_file:,
     )
 
     expect(deps.dfe_analytics_version).to eq("1.2.0")

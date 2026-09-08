@@ -9,7 +9,7 @@ module SchoolsDigitalTechDocs
                       elsif @ruby_version_file.present?
                         @ruby_version_file.split.last
                       elsif @tool_versions_file.present?
-                        tool_version(["ruby"], required: true, label: "Ruby")
+                        tool_version(%w[ruby], required: true, label: "Ruby")
                       end
 
             Gem::Version.new(version).release.to_s if version

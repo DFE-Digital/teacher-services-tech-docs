@@ -75,7 +75,7 @@ module SchoolsDigitalTechDocs
           end
 
           def selector_matches_request?(dep, requested_version, selector)
-            selector == "#{dep}@#{requested_version}" || selector == "#{dep}@npm:#{requested_version}"
+            ["#{dep}@#{requested_version}", "#{dep}@npm:#{requested_version}"].include?(selector)
           end
 
           def parsed_yarn_lock_entries
@@ -152,7 +152,7 @@ module SchoolsDigitalTechDocs
           def tool_version(tool_names, required: false, label: tool_names.join("/"))
             return unless @tool_versions_file.present?
 
-            pattern = /\A(?:#{tool_names.join("|")})\s+\S+/
+            pattern = /\A(?:#{tool_names.join('|')})\s+\S+/
             matches = @tool_versions_file.split("\n").select { |line| line.match?(pattern) }
 
             if required && matches.empty?

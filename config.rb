@@ -64,7 +64,7 @@ RUBY_SERVICE_PROFILES = SERVICE_PROFILES.select(&:ruby?).sort_by(&:service_name)
 OTHER_SERVICE_PROFILES = SERVICE_PROFILES.select(&:other?).sort_by(&:service_name).freeze
 SERVICE_PROFILES_BY_NAME = (RUBY_SERVICE_PROFILES + CS_SERVICE_PROFILES + OTHER_SERVICE_PROFILES).to_h { |profile| [profile.service_name, profile] }.freeze
 SERVICE_DOCS = service_docs.freeze
-SERVICE_PAGE_PATHS = service_list.to_h { |service| [service["name"], "/service/#{service_page_slug.call(service["name"])}.html"] }.freeze
+SERVICE_PAGE_PATHS = service_list.to_h { |service| [service["name"], "/service/#{service_page_slug.call(service['name'])}.html"] }.freeze
 
 ALL_SERVICE_NAMES = service_list.map { |service| service["name"] }
 MAPPED_SERVICE_NAMES = SERVICE_REPOS.map(&:service_name)

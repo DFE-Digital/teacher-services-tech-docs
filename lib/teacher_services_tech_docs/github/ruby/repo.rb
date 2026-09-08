@@ -41,7 +41,7 @@ module SchoolsDigitalTechDocs
           production_environment_file:,
           dfe_analytics_initializer_file:,
           terraform_files:,
-          dockerfile:
+          dockerfile:,
         )
 
         repo = @client.get_repo(@repo_name)

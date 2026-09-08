@@ -93,7 +93,7 @@ module SchoolsDigitalTechDocs
           service_name: @service_name,
           lockfile: @lockfile,
           package_json_file: @package_json_file,
-          yarn_lock_file: @yarn_lock_file
+          yarn_lock_file: @yarn_lock_file,
         )
       end
 
@@ -102,21 +102,21 @@ module SchoolsDigitalTechDocs
           service_name: @service_name,
           lockfile: @lockfile,
           package_json_file: @package_json_file,
-          yarn_lock_file: @yarn_lock_file
+          yarn_lock_file: @yarn_lock_file,
         )
       end
 
       def asset_management_detector
         @asset_management_detector ||= Ruby::Dependencies::AssetManagement.new(
           service_name: @service_name,
-          lockfile: @lockfile
+          lockfile: @lockfile,
         )
       end
 
       def job_queues_detector
         @job_queues_detector ||= Ruby::Dependencies::JobQueues.new(
           service_name: @service_name,
-          lockfile: @lockfile
+          lockfile: @lockfile,
         )
       end
 
@@ -124,7 +124,7 @@ module SchoolsDigitalTechDocs
         @caching_detector ||= Ruby::Dependencies::Caching.new(
           service_name: @service_name,
           lockfile: @lockfile,
-          production_environment_file: @production_environment_file
+          production_environment_file: @production_environment_file,
         )
       end
 
@@ -132,7 +132,7 @@ module SchoolsDigitalTechDocs
         @dfe_analytics_detector ||= Ruby::Dependencies::DfeAnalytics.new(
           service_name: @service_name,
           lockfile: @lockfile,
-          dfe_analytics_initializer_file: @dfe_analytics_initializer_file
+          dfe_analytics_initializer_file: @dfe_analytics_initializer_file,
         )
       end
 
@@ -151,7 +151,7 @@ module SchoolsDigitalTechDocs
           node_version_file: @node_version_file,
           nvmrc_file: @nvmrc_file,
           tool_versions_file: @tool_versions_file,
-          package_json_file: @package_json_file
+          package_json_file: @package_json_file,
         )
       end
 
@@ -160,7 +160,7 @@ module SchoolsDigitalTechDocs
           service_name: @service_name,
           tool_versions_file: @tool_versions_file,
           yarnrc_file: @yarnrc_file,
-          package_json_file: @package_json_file
+          package_json_file: @package_json_file,
         )
       end
 

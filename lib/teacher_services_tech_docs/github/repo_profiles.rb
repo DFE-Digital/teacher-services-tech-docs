@@ -30,7 +30,6 @@ module SchoolsDigitalTechDocs
           {}
         end
       end
-
     end
   end
 end

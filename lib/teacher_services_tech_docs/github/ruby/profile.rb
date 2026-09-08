@@ -8,21 +8,21 @@ module SchoolsDigitalTechDocs
         PRIMARY_TECH_STACK_KEYS = %w[ruby rails postgres alpine node yarn redis].freeze
 
         def_delegators :dependencies,
-          :rails_version,
-          :ruby_version,
-          :node_version,
-          :yarn_version,
-          :dfe_analytics_version,
-          :dfe_reference_data_version,
-          :dfe_autocomplete_version,
-          :css_compilation,
-          :js_compilation,
-          :asset_management,
-          :job_queues,
-          :caching,
-          :postgres_version,
-          :redis_version,
-          :alpine_version
+                       :rails_version,
+                       :ruby_version,
+                       :node_version,
+                       :yarn_version,
+                       :dfe_analytics_version,
+                       :dfe_reference_data_version,
+                       :dfe_autocomplete_version,
+                       :css_compilation,
+                       :js_compilation,
+                       :asset_management,
+                       :job_queues,
+                       :caching,
+                       :postgres_version,
+                       :redis_version,
+                       :alpine_version
         def_delegator :dependencies, :has_tool_versions?, :asdf?
 
         def language
