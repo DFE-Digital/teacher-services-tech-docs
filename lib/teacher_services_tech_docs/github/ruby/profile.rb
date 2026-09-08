@@ -50,13 +50,7 @@ module SchoolsDigitalTechDocs
         end
 
         def primary_tech_stack
-          split_tech_stack.first
-        end
-
-      private
-
-        def split_tech_stack
-          [tech_stack.slice(*PRIMARY_TECH_STACK_KEYS), tech_stack.except(*PRIMARY_TECH_STACK_KEYS)]
+          tech_stack.slice(*PRIMARY_TECH_STACK_KEYS)
         end
       end
     end
