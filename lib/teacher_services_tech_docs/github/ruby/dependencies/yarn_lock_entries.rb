@@ -3,6 +3,11 @@ module SchoolsDigitalTechDocs
     module Ruby
       module Dependencies
         class YarnLockEntries
+          ENTRY_HEADER_LINE = /\A\S.*:\z/
+          VERSION_LINE = /\A\s{2}version(?:\s|:)\s*"?(?<version>[^"\s]+)"?\z/
+          SCOPED_PACKAGE_NAME = /\A(@[^\/]+\/[^@]+)@/
+          UNSCOPED_PACKAGE_NAME = /\A([^@]+)@/
+
           def initialize(yarn_lock_file)
             @yarn_lock_file = yarn_lock_file
           end
@@ -37,7 +42,7 @@ module SchoolsDigitalTechDocs
               i = 0
               while i < lines.length
                 line = lines[i]
-                unless line =~ /\A\S.*:\z/
+                unless line =~ ENTRY_HEADER_LINE
                   i += 1
                   next
                 end
@@ -47,7 +52,7 @@ module SchoolsDigitalTechDocs
 
                 version = nil
                 while i < lines.length && lines[i].start_with?(" ")
-                  match = lines[i].match(/\A\s{2}version(?:\s|:)\s*"?(?<version>[^"\s]+)"?\z/)
+                  match = lines[i].match(VERSION_LINE)
                   version = match[:version] if match
                   i += 1
                 end
@@ -68,9 +73,9 @@ module SchoolsDigitalTechDocs
 
           def package_name_from_selector(selector)
             if selector.start_with?("@")
-              selector[/\A(@[^\/]+\/[^@]+)@/, 1]
+              selector[SCOPED_PACKAGE_NAME, 1]
             else
-              selector[/\A([^@]+)@/, 1]
+              selector[UNSCOPED_PACKAGE_NAME, 1]
             end
           end
         end

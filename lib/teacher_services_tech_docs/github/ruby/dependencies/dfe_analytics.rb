@@ -3,6 +3,8 @@ module SchoolsDigitalTechDocs
     module Ruby
       module Dependencies
         class DfeAnalytics < DependencyDetectorBase
+          AIRBYTE_DISABLED = /airbyte_enabled\s*(?:=|:)\s*false\b/
+
           def value
             dfe_analytics_gem_version = get_dependency_version("dfe-analytics")
             has_dfe_analytics_gem = dfe_analytics_gem_version.present?
@@ -27,7 +29,7 @@ module SchoolsDigitalTechDocs
               next false if stripped_line.start_with?("#")
               next false unless stripped_line.include?("airbyte_enabled")
 
-              !stripped_line.match?(/airbyte_enabled\s*(?:=|:)\s*false\b/)
+              !stripped_line.match?(AIRBYTE_DISABLED)
             end
           end
         end

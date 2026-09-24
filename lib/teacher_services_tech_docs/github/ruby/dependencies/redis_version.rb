@@ -3,6 +3,11 @@ module SchoolsDigitalTechDocs
     module Ruby
       module Dependencies
         class RedisVersion
+          REDIS_MODULE_HEADER = /module\s+"[^"]*redis[^"]*"\s*\{/
+          HARDCODED_SERVER_VERSION = /server_version\s*=\s*"(\d+[.\d]*)"/
+          SERVER_VERSION_VARIABLE_REF = /server_version\s*=\s*var\.(\w+)/
+          VARIABLE_DEFAULT_VALUE = /default\s*=\s*"?([\d.]+)"?/
+
           def initialize(terraform_files:)
             @files = TerraformFileSet.new(terraform_files)
           end
@@ -25,16 +30,16 @@ module SchoolsDigitalTechDocs
             var_name = nil
 
             @files.each_content do |content|
-              TerraformBlockScanner.bodies(content, /module\s+"[^"]*redis[^"]*"\s*\{/).each do |module_body|
+              TerraformBlockScanner.bodies(content, REDIS_MODULE_HEADER).each do |module_body|
                 has_redis = true
 
-                version_match = module_body.match(/server_version\s*=\s*"(\d+[.\d]*)"/)
+                version_match = module_body.match(HARDCODED_SERVER_VERSION)
                 if version_match
                   hardcoded_version = version_match[1]
                   break
                 end
 
-                var_match = module_body.match(/server_version\s*=\s*var\.(\w+)/)
+                var_match = module_body.match(SERVER_VERSION_VARIABLE_REF)
                 var_name ||= var_match[1] if var_match
               end
 
@@ -52,13 +57,13 @@ module SchoolsDigitalTechDocs
             var_name = nil
 
             files.each_value do |content|
-              version_match = content.match(/server_version\s*=\s*"(\d+[.\d]*)"/)
+              version_match = content.match(HARDCODED_SERVER_VERSION)
               if version_match
                 hardcoded_version = version_match[1]
                 break
               end
 
-              var_match = content.match(/server_version\s*=\s*var\.(\w+)/)
+              var_match = content.match(SERVER_VERSION_VARIABLE_REF)
               var_name ||= var_match[1] if var_match
             end
 
@@ -73,7 +78,7 @@ module SchoolsDigitalTechDocs
 
             @files.variable_files.each_value do |content|
               TerraformBlockScanner.bodies(content, /variable\s+"#{Regexp.escape(var_name)}"\s*\{/).each do |variable_body|
-                default_match = variable_body.match(/default\s*=\s*"?([\d.]+)"?/)
+                default_match = variable_body.match(VARIABLE_DEFAULT_VALUE)
                 return default_match[1] if default_match
               end
             end

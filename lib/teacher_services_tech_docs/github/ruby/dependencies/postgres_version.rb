@@ -3,6 +3,11 @@ module SchoolsDigitalTechDocs
     module Ruby
       module Dependencies
         class PostgresVersion
+          HARDCODED_SERVER_VERSION = /server_version\s*=\s*"?(\d+)"?/i
+          POSTGRES_VERSION_IN_TFVARS = /postgres[_-](?:server[_-])?version["\s:=]*(\d+)/i
+          POSTGRES_VERSION_VARIABLE_HEADER = /variable\s+"postgres(?:_server)?_version"\s*\{/i
+          VARIABLE_DEFAULT_VALUE = /default\s*=\s*"?(\d+)"?/
+
           def initialize(terraform_files:)
             @files = TerraformFileSet.new(terraform_files)
           end
@@ -25,7 +30,7 @@ module SchoolsDigitalTechDocs
             database_files.each_value do |content|
               next if content.include?("var.")
 
-              version_match = content.match(/server_version\s*=\s*"?(\d+)"?/i)
+              version_match = content.match(HARDCODED_SERVER_VERSION)
               return version_match[1] if version_match
             end
 
@@ -34,7 +39,7 @@ module SchoolsDigitalTechDocs
 
           def production_tfvars_version
             @files.production_tfvars_files.each_value do |content|
-              version_match = content.match(/postgres[_-](?:server[_-])?version["\s:=]*(\d+)/i)
+              version_match = content.match(POSTGRES_VERSION_IN_TFVARS)
               return version_match[1] if version_match
             end
 
@@ -43,8 +48,8 @@ module SchoolsDigitalTechDocs
 
           def variables_default_version
             @files.variable_files.each_value do |content|
-              TerraformBlockScanner.bodies(content, /variable\s+"postgres(?:_server)?_version"\s*\{/i).each do |variable_body|
-                version_match = variable_body.match(/default\s*=\s*"?(\d+)"?/)
+              TerraformBlockScanner.bodies(content, POSTGRES_VERSION_VARIABLE_HEADER).each do |variable_body|
+                version_match = variable_body.match(VARIABLE_DEFAULT_VALUE)
                 return version_match[1] if version_match
               end
             end

@@ -3,6 +3,12 @@ module SchoolsDigitalTechDocs
     module Ruby
       module Dependencies
         class AlpineVersion
+          ALPINE_VERSION_TAG = /alpine(\d+\.\d+)/
+          ALPINE_SUFFIX_WITHOUT_VERSION = /-alpine\s*\z/
+          DOCKERFILE_FROM_IMAGE = /\AFROM\s+(.+?)(?:\s+AS\s+.+)?\z/i
+          DOCKERFILE_ARG_DEFAULT = /^\s*ARG\s+(\w+)=(.+)/
+          VARIABLE_REFERENCE = /\$\{(\w+)\}/
+
           def initialize(dockerfile:)
             @dockerfile = dockerfile
           end
@@ -15,10 +21,10 @@ module SchoolsDigitalTechDocs
 
             resolved_image = resolve_image(final_stage_image, parse_arg_defaults)
 
-            version_match = resolved_image.match(/alpine(\d+\.\d+)/)
+            version_match = resolved_image.match(ALPINE_VERSION_TAG)
             return version_match[1] if version_match
 
-            return "unspecified" if resolved_image.match?(/-alpine\s*\z/)
+            return "unspecified" if resolved_image.match?(ALPINE_SUFFIX_WITHOUT_VERSION)
 
             "Unknown"
           end
@@ -27,19 +33,19 @@ module SchoolsDigitalTechDocs
 
           def from_images
             @dockerfile.each_line.filter_map do |line|
-              from_match = line.chomp.match(/\AFROM\s+(.+?)(?:\s+AS\s+.+)?\z/i)
+              from_match = line.chomp.match(DOCKERFILE_FROM_IMAGE)
               from_match && from_match[1].strip
             end
           end
 
           def parse_arg_defaults
-            @dockerfile.scan(/^\s*ARG\s+(\w+)=(.+)/).each_with_object({}) do |(name, value), args|
+            @dockerfile.scan(DOCKERFILE_ARG_DEFAULT).each_with_object({}) do |(name, value), args|
               args[name] = value.strip.delete_prefix('"').delete_suffix('"').delete_prefix("'").delete_suffix("'")
             end
           end
 
           def resolve_image(image, arg_values, seen = [])
-            var_ref = image.match(/\$\{(\w+)\}/)
+            var_ref = image.match(VARIABLE_REFERENCE)
             return image unless var_ref
 
             var_name = var_ref[1]
