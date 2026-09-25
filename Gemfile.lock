@@ -337,6 +337,7 @@ DEPENDENCIES
   mutex_m (~> 0.3.0)
   nokogiri
   octokit
+  parallel
   pry
   rake
   rspec

@@ -18,6 +18,14 @@ module SchoolsDigitalTechDocs
         client.repo(repo)
       end
 
+      def get_tree_paths(repo)
+        default_branch = get_repo(repo).default_branch
+        tree = client.tree(repo, default_branch, recursive: true)
+        tree.tree.select { |entry| entry.type == "blob" }.map(&:path)
+      rescue Octokit::NotFound
+        []
+      end
+
     private
 
       def client
@@ -28,7 +36,12 @@ module SchoolsDigitalTechDocs
             builder.response :logger, nil, { headers: false, bodies: false }
             builder.use FaradayMiddleware::Caching, cache
             builder.use Octokit::Response::RaiseError
-            builder.use Faraday::Request::Retry, exceptions: Faraday::Request::Retry::DEFAULT_EXCEPTIONS + [Octokit::ServerError]
+            builder.use Faraday::Request::Retry,
+                        max: 4,
+                        interval: 2,
+                        interval_randomness: 0.5,
+                        backoff_factor: 2,
+                        exceptions: Faraday::Request::Retry::DEFAULT_EXCEPTIONS + [Octokit::ServerError] + Octokit::RATE_LIMITED_ERRORS
             builder.adapter Faraday.default_adapter
           end
 

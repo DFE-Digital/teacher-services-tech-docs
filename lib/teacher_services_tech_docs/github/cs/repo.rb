@@ -5,14 +5,7 @@ module SchoolsDigitalTechDocs
 
       attr_reader :service_name
 
-      Profile = Struct.new(:service_name,
-                           :repo_name,
-                           :target_framework,
-                           :dfe_analytics_version,
-                           :asdf,
-                           :default_branch,
-                           :archived,
-                           keyword_init: true)
+      Profile = RepoProfiles::CsRepoProfile
 
       def initialize(repo_name:, service_name:, csproj_path:, client: GitHub::Client.new)
         @repo_name = repo_name
@@ -37,11 +30,9 @@ module SchoolsDigitalTechDocs
         Profile.new(
           service_name: @service_name,
           repo_name: @repo_name,
-          target_framework: deps.target_framework,
-          dfe_analytics_version: deps.dfe_analytics_version,
+          repo: repo,
+          dependencies: deps,
           asdf: has_tool_versions,
-          default_branch: repo.default_branch,
-          archived: repo.archived,
         )
       end
     end

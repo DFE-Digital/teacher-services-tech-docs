@@ -1,0 +1,39 @@
+---
+---
+<h1 id="service"><%= profile.service_name %></h1>
+
+<p>Repository: <%= link_to(profile.repo_name, profile.repository_url) %></p>
+
+<h2 id="tech-stack">Tech stack</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Technology</th>
+        <th>Version</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% profile.tech_stack.each do |technology, version| %>
+        <tr>
+          <th><%= technology %></th>
+          <td><%= version %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if pages.any? %>
+
+<h2 id="documentation-pages">Documentation pages</h2>
+
+<ul class="govuk-list">
+<% pages.sort_by { |page| SchoolsDigitalTechDocs::TitleSort.key(page.fetch(:title)) }.each do |page| %>
+  <li><%= link_to(page.fetch(:title), "/#{page.fetch(:path)}") %></li>
+<% end %>
+</ul>
+<% else %>
+<p>No documentation pages are currently available for this service.</p>
+<% end %>

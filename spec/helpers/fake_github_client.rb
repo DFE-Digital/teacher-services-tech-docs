@@ -18,6 +18,10 @@ class FakeGithubClient
     Repo.new(default_branch: "main", archived: false)
   end
 
+  def get_tree_paths(repo)
+    @repo_stubs.fetch(repo, {}).keys
+  end
+
   def stub_repo_file(repo, file, contents)
     unless @repo_stubs[repo]
       @repo_stubs[repo] = {}
