@@ -12,6 +12,7 @@ module SchoolsDigitalTechDocs
                         tool_version(%w[ruby], required: true, label: "Ruby")
                       end
 
+            version = version&.gsub(/^ruby-/, "")
             Gem::Version.new(version).release.to_s if version
           end
         end

@@ -184,6 +184,11 @@
   language: "ruby"
   docsets:
     - path: "docs"
+- name: "Find of placement schools"
+  repo_name: "DFE-Digital/find-placement-schools"
+  language: "ruby"
+  docsets:
+    - path: "adr"
 - name: Uptime
   repo_name: "DFE-Digital/teacher-services-upptime"
   language: "other"
@@ -224,3 +229,7 @@
   repo_name: "DFE-Digital/get-information-about-schools"
   language: "cs"
   csproj_path: "Web/EdubaseWeb.sln"
+- name: "Get Into Teaching API"
+  repo_name: "DFE-Digital/get-into-teaching-api"
+  language: "cs"
+  csproj_path: "GetIntoTeachingApi/GetIntoTeachingApi.csproj"
