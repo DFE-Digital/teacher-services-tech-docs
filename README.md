@@ -6,14 +6,20 @@ This is the repo for the [Schools Digital tech docs](https://tech-docs.teacherse
 
 The required versions of build tools are defined in [.tool-versions](.tool-versions). These can be automatically installed with [asdf-vm](https://asdf-vm.com/), see their [installation instructions](https://asdf-vm.com/#/core-manage-asdf).
 
-Install the plugin specified in `.tool-versions`
+Install the plugins specified in `.tool-versions`
 
 ```bash
 asdf plugin add ruby
+asdf plugin add nodejs
 asdf install
+bundle install
 ```
 
 (We don't mandate asdf, you can use other tools if you prefer.)
+
+Ruby and Node.js are both required: the Tech Docs template uses Node.js to render
+GOV.UK components and build frontend assets. Ruby's version is also recorded in
+`.ruby-version` for CI; keep it in sync with `.tool-versions`.
 
 ## Developing on this project
 
