@@ -1,20 +1,22 @@
 source "https://rubygems.org"
 
 # Windows support
-gem "tzinfo-data", platforms: %i[mswin mingw jruby]
-gem "wdm", "~> 0.1.0", platforms: %i[mswin mingw]
+gem "tzinfo-data", platforms: %i[windows jruby]
+gem "wdm", "~> 0.1.0", platforms: %i[windows]
 
 gem "rake"
 
 # Include the tech docs gem
-gem "govuk_tech_docs"
+gem "govuk_tech_docs", "~> 6.6"
 
+gem "commonmarker", "~> 2.0"
 gem "dotenv"
 gem "faraday-http-cache"
 gem "faraday_middleware"
-gem "html-pipeline"
+gem "html-pipeline", "~> 2.14"
 gem "nokogiri"
 gem "octokit"
+gem "ostruct"
 gem "parallel"
 gem "rubocop-govuk"
 
@@ -23,8 +25,6 @@ gem "capybara"
 gem "pry"
 gem "rspec"
 gem "webmock"
-
-gem "haml", "~> 5.0"
 
 # Framework
 

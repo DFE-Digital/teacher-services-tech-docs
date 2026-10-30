@@ -10,8 +10,6 @@ module SchoolsDigitalTechDocs
       def to_html(repo_name: "", branch: "")
         context = {
           repository: repo_name,
-          # Turn off hardbreaks as they behave different to github rendering
-          gfm: false,
           base_url: URI.join(
             "https://github.com",
             "#{repo_name}/blob/#{branch}/",
@@ -29,16 +27,24 @@ module SchoolsDigitalTechDocs
           URI.join(context[:image_base_url], ::File.join(".", ::File.dirname(@path), "/"))
 
         filters = [
-          HTML::Pipeline::MarkdownFilter,
           HTML::Pipeline::AbsoluteSourceFilter,
           PrimaryHeadingFilter,
           HeadingFilter,
           AbsoluteLinkFilter,
         ]
 
+        html = Commonmarker.to_html(
+          @contents.to_s.force_encoding("UTF-8").delete("\r"),
+          options: {
+            render: { hardbreaks: false },
+            extension: { tasklist: false, shortcodes: false },
+          },
+          plugins: { syntax_highlighter: nil },
+        ).rstrip
+
         HTML::Pipeline
           .new(filters)
-          .to_html(@contents.to_s.force_encoding("UTF-8"), context)
+          .to_html(html, context)
       end
 
       def title
@@ -66,10 +72,12 @@ module SchoolsDigitalTechDocs
             next if element["href"].nil? || element["href"].empty?
 
             href = element["href"].strip
+            next if href.start_with?("#")
+
             uri = URI.parse(href)
             path = uri.path
 
-            next if uri.scheme || href.start_with?("#")
+            next if uri.scheme
 
             base = if path.start_with? "/"
                      base_url
