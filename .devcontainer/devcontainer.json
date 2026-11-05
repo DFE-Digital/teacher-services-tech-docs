@@ -1,0 +1,14 @@
+{
+  "name": "Schools Digital tech docs",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "developer",
+  "postCreateCommand": "bundle install",
+  "forwardPorts": [4567],
+  "portsAttributes": {
+    "4567": {
+      "label": "SD Tech Docs Middleman"
+    }
+  }
+}
