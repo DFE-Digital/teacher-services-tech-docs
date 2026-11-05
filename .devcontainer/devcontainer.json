@@ -8,7 +8,7 @@
   "forwardPorts": [4567],
   "portsAttributes": {
     "4567": {
-      "label": "Middleman"
+      "label": "SD Tech Docs Middleman"
     }
   }
 }
