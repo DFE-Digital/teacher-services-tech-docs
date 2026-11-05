@@ -31,6 +31,18 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::MarkdownFile do
       it { is_expected.to eq("<p>These curly quotes “make commonmarker throw an exception”</p>") }
     end
 
+    context "with single line breaks and emoji shortcodes" do
+      let(:contents) { "First line\nsecond line :smile:" }
+
+      it { is_expected.to eq("<p>First line\nsecond line :smile:</p>") }
+    end
+
+    context "with fenced code" do
+      let(:contents) { "```ruby\nputs :hello\n```" }
+
+      it { is_expected.to eq("<pre lang=\"ruby\"><code>puts :hello\n</code></pre>") }
+    end
+
     context "when passed a repo name and branch" do
       let(:path) { "markdown.md" }
       let(:contents) do
@@ -79,6 +91,14 @@ RSpec.describe SchoolsDigitalTechDocs::GitHub::MarkdownFile do
         expect(html).to have_selector("h3#data-gov-uk")
         expect(html).to have_selector("h3#patterns-style-guides")
       end
+    end
+  end
+
+  describe described_class::AbsoluteLinkFilter do
+    it "preserves non-ASCII fragment links without parsing them as URIs" do
+      html = described_class.call('<a href="#café">Section</a>').to_html
+
+      expect(html).to eq('<a href="#caf%C3%A9">Section</a>')
     end
   end
 

@@ -17,6 +17,7 @@ require "faraday"
 require "faraday_middleware"
 require "parallel"
 require "html/pipeline"
+require "commonmarker"
 require "uri"
 require "forwardable"
 
