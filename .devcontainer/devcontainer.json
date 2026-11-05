@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "remoteUser": "vscode",
+  "remoteUser": "developer",
   "postCreateCommand": "bundle install",
   "forwardPorts": [4567],
   "portsAttributes": {

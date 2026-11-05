@@ -5,8 +5,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler --version 2.3.16 --no-document \
-    && groupadd --gid 1000 vscode \
-    && useradd --uid 1000 --gid vscode --create-home --shell /bin/bash vscode \
-    && chown -R vscode:vscode /usr/local/bundle
+    && groupadd --gid 1000 developer \
+    && useradd --uid 1000 --gid developer --create-home --shell /bin/bash developer \
+    && chown -R developer:developer /usr/local/bundle
 
-USER vscode
+USER developer
